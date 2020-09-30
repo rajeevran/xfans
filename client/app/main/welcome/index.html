@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="content">
+    <div class="box-welcome m20">
+      <img ng-src="{{setting.logoFullPath | cdn}}" class="m20" fallback-src>
+      <div class="term-welcome" ng-bind-html="setting.landingPageContent"></div>
+      <div class="row">
+        <div class="col-sm-6"><a ui-sref="home" class="btn btn-warning btn-lg btn-block">I Agree Enter</a></div>
+        <div class="col-sm-6"><a href="https://www.google.com.vn" class="btn btn-grey btn-lg btn-block">I DisAgree Exit</a></div>
+      </div>
+      <div class="img-welcome" style="background-image: url('{{setting.imageHomeFullPath | cdn}}')">
+        <div>18+ Warning</div>
+      </div>
+    </div>
+  </div>
+  <footer></footer>
+</div>

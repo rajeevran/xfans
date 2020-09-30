@@ -1,0 +1,73 @@
+<div class="title-pro">
+  <span> Management Products</span>
+</div>
+<div class="table-responsive">
+  <p style="color:red">NOTE: a tracking # must be sent with in 48 hrs of sale. After 48 hrs the sale will be voided. More than one violation of this will result in losing the store option on this site.</p>
+  <div class="mar-bot-15">
+     <a ui-sref='manager.productAdd' class="btn btn-primary">Add New <i class="fa fa-plus"></i></a>
+  </div>
+  <table class="table table-main">
+     <thead>
+        <tr role="row">
+          <th style='width:7%;' class="text-center" rowspan="1" colspan="1">
+              Image
+           </th>
+           <th class="sorting" rel="name" tabindex="0"  rowspan="1" colspan="1">
+              Name
+           </th>
+           <th class="sorting" rel="name" tabindex="0"  rowspan="1" colspan="1">
+              Categories
+           </th>
+           <th class="sorting" rel="price" rowspan="1" colspan="1">
+              Price
+           </th>
+           <th class="sorting" rel="quantity" rowspan="1" colspan="1">
+              Quantity
+           </th>
+           <th style='width:10%;' rel="status" class="text-center sorting" rowspan="1" colspan="1">
+              Status
+           </th>
+           <th style='width:7%;' class="text-center" rowspan="1" colspan="1">
+              Action
+           </th>
+        </tr>
+     </thead>
+     <tbody>
+        <tr ng-repeat="product in products" class="gradeX odd" role="row">
+          <td class="text-center">
+              <img ng-if="performer.imageThumbPath != 'null'" ng-src="{{product.imageThumbPath | checkImage}}" alt="{{product.name}}" style="width:50px" fallback-src>
+           </td>
+           <td >
+              {{product.name}}
+           </td>
+           <td>
+             <label class="label label-info"
+               ng-repeat="cat in product.categories track by $index" style="margin:5px">{{cat.name}}</label>
+           </td>
+           <td>
+              {{product.price | price}}
+           </td>
+           <td >
+              {{product.quantity}}
+           </td>
+           <td class="text-center">
+              <span ng-if='product.status=="active"' class="label label-sm label-success">
+              Active </span>
+             <span ng-if='product.status=="inactive"' class="label label-sm label-default">
+              Inactive </span>
+           </td>
+           <td class="text-center">
+             <a ui-sref='manager.productEdit({id: product._id})'  class="view" title="Edit">
+               <i class="fa fa-pencil"></i>
+             </a>
+             <a ng-click="delete(product, $index)" class="view" title="Delete">
+               <i class="fa fa-trash"></i>
+             </a>
+           </td>
+        </tr>
+     </tbody>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+  <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

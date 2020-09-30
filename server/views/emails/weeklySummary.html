@@ -1,0 +1,90 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="border-bottom: 1px solid #ddd; padding: 20px 0px; padding-top: 0px; margin-bottom: 40px;">
+		<img src="http://52.42.142.211/assets/images/logo.png">
+	</div>
+	
+	<div style="font-size: 17px">
+		<h3>Dear <%= user.firstname %> <%= user.lastName %>.</h3>
+		
+		<div style="padding: 10px;display: inline-block;background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">New Photographers</div>
+		<ul style="padding: 0px; overflow: hidden;">
+			{% for p in photographers %}
+				<li style="float: left;width: 25%;">
+					<div style="list-style: none; position: relative;margin: 0px 5px">
+						<img src="<%= p.avatar %>">
+						<div style="background: rgba(0,0,0,0.5); color: #fff; position: absolute;bottom: 5px;width: 100%;">
+							<span style="padding: 10px; display: block"><%= p.firstName %> <%= p.lastName %></span>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<div style="padding: 10px;display: inline-block;background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">New Models</div>
+		<ul style="padding: 0px; overflow: hidden;">
+			{% for m in models %}
+				<li style="float: left;width: 25%;">
+					<div style="list-style: none; position: relative;margin: 0px 5px">
+						<img src="<%= m.avatar %>">
+						<div style="background: rgba(0,0,0,0.5); color: #fff; position: absolute;bottom: 5px;width: 100%;">
+							<span style="padding: 10px; display: block"><%= m.firstName %> <%= m.lastName %></span>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<div style="padding: 10px;display: inline-block;background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">New Stylist</div>
+		<ul style="padding: 0px; overflow: hidden;">
+			{% for s in stylist %}
+				<li style="float: left;width: 25%;">
+					<div style="list-style: none; position: relative;margin: 0px 5px">
+						<img src="<%= s.avatar %>">
+						<div style="background: rgba(0,0,0,0.5); color: #fff; position: absolute;bottom: 5px;width: 100%;">
+							<span style="padding: 10px; display: block"><%= s.firstName %> <%= s.lastName %></span>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<div style="padding: 10px;display: inline-block; background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">My New Followers</div>
+		<div style="margin: 10px 0px">
+			{% for f in followers %}
+			<a href="http://chiiz.mansainc.com/portfolio/<%= f.type %>/<%= f.uuid %>"><%= f.firstname%> <%= f.lastName%></a> is now following you.
+			{% endfor%}
+		</div>
+
+		<div style="padding: 10px;display: inline-block; background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">My Comments</div>
+		<div style="margin: 10px 0px">
+			{% for c in comments %}
+			<a href="http://chiiz.mansainc.com/portfolio/<%= c.type %>/<%= c.uuid %>"><%= c.firstname%> <%= c.lastName%></a> commented on your <%= c.place %>
+			{% endfor%}
+		</div>
+
+		<div style="padding: 10px;display: inline-block; background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">My Vote</div>
+		<div style="margin: 10px 0px">
+			{% for v in votes %}
+			<a href="http://chiiz.mansainc.com/portfolio/<%= v.type %>/<%= v.uuid %>"><%= v.firstname%> <%= v.lastName%></a> voted your <%= v.place %>
+			{% endfor%}
+		</div>
+
+		<div style="padding: 10px;display: inline-block; background: #8fa3b5; color: #fff; font-weight: bold; font-size: 18px">Features Photos</div>
+		<ul style="padding: 0px; overflow: hidden;">
+			{% for p in featuresPhotos %}
+			<li style="float: left;width: 25%;">
+				<div style="list-style: none; position: relative;margin: 0px 5px">
+					<img src="<%= p.thumbnailUrls.small %>">
+					<div style="background: rgba(0,0,0,0.5); color: #fff; position: absolute;bottom: 5px;width: 100%;">
+						<span><%= p.name %></span>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endblock %}

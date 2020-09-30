@@ -1,0 +1,86 @@
+<div class="portlet box blue">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-gift"></i> {{action}} {{coupon.name}}
+    </div>
+    <div class="tools">
+      <a href="" class="collapse" data-original-title="" title=""></a>
+    </div>
+  </div>
+  <div class="portlet-body form" style="display: block;">
+    <form name="form" ng-submit="submit(form)" novalidate>
+      <div class="form-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" name="name" ng-model='item.name' required>
+
+          <p class="help-block" ng-show="form.name.$error.required && form.$submitted">
+            This field is required
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" ng-model="item.description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Discount type</label>
+          <select class="form-control" ng-model="item.discountType" required name="discountType" disabled>
+            <option value="amount">Amount</option>
+            <option value="percentage">Percentage</option>
+          </select>
+          <p class="help-block" ng-show="form.discountType.$error.required && form.$submitted">
+            This field is required
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>% Value</label>
+          <input type="number" class="form-control" name="discountValue" ng-model='item.discountValue' required>
+
+          <p class="help-block" ng-show="form.discountValue.$error.required && form.$submitted">
+            This field is required
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>Code</label>
+          <input type="text" class="form-control" name="code" ng-model='item.code' />
+        </div>
+        <div class="form-group">
+          <label>Number of uses</label>
+          <input type="number" class="form-control" name="number-uses" ng-model='item.numberUse'>
+        </div>
+        <div class="form-group">
+          <label>Expiry date</label>
+          <!-- <input type="text" class="form-control" name="exp" ng-model='item.expiredDate'> -->
+          <!-- <input date-range-picker class="form-control date-picker" type="text" ng-model="item.expiredDate" min="'2017-11-11'" max="today" /> -->
+          <p class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="item.expiredDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Product</label>
+          <select ui-select2="select2Options" multiple data-placeholder="Select products" class="form-control" ng-model="item.productIds">
+            <option ng-repeat="product in products" value="{{product._id}}">{{product.name}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><input type="checkbox" ng-model="item.isActive" class="checkbox" /> Is active?</label>
+        </div>
+        <!-- <div class="form-group">
+          <label><input type="checkbox" ng-model="item.useMultipleTimes" class="checkbox" /> Can you multiple times?</label>
+        </div> -->
+      </div>
+
+      <div class="form-actions right">
+        <a ui-sref="coupons.list" class="btn default">Cancel</a>
+        <button type="submit" class="btn green">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

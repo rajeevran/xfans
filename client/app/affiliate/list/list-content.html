@@ -1,0 +1,50 @@
+<h3 class="affiliate-title">Welcome to Affiliate Content Center</h3>
+<div class="container">
+<div class="title-pro">
+  <span><a href="#" ui-sref="affiliateModel">Model Center -</a></span><span>Content listing</span>
+</div>
+<div class="table-responsive">
+  <table class="table-main" style="background:#333">
+    <tr>
+      <!-- <th></th> -->
+      <th>Title</th>
+      <th>Created date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>
+        <!-- <div class="btn btn-danger" id="downloadAllbtn" ng-click="downloadAll()">Download All</div> -->
+      </th>
+    </tr>
+    <tr ng-repeat="video in videos">
+      <!-- <td><img fallback-src ng-src="{{video.imageMediumPath | checkImage}}" class="img-thumbnail"/></td> -->
+      <td>
+        {{video.name}}
+      </td>
+      <td>{{video.createdAt | date}}</td>
+
+      <td><span class="label label-default" ng-if="video.status === 'inactive'">Inactive</span>
+          <span class="label label-success" ng-if="video.status === 'active'">Active</span>
+      </td>
+      <td >
+        <a ng-href="{{video.previewFilePath}}" target="_blank"><i class="fa fa-eye"></i></a>
+        <a href="{{video.filePath}}" download="{{video.name}}" target="_blank" class="downloadItem"><i class="fa fa-download"></i></a>
+      </td>
+    </tr>
+
+  </table>
+  <h5 ng-if="totalItems === 0">
+    There is no content now.
+  </h5>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+
+<uib-pagination  previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="query(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>
+</div>
+<footer></footer>

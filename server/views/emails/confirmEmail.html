@@ -1,0 +1,19 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="border-bottom: 1px solid #ddd; padding: 20px 0px; padding-top: 0px; margin-bottom: 40px;">
+		<img src="http://52.42.142.211/assets/images/logo.png">
+	</div>
+	
+	<div style="font-size: 17px">
+		<h3>Dear <%= user.firstname %> <%= user.lastName %>.</h3>
+		<p>You have selected <%= user.email %> as your Chiiz ID. To verify this email address belongs to you, please click on the link below. This link will expire three days after this email was sent. </p>
+		<div>
+			<a style="font-size: 17px; font-weight: bold;padding: 12px 30px;border-radius: 3px; color: #FFF;background-color: #32c5d2;border-color: #32c5d2; text-decoration: none" href="<%= url %>">Confirm Email</a>
+		</div>
+		<p>Why you received this email.</p>
+		<p>Chiiz requires verification whenever an email address is selected as an Chiiz ID. Your Chiiz ID cannot be used until you verify it. If you did not make this request, you can ignore this email. No Chiiz ID will be created without verification. Chiiz Support</p>
+	</div>
+</div>
+{% endblock %}

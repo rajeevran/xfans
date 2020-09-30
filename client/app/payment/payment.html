@@ -1,0 +1,121 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="profile-box payment">
+
+      <div class="title-pro">
+        <span>Checkout</span>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 payment-provider" ng-show="havePaymentGateway">
+          <ul>
+            <li>
+              <label>
+                <input type="radio" name="provider" value="ccbill" ng-model="provider">
+                <img src="{{ 'assets/images/paypal3.png' | cdn }}"/> CCBill
+              </label>
+            </li>
+          </ul>
+          <div class="form-group" ng-show="paymentType === 'product'">
+            <div class="input-group">
+              <input type="text" name="coupon" placeholder="Coupon Code" class="form-control" ng-model="couponCode">
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="checkCoupon()">
+                  Apply!
+                </button>
+              </span>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-lg btn-warning" ng-click="doRedirect()">Checkout</button>
+          </div>
+        </div>
+        <div class="col-lg-6 payment-provider" ng-show="!havePaymentGateway">
+          <p class="alert alert-danger">Payment is disabled. Please contact administractor for more details! </p>
+        </div>
+        <div class="col-lg-6">
+          <div class="payment-details table-responsive">
+            <form>
+              <table class="table">
+                <tr ng-if="paymentType !== 'tip_performer'">
+                  <th colspan="2">Products</th>
+                  <th width="100" class="align-center">Quantity</th>
+                  <th width="100">Price</th>
+                </tr>
+                <tr ng-if="paymentType === 'product'" ng-repeat="product in products track by $index">
+                  <td width="50">
+                    <a ui-sref="storeView({id: product._id, alias: product.getData().alias})">
+                      <img ng-src="{{product.getData().imageThumbPath}}" fallback-src style="max-width: 50px">
+                    </a>
+                  </td>
+                  <td><a ui-sref="storeView({id: product._id, alias: product.getData().alias})">{{product._name}}</a></td>
+                  <td align="center">{{product._quantity}}</td>
+                  <td>{{product._price * product._quantity | price}}</td>
+                </tr>
+                <tr ng-if="package">
+                  <th colspan="2">{{package.name}}</th>
+                  <th align="center">1</th>
+                  <th>{{package.price | price}}</th>
+                </tr>
+                <tr ng-if="video">
+                  <th colspan="2">{{video.name}}</th>
+                  <th align="center">1</th>
+                  <th>{{video.price | price}}</th>
+                </tr>
+                <tr ng-if="performer && paymentType !== 'tip_performer'">
+                  <th colspan="2">
+                    <span ng-if="subscriptionType === 'yearly'">Yearly subscription</span>
+                    <span ng-if="subscriptionType === 'monthly'">Monthly subscription</span>
+                    <span>
+                      <strong>
+                        {{performer.name}}
+                      </strong>
+                    </span>
+                  </th>
+                  <th align="center" class="text-center">1</th>
+                  <th>
+                    <span>{{totalPrice | price}}</span>
+                  </th>
+                </tr>
+                <tr ng-if="performer && paymentType === 'tip_performer'">
+                  <th colspan="2">
+                    <span>Tip to</span>
+                    <span>
+                      <strong>
+                        {{performer.name}}
+                      </strong>
+                    </span>
+                  </th>
+                  <th align="center" class="text-center" colspan="2">
+                    <span>
+                      <input type="number" class="form-control" ng-model="tip.amount" placeholder="Enter your tip amout" />
+                    </span>
+                  </th>
+                </tr>
+                <tr ng-show="coupon && !performer">
+                  <td colspan="3" class="text-right"><strong>Discount</strong></td>
+                  <td>
+                    <strong ng-if="coupon.discountType==='amount'">{{coupon.discountValue | price}}</strong>
+                    <strong ng-if="coupon.discountType==='percentage'">{{coupon.discountValue}}%</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3" class="text-right"><strong>Total Price</strong></td>
+                  <td>
+                    <strong ng-if="coupon && coupon.discountType==='amount'">{{total - coupon.discountValue | price}}</strong>
+                    <strong ng-if="coupon && coupon.discountType==='percentage'">{{total - (total * coupon.discountValue)/100 | price}}</strong>
+                    <strong ng-if="!coupon">{{total | price}}</strong>
+                    <strong ng-if="performer">{{totalPrice | price}}</strong>
+                    <strong ng-if="paymentType === 'tip_performer'">{{tip.amount | price}}</strong>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

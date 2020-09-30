@@ -1,0 +1,61 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+
+    <div class="detail-box m20 prod-list">
+      <div class="img-detail col-md-4" ng-click="openLightboxModal()" >
+        <img alt="{{product.name}}" ng-src="{{product.imageFullPath | checkImage | cdn}}" fallback-src>
+      </div>
+      <div class="text-detail col-md-8">
+        <h3>{{product.name}}</h3>
+        <div ng-if="product.pricePromotion == 0" class="price-store">${{product.price}}</div>
+        <div ng-if="product.pricePromotion != 0" class="price-store">${{product.pricePromotion}}</div>
+        <div ng-if="product.categories.length">
+          <strong>Categories</strong>
+          <br />
+          <a ng-repeat="cat in product.categories track by $index" style="margin-right:10px; color: aqua"
+            ui-sref="store({categoryId: cat._id})">{{cat.name}}</a>
+        </div>
+        <hr>
+        <div class="desrciption-store">
+          {{product.description}}
+        </div>
+        <div  ng-if="product.quantity > 0" class="quanlity">
+          Quantity <input ng-model="quantity.value" type="text" >
+        </div>
+        <hr>
+        <a ng-if="product.quantity > 0" buy-product="product" class="btn btn-warning">Buy now</a>
+        <a ng-if="product.quantity == 0"  class="btn btn-warning">Sold Out</a>
+      </div>
+    </div>
+
+    <div class="title-main">
+      <h4>Related Products</h4>
+    </div>
+
+    <ul class="row list-li list-video">
+      <li ng-repeat="product in products" class="col-sm-4 col-lg-3">
+        <div class="box-li">
+          <div class="img-li">
+            <a ui-sref="storeView({id:product._id,alias:product.alias})">
+              <img ng-src="{{product.imageMediumPath | checkImage}}" alt="{{product.name}}" fallback-src>
+            </a>
+            <div class="bottom-img">
+              {{product.name}}
+            </div>
+          </div>
+          <div class="bottom-store">
+            <div class="pull-left">
+              <div ng-if="product.pricePromotion == 0" class="price-store">${{product.price}}</div>
+              <div ng-if="product.pricePromotion != 0" class="price-store">${{product.pricePromotion}}</div>
+            </div>
+            <div class="pull-right">
+              <a href="#" class="btn btn-warning">Buy now</a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,36 @@
+<div class="m20">
+  <div class="title-main">
+    <h4>Recent movies</h4>
+  </div>
+
+  <ul class="row list-li list-video">
+    <li ng-repeat="video in videos" class="col-sm-4 col-lg-3">
+          <div class="box-li">
+            <div class="img-li">
+              <img src="{{video.imageMediumPath}}" alt="{{video.name}}">
+              <a  ui-sref="videoView({id:video._id,alias:video.alias})" class="play-hover">
+                <i class="fa fa-caret-right"></i>
+              </a>
+              <div class="bottom-img">
+                <div class="pull-left">
+                  <ul class="ac-box-li">
+                    <li><a href="#"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+                    <li><a href="#"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+                  </ul>
+                </div>
+                <div class="pull-right">
+                  {{video.updatedAt | date}}
+                </div>
+              </div>
+            </div>
+            <div class="text-li">
+              <a ui-sref="videoView({id:video._id,alias:video.alias})" title="{{video.name}}">{{video.name}}</a>
+            </div>
+          </div>
+        </li>
+    
+  </ul>
+  <div class="text-center">
+    <a ui-sref="movies" class="btn btn-lg btn-warning btn-botder">View All Videos <i class="fa fa-caret-right"></i></a>
+  </div>
+</div>

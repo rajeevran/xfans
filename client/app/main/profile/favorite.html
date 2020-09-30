@@ -1,0 +1,26 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="profile-box">
+      <profile-menu></profile-menu>
+
+      <div class="profile-right">
+        <div class="title-pro">
+          <span>Favorites</span>
+        </div>
+
+        <ul class="row list-li list-item.video">
+
+          <li ng-repeat="item in videos" class="col-sm-6 col-lg-4">
+            <div movie-card video="item.video"></div>
+          </li>
+        </ul>
+
+        <div ng-if="totalItems > itemsPerPage" class="paging">
+      <uib-pagination  previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

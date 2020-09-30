@@ -1,0 +1,43 @@
+<div class="row">
+  <h3 class="abl-ttl">Albums Listing</h3>
+  <div class="col-md-12">
+      <a ui-sref="manager.albumCreate({performerId:user._id})" class="btn btn-warning pull-right">
+        Add New <i class="fa fa-plus"></i>
+      </a>
+       <div class="portlet-body">
+         <table class="table table-stripe">
+           <thead>
+             <tr>
+               <th>
+                 Name
+               </th>
+               <th>
+                 Description
+               </th>
+               <th>
+                 #
+               </th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="item in items track by $index">
+               <td>
+                 {{item.name}}
+               </td>
+               <td>
+                 {{item.description}}
+               </td>
+               <td>
+                 <a ui-sref="manager.albumUpdate({id: item._id, performerId:user._id})">
+                   <i class="fa fa-pencil"></i>
+                 </a>&nbsp;
+                 <a href="#" ng-click="delete(item, $index)">
+                   <i class="fa fa-trash"></i>
+                 </a>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+  </div>
+</div>

@@ -1,0 +1,360 @@
+<div>
+  <div class="title-pro">
+    <span>Account information</span>
+  </div>
+  <form class="form-horizontal form" enctype="multipart/form-data" name="form" ng-submit="updateProfile(form)" novalidate>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Profile link</label>
+      <div class="col-sm-8 col-lg-10">
+        <h5>{{domain}}/{{model.username}}</h5>
+        <input type="text" name="user" ng-model="model.username" class="form-control" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Full name</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="name" ng-model="model.name" class="form-control" required>
+        <p class="help-block" ng-show="form.name.$error.required && submitted">
+          Full name is required
+        </p>
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Email</label>
+      <div class="col-sm-8 col-lg-4">
+        <input ng-disabled="true" type="text" name="email" class="form-control" ng-model="model.email" required>
+        <p class="help-block" ng-show="form.email.$error.email && submitted">
+          Doesn't look like a valid email.
+        </p>
+        <p class="help-block" ng-show="form.email.$error.required && submitted">
+          What's your email address?
+        </p>
+        <p class="help-block" ng-show="form.email.$error.mongoose">
+          {{ errors.email}}
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Description</label>
+      <div class="col-sm-8 col-lg-10 mar-bot-10">
+        <textarea type="text" name="description" ng-model="model.description" class="form-control" rows="3" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 col-lg-2 control-label">Sexual Preference</label>
+        <div class="col-sm-8 col-lg-10 mar-bot-10">
+            <textarea class="form-control" name="sexualPreference" rows='3' ng-model="model.sexualPreference"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Age</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="number" name="age" ng-model="model.age" class="form-control">
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Sex</label>
+      <div class="col-sm-8 col-lg-4">
+        <select type="text" name="sex" ng-model="model.sex" class="form-control">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="FTM">Female To Male</option>
+          <option value="MTF">Male To Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Ethnicity</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="ethnicity" ng-model="model.ethnicity" class="form-control">
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Languages</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="languages" ng-model="model.languages" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Home Town</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="hometown" ng-model="model.hometown" class="form-control">
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Weight</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="weight" ng-model="model.weight" class="form-control">
+      </div>
+      <!-- <label class="col-sm-4 col-lg-2 control-label">Phone</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="phone" ng-model="model.phone" class="form-control">
+      </div> -->
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Hair</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="hair" ng-model="model.hair" class="form-control">
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Body Hair</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="pubic-hair" ng-model="model.publicHair" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Eyes</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="eyes" ng-model="model.eyes" class="form-control">
+      </div>
+      <label class="col-sm-4 col-lg-2 control-label">Foot Size</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="burst" ng-model="model.bust" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 col-lg-2 control-label">Height</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" name="height" ng-model="model.height" class="form-control">
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <div class="col-lg-12">
+        <label class="control-label">Show home? <input type="checkbox" ng-model="model.showHome" /></label>
+        <p class="help help-block">
+          <small>Your profile and video will be shown in the home page.</small>
+        </p>
+      </div>
+    </div> -->
+
+    <!-- <div class="title-pro">
+      <span>Connect Twitter</span>
+    </div>
+    <div class="row">
+      <p class="red">Both fields below must be enable so you can tweet your video to Twitter</p>
+      <div class="col-lg-12">
+        <div class="text-center">
+          <div ng-if="!model.connectTwitter">
+            Your account does not connect to Twitter. Try to connect your Twitter account. <br />
+            <a ng-click="connectTwitter()"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div ng-if="model.connectTwitter">
+            Your account linked to Twitter account <br />
+            <a ng-click="connectTwitter()"><i class="fab fa-twitter"></i>Reconnect</a>
+
+
+            <br /> <br />
+            <label><input type="checkbox" ng-model="model.autoPostTwitter" /> Auto post new video to Twitter</label>
+            <br />
+            <div ng-if="model.autoPostTwitter">
+              <label>Custom text for Twitter video</label>
+              <textarea ng-model="model.customTwitterTextVideo" class="form-control" style="color:#000" placeholder="Enter your custom text here, limit 50 characters" maxlength="50"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="title-pro">
+      <span>Bank account setting</span>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <label class="control-label">Date of birth</label>
+        <input type="text" name="birthdate" ng-model="model.bankDateofBirth" class="form-control" placeholder="mm/dd/yyyy">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">First Name</label>
+        <input type="text" name="firstName" ng-model="model.bankFirstName" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Last Name</label>
+        <input type="text" name="lastName" ng-model="model.bankLastName" class="form-control">
+      </div>
+      <!-- <div class="col-lg-12">
+          <label class="control-label">Photo ID</label>
+          <div class="col-sm-8 col-lg-12">
+            <div class="photo-upload">
+              <img ng-src="{{idPhoto || idFile.fileUrl | checkImage}}">
+              <div class="upload">
+                <button type="file" class="btn btn-warning" ngf-select="uploadFilesId($file, $invalidFiles)"
+                    accept="image/*" ngf-max-size="100MB" >
+                Upload Photo ID</button>
+
+                <div >{{f1.name}} {{errFile1.name}} {{errFile1.$error}} {{errFile1.$errorParam}}
+                    <span class="progress" ng-show="f1.progress >= 0">
+                        <div style="width:{{f1.progress}}%"
+                             ng-bind="f1.progress + '%'"></div>
+                    </span>
+                </div>
+                <p class="help help-block">
+                  <small>Allow image file.<br>NO EXPLICIT MATERIAL ALLOWED</small>
+                </p>
+                <div class="progress" ng-show="IdUploading">
+                  <div class="progress-bar" role="progressbar" ng-style="{width: f1.progress + '%'}">
+                  </div>
+                </div>
+                {{errorMsg1}}
+
+                </div>
+              </div>
+        </div>
+      </div> -->
+      <div class="col-lg-12">
+        <label class="control-label">SSN number</label>
+        <h5>{{model.bankSsn | ssn}}</h5>
+        <input type="text" name="ssn" ssn-field ssn-field-mask="true" ng-model="model.bankSsn" placeholder="###-##-####" class="form-control" />
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Bank Name</label>
+        <input type="text" name="bankName" ng-model="model.bankName" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Bank Account #</label>
+        <input type="text" name="bankAccount" ng-model="model.bankAccount" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Rounding #</label>
+        <input type="text" name="bankRounding" ng-model="model.bankRounding" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Swift Code (if out of the USA)</label>
+        <input type="text" name="bankSwiftCode" ng-model="model.bankSwiftCode" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Bank Address</label>
+        <input type="text" name="bankBankAddress" ng-model="model.bankBankAddress" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Legal Type</label>
+        <input type="text" name="monthly" ng-model="model.bankLegalType" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Business Title</label>
+        <input type="text" name="businesstitle" ng-model="model.bankBusinessTitle" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Business Tax ID</label>
+        <input type="text" name="businesstaxid" ng-model="model.bankBusinessTaxId" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Country</label>
+        <input type="text" name="country" ng-model="model.bankCountry" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">State</label>
+        <input type="text" name="state" ng-model="model.bankState" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">City</label>
+        <input type="text" name="City" ng-model="model.bankCity" class="form-control">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Address</label>
+        <input type="text" name="address" ng-model="model.bankAddress" class="form-control">
+      </div>
+      <div class="col-lg-12">
+        <label class="control-label">ZIP code</label>
+        <input type="text" name="zipcode" ng-model="model.bankZip" class="form-control">
+      </div>
+    </div>
+    <br>
+    <div class="title-pro">
+      <span>Subscription setting</span>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label class="control-label">Monthly subscription price</label>
+        <input type="number" name="monthly" ng-model="model.subscriptionMonthlyPrice" class="form-control" min="1">
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Yearly subscripion price</label>
+        <input type="number" name="monthly" ng-model="model.subscriptionYearlyPrice" class="form-control" min="1">
+      </div>
+    </div>
+
+    <br>
+    <div class="title-pro">
+      <span>Welcom data</span>
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12">
+        <label class="control-label">Cover Photo</label>
+        <img fallback-src ng-src="{{model.welcomePhoto}}" style="max-width: 100%" ng-if="!cropper.croppedImage" />
+        <img ng-src="{{cropper.croppedImage}}" ng-if="cropper.croppedImage" style="max-width: 100%; padding:15px" />
+        <div class="clearfix"></div>
+        <!-- <input type="file" ng-model="welcomePhoto" name="file" ngf-select="uploadFile($file, 'welcomePhoto')" accept="image/*" ngf-max-size="100MB" /> -->
+        <input type="file" img-cropper-fileread image="cropper.sourceImage" accept="image/*" ngf-max-size="100MB" name="file" />
+        <p class="help help-block" id="max-width">
+          <small>Allow image file<br>NO EXPLICIT MATERIAL ALLOWED</small>
+        </p>
+        <div ng-if="cropper.sourceImage !== null">
+          <canvas width="600" height="300" id="canvas" image-cropper image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="1680" crop-height="550" keep-aspect="true" touch-radius="30" crop-area-bounds="bounds"></canvas>
+        </div>
+        <div class="btn btn-danger mar-bot-10" ng-if="cropper.sourceImage" ng-click="crop()">Crop Image!</div>
+        <div class="progress" ng-show="welcomePhoto.progress">
+          <div class="progress-bar" role="progressbar" ng-style="{width: welcomePhoto.progress + '%'}">
+            <span class="sr-only">{{welcomeVideo.progress}}0% Complete</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:inline-block; width:100%">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="control-label">Welcome Photo</label>
+            <div class="photo-upload">
+              <img ng-src="{{photo  | checkAvatar}}" fallback-src>
+              <div class="upload">
+                <button type="file" class="btn btn-warning" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-size="100MB">
+                  Upload Photo</button>
+
+                <!-- <div >{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                      <span class="progress" ng-show="f.progress >= 0">
+                          <div style="width:{{f.progress}}%"
+                               ng-bind="f.progress + '%'"></div>
+                      </span>
+                  </div> -->
+                <p class="help help-block">
+                  <small>Allow image file.<br>NO EXPLICIT MATERIAL ALLOWED</small>
+                </p>
+                <div class="progress" ng-show="MainPhotoUploading" style="postion:relative">
+                  <div class="progress-bar" role="progressbar" ng-style="{width: welcomeFile.progress + '%'}">
+                    <div style="color:red;position:absolute;left:50%">{{welcomeFile.progress}}% </div>
+                  </div>
+                </div>
+                {{errorMsg}}
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <label class="control-label">Welcome Video</label>
+          <div class="photo-upload">
+            <img src="/assets/images/icon-video.gif" style="max-width: 100px" ng-if="model.welcomeVideo" />
+            <div class="upload">
+              <div class="clearfix"></div>
+              <button type="file" class="btn btn-warning" ngf-select="uploadFile($file, 'welcomeVideo')" accept="video/*" ngf-max-size="10000MB" ng-model="welcomeVideo">
+                Upload Video</button>
+              <p class="help help-block">
+                <small>Allow mp4 file.<br>NO EXPLICIT MATERIAL ALLOWED</small>
+              </p>
+              <div class="progress" ng-show="viUploading" style="postion:relative">
+                <div class="progress-bar" role="progressbar" ng-style="{width: welcomeVideo.progress + '%'}">
+                  <div style="color:red;position:absolute;left:50%">{{welcomeVideo.progress}}%</div>
+                </div>
+              </div>
+              <div style="color:red" ng-show="viUploading">Please waiting for upload & convert video.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-6">
+        <label class="control-label">Use welcome option as</label>
+        <select ng-model="model.welcomeOption" class="form-control">
+          <option value="video">Video</option>
+          <option value="photo">Photo</option>
+        </select>
+      </div>
+    </div>
+
+    <hr />
+    <div class="text-center">
+      <button type="submit" class="btn btn-warning btn-lg">Save Profile</button>
+    </div>
+  </form>
+</div>

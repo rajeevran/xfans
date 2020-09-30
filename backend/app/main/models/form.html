@@ -1,0 +1,425 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a ui-sref='store'>Models</a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Management Perfomers <small></small>
+      </h3>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box blue">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-gift"></i> {{action}} {{performer.name}}
+              </div>
+              <div class="tools">
+                <a href="" class="collapse" data-original-title="" title="">
+                </a>
+              </div>
+            </div>
+            <div class="portlet-body form" style="display: block;">
+              <form enctype="multipart/form-data" name="form" ng-submit="submitForm(form,performer.imageFullPath)"
+                novalidate>
+                <div class="form-body">
+                  <div class="form-group">
+                    <label>UserName</label>
+                    <input type="text" class="form-control" name="username" ng-model='performer.username' required>
+                    <p class="help-block" ng-show="form.username.$error.required && submitted">
+                      This field is required
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" ng-model='performer.name' required>
+                    <p class="help-block" ng-show="form.name.$error.required && submitted">
+                      This field is required
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" ng-model="performer.type" required name="modelType">
+                      <option value="system">System</option>
+                      <option value="registered">Registered</option>
+                    </select>
+                    <p class="help-block" ng-show="form.modelType.$error.required && submitted">
+                      This field is required
+                    </p>
+                  </div>
+                  <div class="form-group" ng-show="performer.type == 'registered'">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" ng-model='performer.email'
+                      ng-required="performer.type == 'registered'" />
+                    <p class="help-block" ng-show="form.email.$error.required && submitted">
+                      This field is required
+                    </p>
+                  </div>
+                  <div class="form-group" ng-show="performer.type == 'registered'">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" ng-model='performer.password' />
+                    <p class="help help-block">
+                      <small>Leave blank to keep old password</small>
+                    </p>
+                  </div>
+                  <div class="form-group" ng-show="performer.type == 'registered'">
+                    <label>ID Verified? <input type="checkbox" ng-model="performer.isVerified" /></label>
+                    <div class="clearfix" ng-show="idFile">
+                      <a href="{{idFile.fileUrl}}" target="_blank">View id file</a>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Email Verified?<input type="checkbox" ng-model="performer.emailVerified"></label>
+                  </div>
+                  <div class="form-group" ng-show="performer.type == 'registered'">
+                    <div>This option allow performer to show profile & videos to dashboard or not</div>
+                    <label>Show Home? <input type="checkbox" ng-model="performer.showHome" /></label>
+
+                  </div>
+                  <div class="form-group">
+                    <label>Image</label>
+                    <div class="photo-upload">
+                      <img ng-show="form.file.$valid " ngf-thumbnail="performer.imageFullPath | checkImage"
+                        class="thumb">
+                      <div class="upload">
+                        <input class="btn btn-warning btupload" type="file" ngf-select
+                          ng-model="performer.imageFullPath" name="file" accept="image/*" ngf-max-size="100MB">
+
+                        <span ng-show="form.result">Upload Successful</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Subscriptions Monthly Price</label>
+                        <input type="number" class="form-control" ng-model="performer.subscriptionMonthlyPrice" />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Subscriptions Yearly Price</label>
+                        <input type="number" class="form-control" ng-model="performer.subscriptionYearlyPrice" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows='5' ng-model='performer.description'></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Sexual Preference</label>
+                    <textarea class="form-control" rows='5' ng-model="performer.sexualPreference"></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Sex</label>
+                        <select class="form-control" ng-model="performer.sex">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="FTM">Female To Male</option>
+                          <option value="MTF">Male To Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" class="form-control" ng-model="performer.age" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Weight</label>
+                        <input type="text" class="form-control" ng-model="performer.weight" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Height</label>
+                        <input type="text" class="form-control" ng-model="performer.height" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Hair</label>
+                        <input type="text" class="form-control" ng-model="performer.hair" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Eyes</label>
+                        <input type="text" class="form-control" ng-model="performer.eyes" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Ethnicity</label>
+                        <input type="text" class="form-control" ng-model="performer.ethnicity" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Languages</label>
+                        <input type="text" class="form-control" ng-model="performer.languages" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Hometown</label>
+                        <input type="text" class="form-control" ng-model="performer.hometown" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Body Hair</label>
+                        <input type="text" class="form-control" ng-model="performer.publicHair" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Foot Size</label>
+                        <input type="text" class="form-control" ng-model="performer.bust" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Sort</label>
+                        <input type="text" class="form-control" ng-model='performer.sort'>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bank-block">
+                    <h3 style="font-weight:600;padding-left:10px">Bank Infomations</h3>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Date of birth</label>
+                        <input type="text" placeholder="mm/dd/yyyy" class="form-control"
+                          ng-model="performer.bankDateofBirth" name="bankDateofBirth">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" ng-model="performer.bankFirstName">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" ng-model="performer.bankLastName">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>SSN</label>
+                        <input type="text" class="form-control" ng-model="performer.bankSsn" name="ssn" ng-maxlength="9"
+                          placeholder="###-##-####" />
+                        <span class="help-block" ng-show="form.ssn.$invalid">Valid SSN has 9 characters!</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Bank Name</label>
+                        <input type="text" name="bankName" ng-model="performer.bankName" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Bank Account #</label>
+                        <input type="text" name="bankAccount" ng-model="performer.bankAccount" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Rounding #</label>
+                        <input type="text" name="bankRounding" ng-model="performer.bankRounding" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Swift Code (if out of the USA)</label>
+                        <input type="text" name="bankSwiftCode" ng-model="performer.bankSwiftCode" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Bank Address</label>
+                        <input type="text" name="bankBankAddress" ng-model="performer.bankBankAddress"
+                          class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Legal Type</label>
+                        <input type="text" class="form-control" ng-model="performer.bankLegalType">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Business Title</label>
+                        <input type="text" class="form-control" ng-model="performer.bankBusinessTitle">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Business Tax Id</label>
+                        <input type="text" class="form-control" ng-model="performer.bankBusinessTaxId">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" class="form-control" ng-model="performer.bankCountry">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>State</label>
+                        <input type="text" class="form-control" ng-model="performer.bankState">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input type="text" class="form-control" ng-model="performer.bankCity">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" ng-model="performer.bankAddress">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- <div class="col-md-6">
+                      <div class="bank-block">
+                        <h3 style="font-weight:600;padding-left:10px">Comission</h3>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Tip comission</label>
+                            <input type="number" class="form-control" ng-model="performer.tipCommision" name="tip">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Subscription Commission</label>
+                            <input type="number" class="form-control" ng-model="performer.subscriptionCommision"
+                              name="subscriptionCommision">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label>Single Purchase Commission</label>
+                            <input type="number" class="form-control" ng-model="performer.storeComission"
+                              name="storeComission">
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="col-md-6">
+                      <div class="bank-block">
+                        <h3 style="font-weight:600;padding-left:10px">CCBill payment setting</h3>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Flexform ID for monthly subscritpion</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.formMonthSubscription"
+                              name="formMonthSubscription">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Flexform ID for yearly subscription</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.formYearlySubscription"
+                              name="formYearlySubscription">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Flexform ID for single payment</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.formSinglePayment"
+                              name="formSinglePayment">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Sub account number for monthly and yearly subscription (eg 0001)</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.subAccountSubscription"
+                              name="subAccountSubscription" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Sub account number for store (eg 0001)</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.subAccountStore"
+                              name="subAccountStore" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Sub account number for sale video (eg 0001)</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.subAccountSaleVideo"
+                              name="subAccountSaleVideo" />
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Sub account number for tip (eg 0001)</label>
+                            <input type="text" class="form-control" ng-model="performer.ccbill.subAccountTip"  name="subAccountTip" />
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select class='form-control' ng-model='performer.status'>
+                          <option value='active'>Active</option>
+                          <option value='inactive'>Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                    File too large
+                    {{errorFile.size / 1000000|number:1}}MB: max 5MB
+                  </p>
+                  <span class="progress" ng-show="picFile.progress >= 0">
+                    <div style="width:{{picFile.progress}}%" ng-bind="form.progress + '%'"></div>
+                  </span>
+                </div>
+                <div class="form-actions right">
+                  <a ui-sref='models' class="btn default">Cancel</a>
+                  <button type="submit" class="btn green">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+<footer></footer>

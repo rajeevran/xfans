@@ -1,0 +1,147 @@
+<div class="title-pro">
+  <span> Bulk upload videos</span>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+    <div class="portlet box grey-cascade">
+      <div class="portlet-body">
+        <div class="form-group">
+          <div ngf-drop="populateFile($files)" ngf-select="populateFile($files)" ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-multiple="true" accept="video/mp4,video/x-m4v,.flv,.mkv,.3gp,video/*" ngf-max-size="20000MB">Drop video here or click to upload</div>
+          <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+        </div>
+        <div class="form-group">
+          <label>Select files</label>
+          <input type="file" ngf-select="populateFile($files)" ng-model="files" ngf-multiple="true" accept="video/mp4,video/x-m4v,.flv,.mkv,.3gp,video/*" ngf-max-size="20000MB" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12" ng-repeat="file in files track by $index">
+    <div class="row">
+      <div class="col-md-2">
+        <img src="assets/images/icon-video.gif" style="width:100%" />
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" ng-model="file.data.name" class="form-control" />
+
+              <a href="#" class="btn btn-danger" ng-click="remove(file, $index)" ng-disabled="uploading">Remove</a>
+              <a href="#" class="btn btn-primary" ng-click="file.extra=true" ng-if="!file.extra">Show extra</a>
+              <a href="#" class="btn btn-primary" ng-click="file.extra=false" ng-if="file.extra">Hide extra</a>
+              <a href="#" class="btn btn-info" ng-show="file.uploading">Uploading...</a>
+              <a href="#" class="btn btn-info" ng-show="file.uploaded">Uploaded</a>
+              <div class="progress" ng-show="file.uploading" style="position:relative">
+                <div class="progress-bar" role="progressbar" ng-style="{width: file.progressPercentage + '%'}">
+                </div>
+                <div style="color:red;position:absolute;left:50%">{{file.progressPercentage}}%</div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="file.extra">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" ng-model='file.data.description' ng-disabled="uploading"></textarea>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Categories</label>
+                <select ui-select2="select2Options" data-placeholder="Select Categories" multiple class="form-control padding-0" ng-model="file.data.categories">
+                  <option ng-repeat="item in categories" value="{{item._id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Tags</label>
+                <input class="form-control padding-0" data-placeholder="Add tags" type="hidden" ui-select2="inputSelect2Options" ng-if="inputSelect2Options" ng-model="file.data.tags">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- <div class="col-md-6">
+               <div class="form-group">
+                 <label>Meta Keywords</label>
+                 <input type="text" class="form-control" ng-model='file.data.metaKeywords' ng-disabled="uploading">
+               </div>
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+                 <label>Meta Title</label>
+                 <input type="text" class="form-control" ng-model='file.data.metaTitle' ng-disabled="uploading">
+               </div>
+             </div>
+             <div class="col-md-12">
+               <div class="form-group">
+                 <label>Meta Description</label>
+                 <input type="text" class="form-control" ng-model='file.data.metaDescription' ng-disabled="uploading">
+               </div>
+             </div> -->
+            <!-- <div class="col-md-12">
+               <div class="form-group">
+                 <label>Image</label>
+                 <div class="photo-upload">
+                   <img ng-show="form.file.$valid" ngf-thumbnail="file.data.imageFullPath" class="thumb" />
+                   <input class="btn btn-warning btupload" type="file" ngf-select
+                          ng-model="file.data.imageFullPath" name="file"
+                          accept="image/*" ngf-max-size="100MB"
+                          ngf-model-invalid="errorFile">
+                 </div>
+               </div>
+             </div> -->
+            <!-- <div class="col-md-12">
+               <div class="form-group">
+                 <label>File Trailer Path</label>
+                 <img ng-if="file.data.fileTrailerPath" width="100" src="assets/images/icon-video.gif">
+                 <input class="btn btn-warning btupload" type="file" ngf-select
+                        ng-model="file.data.fileTrailerPath" name="file"
+                        accept="video/mp4,video/x-m4v,video/*" ngf-max-size="20000MB" />
+               </div>
+             </div> -->
+            <div class="col-md-12" style="display:none">
+              <div album-create options="file.albumOptions"></div>
+            </div>
+            <div class="col-lg-12">
+              <div class="col-ld-6">
+                <div class="form-group">
+                  <label>
+                    <input type="checkbox" ng-model="file.data.isSaleVideo"> For sale?
+                  </label>
+                  <div class="input-group" ng-if="file.data.isSaleVideo">
+                    <label>Price</label>
+                    <input type="number" class="form-control" ng-model="file.data.price" ng-required="file.data.isSaleVideo" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Status</label>
+                <select class='form-control' ng-model='file.data.status' ng-disabled="uploading">
+                  <option value='active'>Active</option>
+                  <option value='inactive'>Inactive</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-offset-2 col-md-10" ng-show="files.length">
+    <div class="form-actions" style="background-color: #ddd; margin-top: 10px;padding:10px">
+      <button class="btn btn-default" ng-disabled="uploading" ng-click="cancel()">Cancel</button>
+      <button class="btn btn-primary" ng-click="uploadAll()" ng-disabled="uploading">Upload all</button>
+    </div>
+
+    <p class="alert alert-info" ng-show="uploading">
+      File is uploading, please wait. Do not reload page at this time.
+    </p>
+  </div>
+</div>

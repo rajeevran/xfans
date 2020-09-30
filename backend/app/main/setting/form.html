@@ -1,0 +1,561 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a ui-sref='setting'>Setting</a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Management Settings <small></small>
+      </h3>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box blue">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-gift"></i> {{action}} {{setting2.name}}
+              </div>
+              <div class="tools">
+                <a href="" class="collapse" data-original-title="" title="">
+                </a>
+
+              </div>
+            </div>
+            <div class="portlet-body form" style="display: block;">
+              <form enctype="multipart/form-data" name="form" ng-submit="submitForm(form, setting2.imageHomeFullPath,
+                setting2.imageWelcomeFullPath,setting2.imageMemberNotVip, setting2.logoFullPath, setting2.imageLoginFullPath)" novalidate>
+                <div class="form-body">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Site name</label>
+                        <input type="text" class="form-control" name="siteName" ng-model='setting2.siteName' required placeholder="Enter your sitename such as xMember">
+
+                        <p class="help-block" ng-show="form.siteName.$error.required && submitted">
+                          This field is required
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Favicon (size: 32px x 32px)</label>
+                        <div class="setting-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="favicon" class="thumb" ng-if="!setting2.favicon&&favicon">
+                          <img ng-src="{{setting2.favicon}}" class="thumb" ng-if="setting2.favicon&&!favicon">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="favicon" name="file" accept="image/*" ngf-max-size="1MB" ngf-model-invalid="errorFile">
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 1M
+                            </p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Meta Title</label>
+                        <input type="text" class="form-control" name="metaTitle" ng-model='setting2.metaTitle' required>
+
+                        <p class="help-block" ng-show="form.metaTitle.$error.required && submitted">
+                          This field is required
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Meta Keyword</label>
+                        <input type="text" class="form-control" name="metaKeyword" ng-model='setting2.metaKeyword'>
+
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Image Background Login (size: over 1200 x 900px)</label>
+                        <div class="setting-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="setting2.imageLoginFullPath" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="setting2.imageLoginFullPath" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5MB
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Image Home Page (size: 542px x 704px)</label>
+                        <div class="setting-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="setting2.imageHomeFullPath" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="setting2.imageHomeFullPath" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5M
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Image Box Welcome (size: 560px x 341px)</label>
+                        <div class="setting-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="setting2.imageWelcomeFullPath" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="setting2.imageWelcomeFullPath" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5M
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Image Member Not Vip (size: 800px x 450px)</label>
+                        <div class="setting-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="setting2.imageMemberNotVip" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="setting2.imageMemberNotVip" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5M
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Watermark (200px of width)</label>
+                        <div class="setting-upload">
+                          <img ngf-thumbnail="setting2.videoWatermarkPath" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="videoWatermarkPath" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5M
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="form-group">
+                    <label>Meta Description</label>
+                    <textarea class="form-control" rows='5' ng-model='setting2.metaDescription'></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" name="companyName" ng-model='setting2.companyName' >
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" name="address" ng-model='setting2.address' >
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" ng-model='setting2.email' >
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Hot Line</label>
+                        <input type="text" class="form-control" name="hotline" ng-model='setting2.hotline' >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Landing Page Content</label>
+                    <textarea data-ck-editor class="form-control" rows='5' ng-model='setting2.landingPageContent'></textarea>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Welcome Title</label>
+                        <input type="text" class="form-control" ng-model='setting2.welcomeTitle' />
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-8">
+                      <div class="form-group">
+                        <label>Welcome Content</label>
+                        <textarea data-ck-editor class="form-control" rows='5' ng-model='setting2.welcomeContent'></textarea>
+                      </div>
+                    </div> -->
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Logo (size: 145px x 65px)</label>
+                        <div class="setting-upload">
+                          <img ngf-thumbnail="setting2.logoFullPath" class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="setting2.logoFullPath" name="file" accept="image/*" ngf-max-size="5MB" ngf-model-invalid="errorFile">
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5M
+                            </p>
+
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Footer Content</label>
+                    <textarea data-ck-editor class="form-control" rows='5' ng-model='setting2.footerContent'></textarea>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label>Icon</label> <br />
+                    <img ng-src="{{setting2.fullAccessVideoText.icon}}" class="thumb" style="max-width: 120px" />
+                    <input class="btn btn-warning btupload" type="file" ngf-select ng-model="fullAccessVideoTextIcon" name="file" accept="image/*" ngf-max-size="2MB" />
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <label>Access video text</label>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Text 1</label>
+                        <input type="text" class="form-control" rows='5' ng-model='setting2.fullAccessVideoText.text1' />
+                      </div>
+                      <div class="col-md-4">
+                        <label>Text 2</label>
+                        <input type="text" class="form-control" rows='5' ng-model='setting2.fullAccessVideoText.text2' />
+                      </div>
+                      <div class="col-md-4">
+                        <label>Icon</label> <br />
+                        <img ng-src="{{setting2.fullAccessVideoText.icon}}" class="thumb" style="max-width: 120px" />
+                        <input class="btn btn-warning btupload" type="file" ngf-select ng-model="fullAccessVideoTextIcon" name="file" accept="image/*" ngf-max-size="2MB" />
+                      </div>
+                    </div>
+                  </div> -->
+                  <hr />
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h3>CCBill payment gateway setting</h3>
+                      <div class="form-group">
+                        <label>Enabled? <input type="checkbox" name="ccbillEnable" ng-model="setting2.ccbillEnable" /></label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <h3>Account Subscriptions CCBill</h3>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Client Accnum</label>
+                            <input type="text" class="form-control" name="clientAccnumSubscriptions" ng-model='setting2.clientAccnumSubscriptions'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Client Subacc</label>
+                            <input type="text" class="form-control" name="clientSubaccSubscriptions" ng-model='setting2.clientSubaccSubscriptions'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Form Name</label>
+                            <input type="text" class="form-control" name="formNameSubscriptions" ng-model='setting2.formNameSubscriptions'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Currency Code</label>
+                            <input type="text" class="form-control" name="currencyCodeSubscriptions" ng-model='setting2.currencyCodeSubscriptions'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Salt</label>
+                            <input type="text" class="form-control" name="saltSubscriptions" ng-model='setting2.saltSubscriptions'>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <h3>Account Single Payment CCBill</h3>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Client Accnum</label>
+                            <input type="text" class="form-control" name="clientAccnumSingle" ng-model='setting2.clientAccnumSingle'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Client Subacc</label>
+                            <input type="text" class="form-control" name="clientSubaccSingle" ng-model='setting2.clientSubaccSingle'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Form Name</label>
+                            <input type="text" class="form-control" name="formNameSingle" ng-model='setting2.formNameSingle'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Currency Code</label>
+                            <input type="text" class="form-control" name="currencyCodeSingle" ng-model='setting2.currencyCodeSingle'>
+                          </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <label>Salt</label>
+                            <input type="text" class="form-control" name="saltSingle" ng-model='setting2.saltSingle'>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <!-- <div class="row">
+                    <div class="col-lg-12">
+                      <h3>Paypal Setting</h3>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label>Enable? <input type="checkbox" name="payppalEnabled" ng-model='setting2.paypal.enable' /></label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="paypalUser" ng-model='setting2.paypal.username' >
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="paypalPass" ng-model='setting2.paypal.password' >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Signature</label>
+                        <input type="text" class="form-control" name="paypalSignature" ng-model='setting2.paypal.signature' >
+                      </div>
+                      <div class="checkbox-c">
+                        <label>
+                          <input type="checkbox" name="paypalSandbox" ng-model='setting2.paypal.sandbox' >
+                          Sandbox
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+                  <!-- <hr />
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h3>Bitpay Setting</h3>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label>Enable? <input type="checkbox" name="bitpayEnable" ng-model='setting2.bitpay.enable' /></label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Api Key</label>
+                        <input type="text" class="form-control" name="bitpayApiKey" ng-model='setting2.bitpay.apiKey' >
+                      </div>
+                      <div class="checkbox-c">
+                        <label>
+                          <input type="checkbox" name="bitPaySandbox" ng-model='setting2.bitpay.sandbox' >
+                          Sandbox
+                        </label>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <hr />
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h3>Mailchimp Setting</h3>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Api Key</label>
+                        <input type="text" class="form-control" name="mailchimp" ng-model='setting2.mailchimp.apiKey'>
+                      </div>
+                      <div class="form-group">
+                        <label>List id</label>
+                        <input type="text" class="form-control" name="mailchimplist" ng-model='setting2.mailchimp.listId'>
+                      </div>
+                      <div class="checkbox-c">
+                        <label>
+                          <input type="checkbox" ng-model='setting2.mailchimp.active' />
+                          Active mailchimp
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h3>Custom site colors</h3>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label>
+                          <input type="checkbox" ng-model="setting2.color.enable" /> Enable?
+                        </label>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Main</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.main" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Lines</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.lines" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Link</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.link" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Link hover</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.linkHover" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Button</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.button" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Button border</label>
+                        <input colorpicker class="form-control" ng-model="setting2.color.buttonBorder" type="text" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Custom</label>
+                        <textarea class="form-control" ng-model="setting2.color.custom"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h3>Commission settings</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Tip commission</label>
+                        <input class="form-control" ng-model="setting2.tipCommision" type="number" max="99" min="1" />
+
+                        <p class="help help-block">
+                          Tip commission in percentage (min is 1% and max is 99%)
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Subscription Commision</label>
+                        <input class="form-control" ng-model="setting2.subscriptionCommision" type="number" max="99" min="1" />
+
+                        <p class="help help-block">
+                          Subscription commission in percentage (min is 1% and max is 99%)
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Store Commission (Sale video commission)</label>
+                        <input class="form-control" ng-model="setting2.storeComission" type="number" max="99" min="1" />
+
+                        <p class="help help-block">
+                          Store commission in percentage (min is 1% and max is 99%)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress" ng-show="progress">
+                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                </div>
+                <div class="form-actions right">
+                  <a ui-sref='setting' class="btn default">Cancel</a>
+                  <button type="submit" class="btn green">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

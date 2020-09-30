@@ -1,0 +1,47 @@
+<div class="row">
+  <h3 class="abl-ttl">Black list</h3>
+  <div class="col-md-12">
+       <div class="portlet-body">
+         <table class="table table-stripe">
+           <thead>
+             <tr>
+               <th>
+               </th>
+               <th>
+                  Name
+               </th>
+               <th>
+                 Type
+               </th>
+               <th>
+                 Blocked At
+               </th>
+               <th>
+                 Action
+               </th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="item in items track by $index">
+               <td>
+                 <img ng-src="{{item.objectInfo.imageMediumPath}}" style="width:45px">
+               </td>
+               <td>
+                 {{item.objectInfo.name}}
+               </td>
+               <td>
+                 <span ng-if="item.objectInfo.role ==='user'">Subcriber</span>
+                 <span ng-if="!item.objectInfo.role || item.objectInfo.role === 'performer'">Performer</span>
+               </td>
+               <td>{{item.createdAt | date}}</td>
+               <td>
+                 <a href="#" class="btn btn-primary" ng-click="delete(item, $index)">
+                  Unblock
+                 </a>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+  </div>
+</div>

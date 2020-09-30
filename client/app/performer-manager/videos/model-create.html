@@ -1,0 +1,118 @@
+<h4 class="page-title">
+  Performer Add
+</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet box blue">
+
+            <div class="portlet-body form" style="display: block;">
+              <form enctype="multipart/form-data"  name="form" ng-submit="submitForm(form,performer.imageFullPath)" novalidate>
+                <div class="form-body">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" ng-model='performer.name' required>
+                    <p class="help-block" ng-show="form.name.$error.required && submitted">
+                      This field is required
+                    </p>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows='5' ng-model='performer.description'></textarea>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Sexual Preference</label>
+                    <textarea class="form-control" rows='5' ng-model="performer.sexualPreference"></textarea>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Sex</label>
+                        <select class="form-control" ng-model="performer.sex" >
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Age</label>
+                        <input  type="number" class="form-control" ng-model="performer.age" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Weight</label>
+                        <input  type="text" class="form-control" ng-model="performer.weight" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Height</label>
+                        <input  type="text" class="form-control" ng-model="performer.height" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Hair</label>
+                        <input  type="text"  class="form-control" ng-model="performer.hair" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Eyes</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.eyes" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Ethnicity</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.ethnicity" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Languages</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.languages" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Hometown</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.hometown" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Body Hair</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.publicHair" />
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label>Foot Size</label>
+                        <input  type="text"  class="form-control"  ng-model="performer.bust" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <label>Status</label>
+                    <select class='form-control'ng-model='performer.status'>
+                      <option value='active'>Active</option>
+                      <option value='inactive'>Inactive</option>
+                    </select>
+                  </div> -->
+                </div>
+                <div class="form-actions right">
+                  <a ui-sref='manager.videosUpload' class="btn btn-default">Cancel</a>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

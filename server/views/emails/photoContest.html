@@ -1,0 +1,59 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="border-bottom: 1px solid #ddd; padding: 20px 0px; padding-top: 0px; margin-bottom: 40px;">
+		<img src="http://52.42.142.211/assets/images/logo.png">
+	</div>
+	
+	<div style="font-size: 17px; margin-bottom: 30px">
+		<div style="position: relative; margin-top: -40px">
+			<img src="<%= photo.thumbnailUrls.large %>" style="width: 100%; height: 400px">
+			<div style="display: block;padding: 10px 20px;color: #fff;font-size: 22px;background: #000;position: absolute;bottom: 0px; left 0px;"><%= contest.prize %> in Prizes</div>
+			{% if oneDayLeft && !hasParticipate %}
+				<div class="display: block;padding: 10px 20px;color: #fff;font-size: 22px;background: #000;position: absolute;bottom: 0px; right: 0px;">Submission Ends: <%= contest.pixSubmissionToDate | date('d-m-Y') %></div>
+			{% elseif oneDayLeft && hasParticipate %}
+				<div class="display: block;padding: 10px 20px;color: #fff;font-size: 22px;background: #000;position: absolute;bottom: 0px; right: 0px;">Submission Ends: <%= contest.votingToDate | date('d-m-Y') %></div>
+			{% endif %}
+		</div>
+
+		<div style="padding: 15px 20px; margin-bottom: 30px; background: #c9f1fd; color: #006e8c; font-weight: bold; font-size: 18px"><%= contest.title %></div>
+
+		<h3>Dear <%= user.firstname %> <%= user.lastName %>.</h3>
+
+		{% if oneDayLeft && !hasParticipate%}
+			<p>
+				Hurry !!! One day left to Submit your photo to this exciting Photo Contest 
+				<a href="<%= contest.link %>"><%= contest.title %></a> 
+			</p>
+			<p>Good Luck</p>
+			<p>Chiiz Team</p>
+			<hr>
+			<div style="border-top:1px solid #ddd; padding-top: 30px; margin-top: 30px;">
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Details</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Participate</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Vote</a>
+			</div>
+		{% elseif !oneDayLeft && !hasParticipate%}
+			<p>We are please to announce </p>
+			<p>This Photo Contest is for the <%= contest.title %>.</p>
+			<hr>
+			<div style="border-top:1px solid #ddd; padding-top: 30px; margin-top: 30px;">
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Details</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Participate</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Vote</a>
+			</div>
+		{% elseif oneDayLeft && hasParticipate%}
+			<p>Hurry !!! One day left to Vote to your favorite Images out of a wonderful collection.  </p>
+			<p>Happy Shooting </p>
+			<p>Chiiz Team</p>
+			<hr>
+			<div style="border-top:1px solid #ddd; padding-top: 30px; margin-top: 30px;">
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Details</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Vote</a>
+			</div>
+		{% endif%}
+
+	</div>
+</div>
+{% endblock %}

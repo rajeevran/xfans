@@ -1,0 +1,118 @@
+
+.help-block{
+    color:red !important;
+    font-weight: bold;
+}
+.img-circle{
+    width: 30px;
+    height:30px;
+}
+.gradeX img{
+   width:70px;
+   /*max-height:50px; */
+}
+.form-group label{
+    font-weight: bold
+}
+.photo-upload img{
+    height:100px;
+}
+.btupload{
+    margin-top:10px;
+}
+.thumb{
+    height:100px;
+}
+.progress{
+    background: #3598dc;
+    color: #fff;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+}
+.select-model-box .select2-search input{
+      line-height: 15px;
+}
+.select-model-box .select2-container--default .select2-selection--multiple{
+  border: 1px solid #e5e5e5;
+}
+.select-model-box .select2-dropdown{
+  border: 1px solid #e5e5e5;
+  top: -5px;
+}
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 99%;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+.message-box {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #60aee4;
+  padding: 15px;
+}
+.message-box li.message-list {
+  list-style: none;
+  margin-bottom: 15px;
+  padding: 0;
+}
+.message-box ul {
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  max-height: 450px;
+  overflow: scroll;
+}
+.message-box li.message-list .media-left img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%!important;
+}
+.message-box li.message-list .media-body {
+  border-bottom: 1px dotted #333;
+}
+.message-box-type {
+  margin-bottom: 15px;
+}
+.mar-top-10 {
+  margin-top: 10px;
+}
+.mess-box {
+  display: inline-block;
+    width: 100%;
+}
+.comment-name {
+  font-weight: bold;
+  padding-right: 10px;
+}
+.comment-date {
+  font-size: 12px;
+  font-style: italic;
+  color: #888;
+}
+.mar-btt-25 {
+  margin-bottom: 25px;
+}
+.mar-top-25 {
+  margin-top: 25px;
+}
+.submid-paid {
+  background: #1caf9a;
+  padding: 3px;
+  color: #fff;
+}
+.bank-block {
+  display: inline-block;
+  border: 1px solid #ccc;
+  margin: 25px 0px;
+}
+.form-group.disable-select .select2-container-multi .select2-search-choice-close{
+  display: none;
+}

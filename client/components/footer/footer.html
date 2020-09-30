@@ -1,0 +1,18 @@
+
+  <div class="footer">
+    <div class="container">
+    <div class="menu-footer">
+      <a ui-sref-active="active" ui-sref="home">Home</a>
+      <a ui-sref-active="active" ui-sref="models">Models</a>
+      <!-- <a ui-sref-active="active" ui-sref="models">Models</a> -->
+      <!-- <a ui-sref-active="active" ui-sref="store">Store</a> -->
+      <a ui-sref-active="active" ui-sref="contact">Contact</a>
+      <a ui-sref-active="active" ng-hide="isLoggedIn()" ui-sref="login">Login</a>
+      <a ui-sref-active="active" ng-hide="isLoggedIn()" ui-sref="landing">Sign up</a>
+    </div>
+    <div ng-bind-html="setting.footerContent" class="color-gray"></div>
+
+    <p class="text-center" ng-show="showBuild">{{version}}</p>
+  </div>
+</div>
+</div>

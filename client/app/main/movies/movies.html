@@ -1,0 +1,70 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="m20">
+      <div class="title-main" ng-show="isSale">
+        <h4 class="active"><a>Video for sale</a></h4>
+      </div>
+      <div class="title-main" ng-show="!isSale">
+        <h4 ui-sref-active="active"><a  ui-sref="movies({type: null})" >All Videos</a></h4>
+        <h4 ui-sref-active="active"><a ui-sref="movies({type:'recent'})">Recent Movies</a></h4>
+        <h4 ui-sref-active="active"><a  ui-sref="movies({type:'upcoming'})">Upcoming Movies</a></h4>
+      </div>
+
+      <div class="row">
+        <form method="post">
+          <div class="">
+            <div class="col-md-11">
+              <div class="row">
+                <div ng-class="{'col-md-6': isSale, 'col-md-4': !isSale}">
+                  <div class="form-group">
+                    <label>Keyword</label>
+                    <input type="text" class="form-control" ng-model="filter.keyword" placeholder="Enter keyword" />
+                  </div>
+                </div>
+                <div ng-class="{'col-md-6': isSale, 'col-md-4': !isSale}">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" ng-model="filter.categoryId">
+                      <option value="">All</option>
+                      <<option value="{{cat._id}}" ng-repeat="cat in categories track by $index">{{cat.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4" ng-hide="isSale">
+                  <div class="form-group">
+                    <label>Model</label>
+                    <ui-select ng-model="filter.performer">
+                    	<ui-select-match placeholder="Search model..." allow-clear="true">{{$select.selected.name}}</ui-select-match>
+                    	<ui-select-choices repeat="person in performers | filter: $select.search track by $index"
+                        refresh="searchPerformers($select.search)"
+                        refresh-delay="500">
+                    		<div ng-bind-html="person.name | highlight: $select.search"></div>
+                    		<div ng-bind-html="person.email | highlight: $select.search"></div>
+                    	</ui-select-choices>
+                    </ui-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <label>&nbsp;</label>
+              <button class="btn btn-primary" ng-click="updateFilter()">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <ul class="row list-li list-video">
+        <li ng-repeat="video in videos" class="col-sm-4 col-lg-3">
+          <div movie-card video="video"></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- <div ng-if="totalItems > itemsPerPage" class="paging">
+      <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+    </div> -->
+  </div>
+</div>
+<footer></footer>

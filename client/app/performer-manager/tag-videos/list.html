@@ -1,0 +1,59 @@
+<div class="title-pro">
+  <span> Tagged Videos listing</span>
+</div>
+<div class="table-responsive">
+  <table class="table-main">
+    <tr>
+      <!-- <th></th> -->
+      <th>Title</th>
+      <th>Posted Date</th>
+      <th>For Sale?</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <th>
+        <select ui-select2="select2Options" data-placeholder="Select Performer" class="form-control"
+          ng-model="performerTagId">
+          <option value="">All</option>
+          <option ng-repeat="item in models" value="{{item._id}}">{{item.name}}
+          </option>
+        </select>
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr ng-repeat="video in items | filter : {user: performerTagId}">
+      <!-- <td><img fallback-src ng-src="{{video.imageMediumPath | checkImage}}" class="img-thumbnail"/></td> -->
+      <td>
+        <a ui-sref="videoView({id:video._id,alias:video.alias})" target="_blank">{{video.name}}</a>
+        <span class="badge badge-danger" ng-if="video.brokenFile">File is broken!</span>
+      </td>
+      <td>{{video.activeDate | date}}</td>
+      <td><span class="label label-default" ng-if="!video.isSaleVideo">N</span>
+        <span class="label label-success" ng-if="video.isSaleVideo">Y</span>
+      </td>
+      <td>
+        <span ng-if="video.isSaleVideo">${{video.price}}</span>
+      </td>
+      <td><span class="label label-default" ng-if="video.status === 'inactive'">Inactive</span>
+        <span class="label label-success" ng-if="video.status === 'active'">Active</span>
+      </td>
+      <td>
+        <a ng-click="untag(video,$index)"><i class="fa fa-times"></i></a>
+        &nbsp;
+        <a href="{{video.filePath}}" download target="_blank"><i class="fa fa-download"></i></a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+
+  <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages"
+    ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+    class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

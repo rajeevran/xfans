@@ -1,0 +1,107 @@
+<div class="title-pro">
+  <span> Upload photo</span>
+</div>
+<div>
+  <form enctype="multipart/form-data" name="form" ng-submit="submitForm(form, files)" novalidate>
+    <div class="form-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" ng-model='photoData.name' required>
+
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+              This field is required
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Album</label>
+            <select ui-select2="select2Options" data-placeholder="Select albums" multiple
+                    class="form-control padding-0" ng-model="photoData.performerAlbumIds">
+              <option ng-repeat="album in albums track by $index" value="{{album._id}}">{{album.name}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Image</label>
+
+            <div class="photo-upload">
+              <div>
+                <img ng-repeat="item in photoData.images" ngf-thumbnail="item" class="thumb">
+              </div>
+              <div>
+                <img ng-repeat="item in files" ngf-thumbnail="item" class="thumb">
+              </div>
+              <input type="file" ng-model="files" name="file"
+                     ngf-select accept="image/*" ngf-multiple="false" ngf-model-invalid="errorFile" ngf-max-size="100MB">
+
+              <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                File too large
+                {{errorFile.size / 1000000|number:1}}MB: max 100
+              </p>
+              <span ng-show="form.result">Upload Successful</span>
+              <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" rows='5' ng-model='photoData.description'></textarea>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Meta Keywords</label>
+              <input type="text" class="form-control" ng-model='photoData.metaKeywords'>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Meta Title</label>
+              <input type="text" class="form-control" ng-model='photoData.metaTitle'>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label>Meta Description</label>
+              <input type="text" class="form-control" ng-model='photoData.metaDescription'>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-lg-6">
+            <div class="form-group">
+              <label>Sort</label>
+              <input type="text" class="form-control" ng-model='photoData.sort'>
+            </div>
+          </div> -->
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Status</label>
+              <select class='form-control' ng-model='photoData.status'>
+                <option value='active'>Active</option>
+                <option value='inactive'>Inactive</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions right">
+        <a ui-sref='manager.photos' class="btn btn-default">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="progress" ng-show="progressPercentage && submitted" style="position:relative">
+        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+          aria-valuemin="0" aria-valuemax="100" ng-style="{width: progressPercentage + '%'}"></div>
+          <div style="color:red;position:absolute;left:50%">{{progressPercentage}}%</div>
+        </div>
+    </div>
+  </form>
+</div>

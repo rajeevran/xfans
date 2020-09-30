@@ -1,0 +1,105 @@
+<div class="box-li">
+  <div class="img-li custom" ng-if="!video.isPlayed && !video.filePath || !video.isPlayed && !video.isSubscribed ">
+    <div ng-show="!video.filePath">No source found.</div>
+    <div ng-show="!video.isSubscribed">
+      <img src="/assets/subscriber-thumb-grey.png">
+    </div>
+    <a class="play-hover" >
+      <i class="fa fa-caret-right"></i>
+    </a>
+    <div class="bottom-img">
+      <div class="pull-left">
+        <ul class="ac-box-li">
+          <li><a ng-click="likeVideo(video)" title="like"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+          <li><a ng-click="open()" title="comment"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+        </ul>
+      </div>
+      <div class="pull-right color-gray" >
+        {{video.activeDate | date}}
+      </div>
+    </div>
+  </div>
+  <div class="img-li custom" ng-if="!video.isPlayed && video.filePath && !video.isSchedule && video.isSubscribed">
+    <img src="{{thumbPath}}" alt="{{video.name}}" />
+    <a class="play-hover" ng-click="playVideo()">
+      <i class="fa fa-caret-right"></i>
+    </a>
+    <div class="bottom-img">
+      <div class="pull-left">
+        <ul class="ac-box-li">
+          <li><a ng-click="likeVideo(video)" title="like"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+          <li><a ng-click="open()" title="comment"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+        </ul>
+      </div>
+      <div class="pull-right color-gray" >
+        {{video.activeDate | date}}
+      </div>
+    </div>
+  </div>
+  <div class="img-li" ng-if="!video.isSchedule && video.isSubscribed && video.filePath && video.isPlayed">
+    <jwplayer setup="jwplayerOptions"></jwplayer>
+    <div class="bottom-img">
+      <div class="pull-left">
+        <ul class="ac-box-li">
+          <li><a ng-click="likeVideo(video)" title="like"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+          <li><a ng-click="open()" title="comment"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+        </ul>
+      </div>
+      <div class="pull-right color-gray" >
+        {{video.activeDate | date}}
+      </div>
+    </div>
+    <span class="time-video">{{video.duration|durationFormat}}</span>
+  </div>
+  <div class="text-li">
+    <a ui-sref="videoView({id:video._id,alias:video.alias})" title="{{video.name}}">{{video.name}}</a>
+  </div>
+</div>
+<div class="comments" ng-if="isOpen">
+  <div class="comment-wrap" >
+    <div class="photo">
+      <div class="avatar" style="background-image: url('{{currentUser.photo | checkAvatar}}')"></div>
+    </div>
+    <div class="comment-block">
+      <form class="form" name="form" ng-submit="saveComment(form)" novalidate>
+        <div class="form-group" ng-class="{ 'has-success': form.content.$valid && submitted,
+                                      'has-error': form.content.$invalid && submitted }">
+
+        <textarea type="text" name="content" cols="30" rows="3" ng-model="comment.content" required placeholder="Leave some text here..."></textarea>
+
+        <p class="help-block" ng-show="form.content.$error.required && submitted">
+          Content is required
+        </p>
+        <p class="help-block" ng-show="err">
+          {{err}}
+        </p>
+      </div>
+    <div>
+        <button type="submit" class="btn btn-warning" ng-if="isLoggedIn && isOwner || isLoggedIn && video.isSubscribed">SUBMIT</button>
+        <button type="submit" class="btn btn-warning" disabled ng-if="!isLoggedIn && !isOwner || !isLoggedIn && !video.isSubscribed">SUBMIT</button>
+    </div>
+      </form>
+    </div>
+  </div>
+  <div class="comment-wrap" ng-repeat="item in comments">
+    <div class="photo">
+      <div class="avatar" style="background-image: url('{{item.user.photo | checkAvatar}}')"></div>
+    </div>
+    <div class="comment-block">
+      <p class="comment-text">{{item.content}}
+      </p>
+      <div class="bottom-comment">
+        <div class="comment-date">{{item.createdAt | date:'short'}}</div>
+        <ul class="comment-actions">
+          <!-- <li class="complain">Complain</li>
+          <li class="reply">Reply</li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-info" ng-click="loadMoreComments()" ng-if="comments.length">Load more...</button>&nbsp;
+    <button class="btn btn-warning" ng-click="open()">Collapse</button>
+  </div>
+
+</div>

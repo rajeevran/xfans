@@ -1,0 +1,167 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="row filter-box">
+          <div class="filter-title">
+            <h5>Filter</h5>
+          </div>
+          <div class="clearfix"></div>
+          <div class="filter-content">
+            <h5 class="filter-types">Filter type</h5>
+            <ul class="filter-select">
+              <li>
+                <a href="#" ng-class="{active:type=='video'}"
+                  ng-click="changeType('video')">
+                  <i class="fa" ng-class="{'fa-check-square-o':type=='video', 'fa-square': type!='video'}"></i>
+                  Movies
+                </a>
+              </li>
+              <li ng-if="!p">
+                <a href="#" ng-class="{active:type=='performer'}"
+                  ng-click="changeType('performer')">
+                  <i class="fa" ng-class="{'fa-check-square-o':type=='performer', 'fa-square': type!='performer'}"></i>
+                  Models
+                </a>
+              </li>
+              <li>
+                <a href="#" ng-class="{active:type=='product'}"
+                  ng-click="changeType('product')">
+                  <i class="fa" ng-class="{'fa-check-square-o':type=='product', 'fa-square': type!='product'}"></i>
+                  Store
+                </a>
+              </li>
+            </ul>
+            <div class="filter-categories">
+              <div ng-if="type === 'video'">
+                <h5 class="filter-types">Categories</h5>
+                <ul class="filter-select">
+                  <li ng-class="{active:videoCategory==''}">
+                    <a href="#" ng-click="filterCategory('video', '')">
+                      <i class="fa" ng-class="{'fa-check-square-o':videoCategory=='', 'fa-square': videoCategory!=''}"></i>
+                      All
+                    </a>
+                  </li>
+                  <li ng-repeat="cat in categories track by $index" ng-class="{active:videoCategory==cat._id}">
+                    <a href="#" ng-click="filterCategory('video', cat._id)">
+                      <i class="fa" ng-class="{'fa-check-square-o':videoCategory==cat._id, 'fa-square': videoCategory!=cat._id}"></i>
+                      {{cat.name}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div ng-if="type === 'product'">
+                <h5 class="filter-types">Categories</h5>
+                <ul class="filter-select">
+                  <li ng-class="{active:productCategory==''}">
+                    <a href="#" ng-click="filterCategory('product', '')">
+                      <i class="fa" ng-class="{'fa-check-square-o':productCategory=='', 'fa-square': productCategory!=''}"></i>
+                      All
+                    </a>
+                  </li>
+                  <li ng-repeat="cat in categories track by $index" ng-class="{active:productCategory==cat._id}">
+                    <a href="#" ng-click="filterCategory('product', cat._id)">
+                      <i class="fa" ng-class="{'fa-check-square-o':productCategory==cat._id, 'fa-square': productCategory!=cat._id}"></i>
+                      {{cat.name}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div ng-if="type==='performer' && !p">
+                <h5 class="filter-types">Filter</h5>
+                <div class="form-group">
+                  <label>Keyword</label>
+                  <input type="text" class="form-control" ng-model="filter.q" placeholder="Enter keyword" />
+                </div>
+                <div class="form-group">
+                  <label>Sex</label>
+                  <select class="form-control" ng-model="filter.sex">
+                    <option value="">All</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="FTM">FTM</option>
+                    <option value="MTF">MTF</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Size</label>
+                  <input type="text" class="form-control" ng-model="filter.size" placeholder="Enter size (brust)" />
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" ng-click="filterModel()">Filter</button>
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="search-result">
+          <a href="#">&#34;{{q}}&#34;</a>
+          <span style="color:#ccc">({{totalItem}} results)</span>
+        </div>
+
+        <ul class="row list-li list-item" ng-if="type === 'video'">
+          <li ng-repeat="item in items" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3">
+            <div movie-card video="item"></div>
+          </li>
+        </ul>
+
+        <ul class="row list-li list-item" ng-if="type === 'performer'">
+          <li ng-repeat="item in items" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3">
+            <div class="box-li">
+              <div class="img-li">
+                <img fallback-src ng-src="{{item.imageMediumPath | checkImage | cdn}}" alt="{{model.name}}">
+                <div class="bg-hover">
+                  <a ui-sref="modelView({id:item.username})" class="btn btn-warning btn-botder">{{item.name}}</a>
+                </div>
+                <div class="bottom-img">
+                  {{item.name}}
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="row list-li list-item" ng-if="type === 'product'">
+          <li ng-repeat="item in items" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3">
+            <div class="box-li">
+              <div class="img-li">
+                <a ui-sref="storeView({id:item._id,alias:item.alias})">
+                    <img fallback-src ng-src="{{item.imageMediumPath | checkImage | cdn}}" alt="{{item.name}}">
+                </a>
+                <div class="bottom-img">
+                  {{item.name}}
+                </div>
+              </div>
+              <div class="bottom-store">
+                <div class="pull-left">
+                  <div ng-if="item.pricePromotion==0" class="price-store">{{item.price |price}}</div>
+                  <div ng-if="item.pricePromotion!=0" class="price-store">{{item.pricePromotion |price}}</div>
+                </div>
+                <div class="pull-right">
+                  <a ng-if="item.quantity > 0" ng-click="buy(item)" class="btn btn-warning">Buy now</a>
+                  <a ng-if="item.quantity == 0" class="btn btn-warning">Sold Out</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <p class="alert alert-info" ng-if="!items.length">
+          There is no search result, please try again.
+        </p>
+
+        <div ng-if="items.length > pageSize" class="paging">
+          <uib-pagination previous-text="Prev" items-per-page="pageSize" ng-change="pageChanged(currentPage)" total-items="totalItem"
+            ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

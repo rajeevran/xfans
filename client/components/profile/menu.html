@@ -1,0 +1,41 @@
+<div class="profile-left">
+  <div class="img-profile text-center">
+    <img ng-src="{{getCurrentUser().imageThumbPath | checkAvatar}}" alt="{{currentUser.name}}" fallback-src>
+    <h3>{{currentUser.name}}</h3>
+  </div>
+  <div class="menu-profile nav-custom">
+    <a href="#" class="toggle-profile-custom">Menu profile <i class="fa fa-angle-down"></i></a>
+    <ul ng-if="currentUser.role === 'user'">
+      <li ui-sref-active="active"><a ui-sref="profile"><i class="fa fa-user"></i> Account information</a></li>
+      <li ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-key"></i> Change password</a></li>
+      <li style="display:none" ui-sref-active="active"><a ui-sref="notifications"><i class="fa fa-bell"></i>
+          Notifications</a></li>
+      <li ui-sref-active="active"><a ui-sref="favorites"><i class="fa fa-heart"></i> Favorites</a></li>
+      <li ui-sref-active="active"><a ui-sref="watchLater"><i class="fa fa-clock-o"></i> Watch later</a></li>
+      <li style="display:none" ui-sref-active="active"><a ui-sref="purchased"><i class="fa fa-shopping-cart"></i>
+          Purchased items</a></li>
+      <li ui-sref-active="active"><a ui-sref="paymentHistory"><i class="fa fa-credit-card"></i> Payment history</a></li>
+      <li ui-sref-active="active"><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
+    </ul>
+    <ul ng-if="currentUser.role === 'performer'">
+      <li ui-sref-active="active"><a ui-sref="manager.profile"><i class="fa fa-user"></i> Account information</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.videos"><i class="fa fa-camera"></i> Videos manager</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.photos"><i class="fa fa-picture-o"></i> Photos manager</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.productList"><i class="fa fa-shopping-cart"></i> Products
+          manager</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.scheduleList({performerId: currentUser._id})"><i class="fa fa-calendar"></i> Calendar Events manager</a></li>
+      <li ui-sref-active="active"><a ui-sref="calendar({performerId: currentUser._id})"><i class="fa fa-calendar"></i>My
+          calendar</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.earning"><i class="fa fa-dollar"></i> Earnings</a></li>
+      <li ui-sref-active="active"><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
+      <li ui-sref-active="active"><a ui-sref="modelMessages"><i class="fa fa-envelope"></i>Models Message</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.stats"><i class="fa fa-bar-chart"></i> Statistic</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.topPerformers"><i class="fa fa-star"></i>Top Performers</a></li>
+      <li ui-sref-active="active"><a ui-sref="manager.tagVideos({performerId: currentUser._id})"><i class="fa fa-check"></i>Tagged Videos</a></li>
+      <!-- <li ui-sref-active="active"><a ui-sref="manager.uploadAffiliateContent({performerId: currentUser._id})"><i class="fa fa-share"></i>Upload Affiliate Content</a></li> -->
+      <li ui-sref-active="active"><a ui-sref="manager.password"><i class="fa fa-key"></i> Change password</a></li>
+      <li ui-sref-active="active"><a ui-sref="modelView({id:getCurrentUser().username})"><i class="fa fa-eye"></i>View
+          Profile</a></li>
+    </ul>
+  </div>
+</div>

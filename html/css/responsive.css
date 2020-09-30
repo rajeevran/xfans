@@ -1,0 +1,137 @@
+
+@media all and (min-width: 320px) and (max-width: 1100px) {
+    .container {
+        width:auto;
+        padding: 0px 15px;
+    }
+}
+@media all and (min-width: 320px) and (max-width: 767px) {
+    .slider-home .slick-dots {
+        bottom: 5px;
+    }
+    .toggle-menu {
+        display: inline-block;
+    }
+    .menu {
+        position: relative;
+    }
+    .menu ul {
+        float: none;
+        position: absolute;
+        top: 34px;
+        right: 0px;
+        width: 200px;
+        margin: 0px;
+        z-index: 100;
+        -ms-transform: scale(0,0); /* IE 9 */
+        -webkit-transform: scale(0,0); /* Safari */
+        transform: scale(0,0);
+        webkit-transition: all 100ms linear;
+        -moz-transition: all 100ms linear;
+        -o-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+        transition: all 300ms linear;
+    }
+    .menu ul.show-menu {
+        -ms-transform: scale(1,1); /* IE 9 */
+        -webkit-transform: scale(1,1); /* Safari */
+        transform: scale(1,1);
+    }
+    .menu ul li {
+        float: none;
+    }
+    .logo {
+        margin: 10px 0px;
+    }
+    .logo img {
+        height: 50px;
+    }
+    .menu {
+        margin-top: 20px;
+    }
+    .box-detail-block {
+        padding-right: 0px;
+    }
+    .membership-detail {
+        display: none;
+    }
+    .img-video-detail {
+        height: 300px;
+    }
+    .video-detail .text-block {
+        top: 0px;
+        left: 0px;
+        height: 100%;
+    }
+    .action-detial-video li a {
+        padding: 5px 10px;
+    }
+    .action-detial-video li a span {
+        display: none;
+    }
+    .img-welcome {
+        display: none;
+    }
+    .box-welcome {
+        padding-right: 20px;
+    }
+    .term-welcome {
+        height: 250px;
+        padding: 10px;
+    }
+    .box-login  {
+        width: 95%;
+    }
+    .pricing li, .top-signup h3, .top-signup .step-signup, .detail-box .img-detail, .detail-box .text-detail {
+        width: auto;
+        float: none;
+    }
+    .detail-box .img-detail, .detail-box .text-detail {
+        height: auto;
+        min-height: 10px;
+    }
+    .detail-box .text-detail {
+        padding: 15px;
+    }
+    .top-signup .step-signup {
+        margin-bottom: 10px;
+    }
+    .box-signup .form-login form {
+        width: auto;
+    }
+    .box-signup .form-login {
+        padding: 20px 0px;
+        background: none;
+    }
+    .profile-left, .profile-right {
+        width: auto;
+        float: none;
+    }
+    .toggle-profile {
+        display: block;
+        padding: 10px;
+        background: #000;
+        font-size: 15px;
+    }
+    .toggle-profile i {
+        float: right;
+    }
+    .menu-profile {
+        margin-bottom: 15px;
+    }
+    .menu-profile ul {
+        display: none;
+    }
+}
+
+@media all and (min-width: 768px) and (max-width: 1100px) {
+    .img-welcome {
+        width: 350px;
+    }
+    .box-welcome {
+        padding-right: 370px;
+    }
+    .pricing li{
+        width: 50%;
+    }
+}

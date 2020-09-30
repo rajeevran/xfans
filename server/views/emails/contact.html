@@ -1,0 +1,22 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="font-size: 17px">
+		<h3>Dear,</h3>
+		<p>You have a new contact. </p>
+		<p>
+      <strong>Name: </strong> <%= name %>
+    </p>
+    <p>
+      <strong>Email: </strong> <%= email %>
+    </p>
+    <p>
+      <strong>Phone: </strong> <%= phone %>
+    </p>
+    <p>
+      <strong>Message: </strong> <%= message %>
+    </p>
+	</div>
+</div>
+{% endblock %}

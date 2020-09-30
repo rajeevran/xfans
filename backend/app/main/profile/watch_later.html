@@ -1,0 +1,58 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="profile-box">
+      <profile-menu></profile-menu>
+
+      <div class="profile-right">
+        <div class="title-pro">
+          <span>Watch later</span>
+        </div>
+
+        <ul class="row list-li list-video">
+
+          <li ng-repeat="video in items" class="col-sm-6 col-lg-4">
+          <div class="box-li">
+            <div class="img-li">
+              <a title="Remove {{video.name}}" ng-click="remove($index)" class="delete-item"><i class="fa fa-trash"></i></a>
+              <img ng-src="{{video.imageMediumPath}}" alt="{{video.name}}">
+              <a  ui-sref="videoView({id:video._id,alias:video.alias})" class="play-hover">
+                <i class="fa fa-caret-right"></i>
+              </a>
+              <div class="bottom-img">
+                <div class="pull-left">
+                  <ul class="ac-box-li">
+                    <li><a href="#"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+                    <li><a href="#"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+                  </ul>
+                </div>
+                <div class="pull-right">
+                  {{video.updatedAt | date}}
+                </div>
+              </div>
+            </div>
+            <div class="text-li">
+              <a ui-sref="videoView({id:video._id,alias:video.alias})" title="{{video.name}}">{{video.name}}</a>
+            </div>
+          </div>
+        </li>
+        </ul>
+        <!-- pager -->
+        <div class="paging" ng-if="pager.GetPager.pages.length > limit">
+          <ul ng-if="pager.GetPager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.GetPager.currentPage === 1}">
+              <a ng-click="setPage(pager.GetPager.currentPage - 1)">Prev</a>
+            </li>
+            <li ng-repeat="page in pager.GetPager.pages" ng-class="{active:pager.GetPager.currentPage === page}">
+              <a ng-click="setPage(page)">{{page}}</a>
+            </li>
+            <li ng-class="{disabled:pager.GetPager.currentPage === pager.GetPager.totalPages}">
+              <a ng-click="setPage(pager.GetPager.currentPage + 1)">Next</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,82 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="m20">
+      <div class="title-main" style="display:inline-block;width:100%;overflow:unset">
+        <h4>{{totalItems}} Models</h4>
+        <div class="btn-group pull-right filter-group" role="group">
+          <a id="filterTopPerformer" type="button" class="btn dropdown-toggle filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort
+          </a>
+          <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1"
+          x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; will-change: transform;min-width:unset;">
+            <li><a class="dropdown-item" href="#" ng-click="filter('recent')">Recent</a></li>
+            <li><a class="dropdown-item" href="#" ng-click="filter('popular')">Popular</a></li>
+            <li><a class="dropdown-item" href="#" ng-click="filter('rate')">Rating</a></li>
+        </div>
+      </div>
+    </div>
+      <div>
+      <form method="get">
+        <div class="col-md-11">
+          <div class="row">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Keyword</label>
+                  <input type="text" class="form-control" ng-model="filter.keyword" placeholder="Enter keyword" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Sex</label>
+                  <select class="form-control" ng-model="filter.sex">
+                    <option value="">All</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="FTM">FTM</option>
+                    <option value="MTF">MTF</option>
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="col-md-4">
+                <div class="form-group">
+                  <label>Size</label>
+                  <input type="text" class="form-control" ng-model="filter.size" placeholder="Enter size (brust)" />
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <label>&nbsp;</label>
+          <button class="btn btn-primary btn-custom" ng-click="updateFilter()">Search</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <ul class="row list-li list-video list-model">
+        <li ng-repeat="model in models" class="col-sm-4 col-lg-3">
+          <div class="box-li">
+            <div class="img-li">
+              <img ng-src="{{model.imageFullPath | checkImage | cdn}}" alt="{{model.name}}" fallback-src>
+              <div class="bg-hover">
+                <a ui-sref="modelView({id: model.username})" class="btn btn-warning btn-botder">{{model.name}}</a>
+              </div>
+              <div class="bottom-img">
+                Views:&nbsp;{{model.totalView}}<span class="pull-right">Subscribers:&nbsp;{{model.totalSubscriber}}</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div ng-if="totalItems > itemsPerPage" class="paging">
+      <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages"
+        ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage"
+        max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+    </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,16 @@
+<div class="m20 about-home">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="text-about">
+        <h3>{{setting.welcomeTitle}}</h3>
+        <div ng-bind-html="setting.welcomeContent"></div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="img-about">
+        <img src="{{setting.imageWelcomeFullPath | cdn}}" width="100%">
+        <a ui-sref="signup" class="btn btn-default btn-lg btn-botder">Sign Up Now <i class="fa fa-caret-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

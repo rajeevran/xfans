@@ -1,0 +1,208 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a>Order</a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Management Orders <small></small>
+      </h3>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-globe"></i>Orders List
+              </div>
+              <div class="tools">
+                <a href="javascript:;" class="collapse" data-original-title="" title="">
+                </a>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <div class="table-toolbar">
+                <div class="row">
+
+                </div>
+              </div>
+              <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                <div class="row">
+                  <div class="col-md-3 col-sm-12">
+                    <!-- <div class="dataTables_length" id="sample_1_length"> -->
+                    <!-- <label> -->
+
+                    <select ng-model="query.type" name="type" class="form-control input-large input-inline">
+                      <option value="">Select Type</option>
+                      <option value="performer_subscription">Performer subscription</option>
+                      <option value="sale_video">Sale Video</option>
+                      <option value="tip_performer">Tip Performer</option>
+                      <option value="Store">Products</option>
+                    </select>
+
+                    <!-- </label> -->
+                    <!-- </div> -->
+                  </div>
+                  <div class="col-md-1 col-sm-12">
+                    <div id="sample_1_filter" class="dataTables_filter">
+
+                      <label>Performer:</label>
+
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-12">
+                    <select ui-select2="select2Options" data-placeholder="Select performer" class="form-control" ng-model="query.performerId" type="search">
+                      <option value="">All</option>
+                      <option ng-repeat="item in models" value="{{item._id}}">{{item.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-1 col-sm-12">
+                    <div class="btn btn-success" ng-click="pageChanged(1)">Filter</div>
+                  </div>
+                  <div class="col-md-4 col-sm-12 pull-right">
+                    <div id="sample_1_filter" class="dataTables_filter">
+                      <label>Search: <input type="search" ng-model="query.keyword" class="form-control
+                         input-inline" placeholder="" aria-controls="sample_1"></label>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-scrollable">
+                  <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+                    <thead>
+                      <tr role="row">
+                        <th rel="name" style='min-width:7%;' class="sorting" rowspan="1" colspan="1">
+                          Name
+                        </th>
+                        <!-- <th rel="address" class="sorting" rowspan="1" colspan="1">
+                          Address
+                        </th> -->
+                        <th rel="email" style='min-width:7%;' class="sorting" rowspan="1" colspan="1">
+                          Email
+                        </th>
+                        <!-- <th rel="phone" class="sorting" rowspan="1" colspan="1">
+                          Phone
+                        </th> -->
+                        <th rel="description" class="text-center sorting" rowspan="1" colspan="1">
+                          Description
+                        </th>
+                        <th tabindex="0" rowspan="1" colspan="1">
+                          Type
+                        </th>
+                        <th style='width:7%' tabindex="0" rowspan="1" colspan="1">
+                          Provider
+                        </th>
+                        <th tabindex="0" rowspan="1" colspan="1">
+                          Discount
+                        </th>
+                        <th rel="totalPrice" class="text-center sorting" rowspan="1" colspan="1">
+                          Total Price
+                        </th>
+                        <th rel="createdAt"  class="text-center sorting_desc" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">
+                          Created At
+                        </th>
+                        <th rel="status" class="text-center sorting" rowspan="1" colspan="1">
+                          Status
+                        </th>
+                        <th class="text-center sorting" rowspan="1" colspan="1">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="order in orders" class="gradeX odd" role="row" ng-show="order.type !== 'free_sale_video'">
+                        <td class="">
+                          {{order.userInfo.name}}
+                        </td>
+                        <!-- <td class="">
+                          {{order.userInfo.address}}
+                        </td> -->
+                        <td class="">
+                          {{order.email ? order.email : order.userInfo.email}}
+                        </td>
+                        <!-- <td>
+                          {{order.userInfo.phone}}
+                        </td> -->
+                        <td class="">
+                          {{order.description}}
+                        </td>
+
+                        <td>
+                          {{order.type}}
+                        </td>
+                        <td>
+                          {{order.provider}}
+                        </td>
+
+                        <td>
+                          <span ng-if="order.coupon">
+                            {{order.coupon.discountType=='amount'?'$':''}}
+                            {{order.coupon.discountValue}}
+                            {{order.coupon.discountType=='percentage'?'%':''}}
+                          </span>
+                        </td>
+
+                        <td class="text-center">
+                          <span ng-if="order.type != 'free_sale_video'">{{order.totalPrice | price}}</span>
+                        </td>
+                        <td class="text-center">
+                          {{order.createdAt | date}}
+                        </td>
+                        <td class="text-center">
+                          <span ng-if='order.status=="active"' class="label label-sm label-success">
+                            Active </span>
+                          <span ng-if='order.status=="inactive"' class="label label-sm label-default">
+                            Inactive </span>
+                        </td>
+                        <td class="text-center">
+                          <a style="display:none" ui-sref='orderView({id:order._id})' class="view" title="View">
+                            <i class="icon-eye"></i>
+                          </a>
+                          <a style="display:none" ui-sref='orderEdit({id:order._id})' class="view" title="Edit">
+                            <i class="icon-pencil"></i>
+                          </a>
+                          <a confirmed-click='delete(order,$index)' ng-confirm-click="Are you sure delete?" class="view" title="Delete">
+                            <i class="icon-trash"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col-md-5 col-sm-12">
+                    <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
+                     {{totalItems}} items
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+
+                      <div class="paging">
+                        <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,39 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="box-signup">
+      <div class="top-signup">
+        
+        <h3>Select Your Membership Plan:</h3>
+
+      </div>
+      <div class="pricing">
+        <ul>
+          <li ng-repeat="item in packages" ng-class="{active:$index==1}">
+            <div class="box-membership">
+              <div class="hea-mem">
+                <h3><span>{{item.name}}</span></h3>
+                <div class="price-membership">
+                  <span class="dola-mem">$</span>
+                  <span class="price-mem">{{item.priceArr[0]}}</span>
+                  <span class="price-mem1">.{{item.priceArr[1]}}</span>
+                </div>
+              </div>
+              <div class="text-membership">
+                <div>
+                  <p>{{item.description}}</p>
+                 {{item.detail}}
+                </div>
+                <a ng-click="selectPlan(item)" ng-if="$index==1" class="btn btn-warning btn-block btn-lg">Select This Plan</a>
+                <a ng-click="selectPlan(item)" ng-if="$index!=1" class="btn btn-grey btn-block btn-lg">Select This Plan</a>
+              </div>
+            </div>
+          </li>
+          
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,198 @@
+<div class="title-pro">
+  <span>Upload video</span>
+</div>
+<form enctype="multipart/form-data" name="form" ng-submit="submitForm(form, video.imageFullPath)" novalidate>
+
+  <div class="form-body">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" ng-model='video.name' required>
+
+        <p class="help-block" ng-show="form.name.$error.required && submitted">
+          This field is required
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Categories</label>
+        <select ui-select2="select2Options" data-placeholder="Select Categories" multiple class="form-control padding-0" ng-model="video.categories">
+          <option ng-repeat="item in categories" value="{{item._id}}">{{item.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Type</label>
+        <select class='form-control' ng-model='video.type'>
+          <option value='upcoming'>Upcoming</option>
+          <option value='recent'>Recent</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Tags</label>
+        <input class="form-control padding-0" data-placeholder="Add tags" type="hidden" ui-select2="inputSelect2Options" ng-if="inputSelect2Options" ng-model="video.tags">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group" ng-show="video.type==='upcoming'">
+        <label>
+          <input type="checkbox" ng-model="video.isSchedule" ng-change="changeSchedule()"> Schedule
+        </label>
+        <div class="input-group" ng-if="isSchedule">
+          <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="video.schedule" is-open="opened" datepicker-options="dateOptions" ng-required="video.isSchedule" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="opened=true">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label>
+          Performers
+        </label>
+        <select ui-select2="select2Options" data-placeholder="Select Model" multiple class="form-control padding-0" ng-model="video.performer">
+          <option ng-repeat="performer in performers" value="{{performer._id}}">{{performer.name}}
+          </option>
+        </select>
+        <div style="color:red">Click <a ui-sref="manager.modelAdd">here</a> to create new performer.</div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-12">
+      <div class="form-group">
+        <label>Image</label>
+
+        <div class="photo-upload">
+          <img ng-show="form.file.$valid" ngf-thumbnail="video.imageFullPath | checkImage" class="thumb">
+           <input class="btn btn-warning btupload" type="file" ngf-select
+                  ng-model="video.imageFullPath" name="file"
+                  accept="image/*" ngf-max-size="100MB"
+                  ngf-model-invalid="errorFile">
+
+           <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+             File too large
+             {{errorFile.size / 1000000|number:1}}MB: max 100MB
+           </p>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>File Path</label>
+
+        <div class="photo-upload">
+          <img ng-if="video.filePath || fileFullPath" width="100px" src="assets/images/icon-video.gif">
+
+          <input class="btn btn-warning btupload" type="file" ngf-select ng-model="fileFullPath" name="file" ngf-multiple="action=='Add'" accept="video/mp4,video/x-m4v,.flv,.mkv,.3gp,video/*" ngf-max-size="20000MB" ngf-model-invalid="errorFile" />
+          <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 20GB
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-6">
+      <div class="form-group">
+        <label>File Trailer Path</label>
+
+        <div class="photo-upload">
+          <img ng-if="video.fileTrailerPath || fileTrailerPath" width="100" src="assets/images/icon-video.gif">
+          <input class="btn btn-warning btupload" type="file" ngf-select
+                 ng-model="fileTrailerPath" name="file"
+                 accept="video/mp4,video/x-m4v,.mkv,.3gp,.flv,video/*" ngf-max-size="20000MB"
+                 ngf-model-invalid="errorFile">
+
+          <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 20GB
+          </p>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" rows='5' ng-model='video.description'></textarea>
+      </div>
+      <div class="form-group" style="display:none">
+        <div album-create options="albumOptions"></div>
+      </div>
+    </div>
+    <!-- <div class="col-lg-6">
+      <div class="form-group">
+        <label>Meta Keywords</label>
+        <input type="text" class="form-control" ng-model='video.metaKeywords'>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Meta Title</label>
+        <input type="text" class="form-control" ng-model='video.metaTitle'>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label>Meta Description</label>
+        <input type="text" class="form-control" ng-model='video.metaDescription'>
+      </div>
+    </div> -->
+    <!-- <div class="col-lg-12">
+      <div class="form-group">
+        <label>Custom text for Twitter video</label>
+        <p>
+          [link to the video] check out my latest post
+        </p>
+        <textarea ng-model="video.customTwitterTextVideo" class="form-control" style="color:#000" placeholder="Enter your custom text here, limit 50 characters" maxlength="50"></textarea>
+      </div>
+    </div> -->
+    <div class="col-lg-12">
+      <div class="col-ld-6">
+        <div class="form-group">
+          <label>
+            <input type="checkbox" ng-model="video.isSaleVideo"> For sale?
+          </label>
+          <div class="input-group" ng-if="video.isSaleVideo">
+            <label>Price</label>
+            <input type="number" class="form-control" ng-model="video.price" ng-required="video.isSaleVideo" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label>Status</label>
+        <select class='form-control' ng-model='video.status'>
+          <option value='active'>Active</option>
+          <option value='inactive'>Inactive</option>
+        </select>
+      </div>
+    </div>
+    <!-- <div class="col-lg-6">
+      <div class="form-group">
+        <label>Sort</label>
+        <input class='form-control' ng-model='video.sort' type="number">
+      </div>
+    </div> -->
+
+
+    <div class="col-lg-12">
+      <div class="progress" ng-show="submitted && progressPercentage" style="position:relative">
+        <div class="progress-bar" role="progressbar" ng-style="{width: progressPercentage + '%'}"></div>
+        <div style="color:red;position:absolute;left:50%">{{progressPercentage}}%</div>
+      </div>
+      <div class="form-group">
+        <label class="help-block">&nbsp;</label>
+        <a ui-sref='manager.videos' class="btn btn-default">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</form>

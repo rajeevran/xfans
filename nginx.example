@@ -1,0 +1,63 @@
+server {
+    listen       443 ssl;
+    server_name  yourdomain.com;
+    client_max_body_size 5000M;
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_max_temp_file_size 0;
+        proxy_buffers 16 16k;
+        proxy_buffer_size 16k;
+    }
+
+    location /uploads/ {
+    	autoindex on;
+    	root /var/www/client/;
+    }
+
+    location ~ \.(mp4) {
+        #https://stackoverflow.com/questions/27619424/nginx-doesnt-recognise-mp4-limit-rate-directive
+        limit_rate 260k; # about 2mbit
+        limit_rate_after 3m;
+    }
+    location /assets/ {
+        autoindex on;
+        root /var/www/client/;
+    }
+    location /fonts/ {
+        autoindex on;
+        root /var/www/client/;
+    }
+    location /bower_components/ {
+        autoindex on;
+        root /var/www/client/;
+    }
+
+    location /app/ {
+        autoindex on;
+        root /var/www/client/;
+    }
+
+    location /backend/app/ {
+        autoindex on;
+        root /var/www/;
+    }
+
+    ssl_certificate /etc/ssl/live/yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/ssl/live/yourdomain.com/privkey.pem;
+}
+
+
+server {
+    listen       80;
+    server_name  yourdomain.com;
+	return 301 https://yourdomain.com$request_uri;
+}
+

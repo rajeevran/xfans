@@ -1,0 +1,306 @@
+<navbar></navbar>
+<div class="content pad-0" ng-if="!blocked">
+  <div class="top-box-profile" style="background: url('{{perfomer.welcomePhoto || 'assets/images/background-header.jpg' | cdn}}'); background-size: 100% 100%;">
+    <div ng-if="perfomer.welcomeVideo && perfomer.welcomeOption === 'video'" class="img-model-detail">
+      <video width="100%" controlsList="nofullscreen nodownload" autoplay ng-if="autoPlay" id="welcome-Video" controls>
+        <source ng-src="{{trustSrc(perfomer.welcomeVideo)}}" type="video/mp4">
+        Your browser does not support video player!
+      </video>
+      <video width="100%" controlsList="nofullscreen nodownload" ng-if="!autoPlay" id="welcome-Video1" controls>
+        <source ng-src="{{trustSrc(perfomer.welcomeVideo)}}" type="video/mp4">
+        Your browser does not support video player!
+      </video>
+    </div>
+    <h3 class="profile-box-name">{{perfomer.name}}<img src="assets/images/medal-icon.png"></h3>
+    <div class="model-total-stats">
+      <a class="stats-total"><span class="stat-num">{{perfomer.totalVideo}}</span>Videos</a>
+      <a class="stats-total"><span class="stat-num">{{perfomer.totalPhoto}}</span>Photos</a>
+      <a class="stats-total"><span class="stat-num">{{perfomer.totalSubscriber}}</span>Subscribers</a>
+    </div>
+
+    <div ng-if="perfomer.welcomeOption === 'photo' || !perfomer.welcomeOption || perfomer.welcomeOption === 'video' && !perfomer.welcomeVideo" class="img-model-detail">
+      <img fallback-src ng-src="{{perfomer.imageThumbPath | checkImage}}" alt="{{perfomer.name}}" />
+    </div>
+  </div>
+
+  <div class="detail-box">
+    <div class="container">
+
+      <ul class="menudetail" role="tablist" ng-show="!isHided">
+        <li>
+          <a href="#" ui-sref="payment({performerId: perfomer._id, type: 'performer_subscription', package: 'yearly'})" class="sub-year-btn" ng-show="!checkSubscribe || !isLoggedIn"><i class="fa fa-hand-o-right"></i>&nbsp;Subscribe yearly</a>
+        </li>
+        <li>
+          <a href="#" ui-sref="payment({performerId: perfomer._id, type: 'performer_subscription', package: 'monthly'})" class="sub-year-btn" ng-show="!checkSubscribe || !isLoggedIn"><i class="fa fa-hand-o-right"></i>&nbsp;Subscribe monthly</a>
+        </li>
+        <!-- <li>
+          <a href="#" ui-sref="payment({performerId: perfomer._id, type: 'tip_performer'})" class="sub-year-btn"
+            ng-show="!isHided">Send tip</a>
+        </li> -->
+        <li>
+          <a href="#" ui-sref="messages({recipientId: perfomer._id})" class="sub-year-btn" ng-if="isLoggedIn() && me.role === 'user'"><i class="fa fa-comments"></i>&nbsp;Send message</a>
+        </li>
+        <li>
+          <a href="#" ui-sref="modelMessages({recipientId: perfomer._id})" class="sub-year-btn" ng-if="isLoggedIn() && me.role === 'performer'"><i class="fa fa-comments"></i>&nbsp;Send message</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+
+
+  <div class="collapse-bio pad-bt-20">
+    <div class="container">
+      <a ng-hide="checkSubscribe && isLoggedIn() || isAllowed && isAllowed !== 0 && isLoggedIn()" ui-sref="payment({performerId: perfomer._id, type: 'performer_subscription', package: 'yearly'})" class="pull-right" style="color:#1ce4e5">
+        Subcribe to view detail!
+      </a>
+      <a ng-if="checkSubscribe && isLoggedIn() || isAllowed && isAllowed !== 0 && isLoggedIn()" class="pull-right" role="button" data-toggle="collapse" href="#collapseDescription" aria-expanded="false" aria-controls="collapseDescription" style="color:#1ce4e5">
+        READ BIO <i class="fa fa-angle-down"></i>
+      </a>
+      <div class="search-li-model  pull-right">
+        <input type="text" class="form-control" ng-model="search.keyword" placeholder="Search..." ng-keypress="searchModel($event)" />
+        <span class="search-icon" ng-click="searchModel()">
+          <img src="assets/images/search-icon.png">
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="collapse " id="collapseDescription">
+    <div class="container">
+      <div class="box-main">
+        <p class="text-new-lines">{{perfomer.description}}</p>
+        <div class="title-text-detail">
+          <a>BIO</a>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <table class="table">
+              <tr>
+                <td class="label-bio"><a>Sex</a></td>
+                <td style="text-transform: capitalize">{{perfomer.sex}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Sexual Preference</a></td>
+                <td>{{perfomer.sexualPreference}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Age</a></td>
+                <td>{{perfomer.age}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Height</a></td>
+                <td>{{perfomer.height}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Weight</a></td>
+                <td>{{perfomer.weight}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Hair</a></td>
+                <td>{{perfomer.hair}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-sm-6">
+            <table class="table">
+              <tr>
+                <td class="label-bio"><a>Eyes</a></td>
+                <td>{{perfomer.eyes}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Ethnicity</a></td>
+                <td>{{perfomer.ethnicity}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Languages</a></td>
+                <td>{{perfomer.languages}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Hometown</a></td>
+                <td>{{perfomer.hometown}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Body Hair</a></td>
+                <td>{{perfomer.publicHair}}</td>
+              </tr>
+              <tr>
+                <td class="label-bio"><a>Foot Size</a></td>
+                <td>{{perfomer.bust}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+
+    <div class="box-panel">
+
+      <!-- Nav tabs -->
+      <ul class="menutab" role="tablist">
+        <li ng-class="{'active': tab === 'Videos'}"><a ng-click="changeTab('Videos')">Videos</a></li>
+        <li ng-class="{'active': tab === 'Albums'}"><a ng-click="changeTab('Albums')">Albums</a>
+        </li>
+        <li ng-class="{'active': tab === 'Store'}"><a ng-click="changeTab('Store')">Store</a></li>
+        <li ng-class="{'active': tab === 'SaleVideos'}"><a ng-click="changeTab('SaleVideos')">Videos for Sale</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane" ng-class="{'display-inherit': tab === 'Videos'}" ng-if="tab === 'Videos'">
+          <div style="display:inline-block;width:100%">
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px">
+              <select ng-model="sort" ng-change="updateQueryVideos(sort,currentPage)" class="filter">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="mostLike">Most Like</option>
+                <option value="mostView">Most View</option>
+              </select>
+            </div>
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px;margin-right: 15px">
+              <a class="grid-ico" ng-class="{'active': listStyle === 'line'}" ng-click="changeStyle('line')"><i class="fa fa-bars"></i></a>
+            </div>
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px;margin-right: 15px">
+              <a class="grid-ico" ng-class="{'active': listStyle === 'grid'}" ng-click="changeStyle('grid')"><i class="fa fa-th"></i></a>
+            </div>
+          </div>
+          <ul class="row list-li list-video">
+            <li ng-repeat="video in videos" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3" ng-if="listStyle === 'grid'">
+              <div movie-card video="video"></div>
+            </li>
+            <li ng-repeat="video in videos" class="col-lg-12 line-videos" ng-if="listStyle === 'line'">
+              <div movie-line-card video="video"></div>
+            </li>
+            <div class="text-center" style="display:inline-block;width:100%">
+              <span class="label label-warning" ng-if="loading">Loading...</span>
+            </div>
+          </ul>
+          <div ng-if="totalItems > itemsPerPage && ispagnation" class="paging">
+            <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" max-size="maxSize" ng-change="updateQueryVideos(sort,currentPage)" total-items="totalItems" ng-model="currentPage" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+          </div>
+          <div class="text-center">
+            <div ng-if="canLoadMore && !ispagnation" class="paging-mobile btn btn-warning" ng-click="loadMore()">Load
+              More</div>
+          </div>
+
+        </div>
+        <div class="tab-pane" ng-class="{'display-inherit': tab === 'SaleVideos'}" ng-if="tab === 'SaleVideos'">
+          <div style="display:inline-block;width:100%">
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px">
+              <select ng-model="sort" ng-change="updateQuerySaleVideos(sort,currentPage1)" class="filter">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="mostLike">Most Like</option>
+                <option value="mostView">Most View</option>
+              </select>
+            </div>
+          </div>
+          <ul class="row list-li list-video custom">
+            <li ng-repeat="video in saleVideos" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3">
+              <div movie-card video="video"></div>
+            </li>
+            <div class="text-center" style="display:inline-block;width:100%">
+              <span class="label label-warning" ng-if="loading1">Loading...</span>
+            </div>
+            <div ng-if="totalItems1 > itemsPerPage && ispagnation" class="paging">
+              <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" max-size="maxSize" ng-change="updateQuerySaleVideos(sort,currentPage1)" total-items="totalItems1" ng-model="currentPage1" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+            </div>
+            <div class="text-center">
+              <div ng-if="canLoadMore && !ispagnation" class="paging-mobile btn btn-warning" ng-click="loadMore()">Load
+                More</div>
+            </div>
+          </ul>
+        </div>
+        <div class="tab-pane" ng-class="{'display-inherit': tab === 'Albums'}" ng-if="tab === 'Albums'">
+          <div style="display:inline-block;width:100%">
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px">
+
+            </div>
+          </div>
+          <ul class="row list-li list-video">
+            <li ng-repeat="album in albums track by $index" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3" ng-if="album.photos.length">
+              <div class="box-li album-thumbs">
+                <div class="img-li" ng-class="{'main-img': album.photos[1]}">
+                  <a ui-sref="album({performerId: perfomer._id,id: album._id})">
+                    <img ng-src="{{album.photos[0].imageThumbPath | checkImage}}" title="{{album.name}}" fallback-src>
+                  </a>
+                </div>
+                <div class="thumbs" ng-if="album.photos[1]">
+                  <div class="row">
+                    <div class="col-xs-4">
+                      <a ui-sref="album({performerId: perfomer._id,id: album._id})">
+                        <img ng-src="{{album.photos[1].imageThumbPath | checkImage}}" title="{{album.name}}" fallback-src>
+                      </a>
+                    </div>
+                    <div class="col-xs-4" ng-if="album.photos[2]">
+                      <a ui-sref="album({performerId: perfomer._id,id: album._id})">
+                        <img ng-src="{{album.photos[2].imageThumbPath | checkImage}}" title="{{album.name}}" fallback-src>
+                      </a>
+                    </div>
+                    <div class="col-xs-4" ng-if="album.photos[3]">
+                      <a ui-sref="album({performerId: perfomer._id,id: album._id})">
+                        <img ng-src="{{album.photos[3].imageThumbPath | checkImage}}" title="{{album.name}}" fallback-src>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <h5 class="text-center" style="padding:5px;">
+                  <a ui-sref="album({performerId: perfomer._id,id: album._id})" style="">
+                    {{album.name}}
+                  </a>
+                </h5>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" ng-class="{'display-inherit': tab === 'Store'}" ng-if="tab === 'Store'">
+          <div style="display:inline-block;width:100%">
+            <div class="btn-group pull-right filter-group" role="group" style="margin-top:-20px"></div>
+          </div>
+          <ul class="row list-li list-video">
+            <li ng-repeat="product in products" class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3">
+              <div class="box-li">
+                <div class="img-li">
+                  <a ui-sref="storeView({id:product._id,alias:product.alias})">
+                    <img ng-src="{{product.imageFullPath | checkImage}}" alt="{{product.name}}" fallback-src>
+                  </a>
+                  <div class="bottom-img">
+                    {{product.name}}
+                  </div>
+                </div>
+                <div class="bottom-store">
+                  <div class="pull-left">
+                    <div ng-if="product.pricePromotion==0" class="price-store">{{product.price |price}}</div>
+                    <div ng-if="product.pricePromotion!=0" class="price-store">{{product.pricePromotion |price}}</div>
+                  </div>
+                  <div class="pull-right">
+                    <a ng-if="product.quantity > 0" buy-product="product" class="btn btn-warning">Buy now</a>
+                    <a ng-if="product.quantity == 0" class="btn btn-warning">Sold Out</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div ng-if="totalProducts > itemsPerPage" class="paging">
+            <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" ng-change="loadProducts(productCurrentPage)" total-items="totalProducts" ng-model="productCurrentPage" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="content pad-0" ng-if="blocked">
+  <h1 class="text-center">
+    <span style="color: red">You have been blocked by this model!</span>
+    <br>
+    <small class="text-content">Go to <a ui-sref="home"><b>Home page</b></a></small>
+  </h1>
+</div>
+<footer></footer>

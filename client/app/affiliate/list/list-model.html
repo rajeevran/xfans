@@ -1,0 +1,36 @@
+<h3 class="affiliate-title">Welcome to Affiliate Content Center</h3>
+<div class="container">
+  <div class="title-pro">
+    <span> Models listing</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table-main" style="background:#333">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <th>
+        </th>
+        <th><input ng-model="keyword" class="form-control" placeholder="Search..." style="width:50%"></th>
+        <th></th>
+      </tr>
+      <tr ng-repeat="item in models | filter:keyword | orderBy: 'name'">
+        <td></td>
+        <td>
+          <a  href="#" ui-sref="affiliateContent({performerId: item._id})">{{item.name}}</a>
+        </td>
+        <td>
+          <a href="#" ui-sref="affiliateContent({performerId: item._id})"><i class="fa fa-sign-in"></i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div ng-if="totalItems > itemsPerPage" class="paging">
+
+  <uib-pagination  previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="query(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+  </div>
+
+</div>
+<footer></footer>

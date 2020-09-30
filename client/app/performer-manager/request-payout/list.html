@@ -1,0 +1,28 @@
+<div class="title-pro">
+  <span> Request payout listing</span>
+</div>
+<div class="table-responsive">
+  <a ui-sref="manager.requestpayoutCreate" class="btn btn-primary">Create new</a>
+  <table class="table-main">
+    <tr>
+
+      <th>Title</th>
+      <th>Schedule</th>
+      <th>Created date</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="request in requests">
+
+      <td>{{request.title}}</td>
+      <td>{{request.startDate | date}}<span ng-if="request.endDate">&nbsp;-&nbsp; </span>{{request.endDate | date}}</td>
+      <td>{{request.createdAt | date}}</td>
+      <td>
+        <a ui-sref="manager.requestpayoutEdit({id: request._id})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        &nbsp; <a ng-click="remove(request._id, $index)"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+  <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

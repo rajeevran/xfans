@@ -1,0 +1,105 @@
+<div class="title-pro">
+  <h4>Request Payout</h4>
+</div>
+<div>
+  <form enctype="multipart/form-data" name="form" ng-submit="submitForm(form)" novalidate>
+    <div class="form-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" name="title" ng-model='request.title' required>
+
+            <p class="help-block" ng-show="form.title.$error.required && submitted">
+              This field is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" rows='5' ng-model='request.description'></textarea>
+      </div>
+      <label>Payout Schedule</label>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group connector">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="request.startDate" is-open="startDatePopupOpen" datepicker-options="startDateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-change="selectedStartDate(request.startDate)"
+            />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="startDatePopupOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="request.endDate" is-open="endDatePopupOpen" datepicker-options="endDateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="endDatePopupOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <!-- <input uib-datepicker class="form-control" ng-model="request.endDate" datepicker-options="endDateOptions"/> -->
+        </div>
+      </div>
+      <div ng-show="form.$submitted">
+        <div ng-show="request.endDate < request.startDate" class="label label-warning">Please try select range date valid!</div>
+      </div>
+      <div class="row mar-top-10" ng-show="request.status">
+        <div class="col-lg-3">
+          <div class="form-group">
+            <label>Status</label>
+            <select class='form-control' ng-model='request.status' disabled>
+              <option value='pending'>Pending</option>
+              <option value='approved'>Approved</option>
+              <option value='rejected'>Rejected</option>
+              <option value='paid'>Paid</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions mar-top-20">
+      <a ui-sref="manager.requests-payout" class="btn btn-cancel">Cancel</a>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div>
+<div ng-show="request._id" class="block-messages">
+  <div class="title-pro">
+    <h4>Messages</h4>
+  </div>
+  <div class="message-box-type">
+    <form enctype="multipart/form-data" name="commentform" ng-submit="submitComment(commentform)" novalidate>
+      <div class="mess-box">
+        <textarea placeholder="Leave message here" class="col-md-12 mess-box-text" ng-model="comment.content" rows="4" name="mess">
+      </textarea></div>
+      <div ng-show="commentform.$submitted || commentform.mess.$touched">
+        <div ng-show="comment.content.length < 6" class="alert alert-warning">Please enter atleast 6 characters!</div>
+      </div>
+      <div class="row mar-top-10">
+        <div class="col-md-2"><input type="submit" class="btn btn-success" /></div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="message-box">
+        <ul>
+          <li ng-repeat="comment in comments" class="col-lg-12 message-list">
+            <div class="media">
+              <div class="media-left"><img fallback-src ng-src="{{comment.user.imageThumbPath}}" alt="{{comment.user.name}}" /></div>
+              <div class="media-body">
+                <div class="media-heading"><span class="comment-name">{{comment.user.name}}</span>
+                  <span class="comment-date">{{comment.createdAt | date:"short"}}</span></div>
+                <div class="comment-content">{{comment.content}}</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

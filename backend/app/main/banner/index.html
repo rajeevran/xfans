@@ -1,0 +1,164 @@
+<navbar></navbar>
+<div class="page-container">
+   <backend-menu></backend-menu>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <div class="page-bar">
+            <ul class="page-breadcrumb">
+               <li>
+                  <i class="fa fa-home"></i>
+                  <a ui-sref="dashboard">Dashboard</a>
+                  <i class="fa fa-angle-right"></i>
+               </li>
+               <li>
+                  <a >Banner</a>
+               </li>
+            </ul>
+         </div>
+         <h3 class="page-title">
+            Management Banners <small></small>
+         </h3>
+         <div class="row">
+            <div class="col-md-12">
+               <!-- BEGIN EXAMPLE TABLE PORTLET-->
+               <div class="portlet box grey-cascade">
+                  <div class="portlet-title">
+                     <div class="caption">
+                        <i class="fa fa-globe"></i>Banners List
+                     </div>
+                     <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title="">
+                        </a>
+                     </div>
+                  </div>
+                  <div class="portlet-body">
+                     <div class="table-toolbar">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="btn-group">
+                                 <a ui-sref='bannerAdd'  id="sample_editable_1_new" class="btn green">
+                                 Add New <i class="fa fa-plus"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                        <div  class="row">
+                           <div style="display:none" class="col-md-6 col-sm-12">
+                              <div class="dataTables_length" id="sample_1_length">
+                                 <label>
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-xsmall input-inline">
+                                       <option value="5">5</option>
+                                       <option value="15">15</option>
+                                       <option value="20">20</option>
+                                       <option value="-1">All</option>
+                                    </select>
+                                    records
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-md-6 col-sm-12 pull-right">
+                              <div id="sample_1_filter" class="dataTables_filter">
+                                 <label>Search: <input type="search" ng-model="query.keyword" class="form-control  input-inline" placeholder="" aria-controls="sample_1"></label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="table-scrollable">
+                           <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
+                              <thead>
+                                 <tr role="row">
+                                   <th style='width:7%;' class="text-center" rowspan="1" colspan="1">
+                                       Image
+                                    </th>
+                                    <th class="sorting" rel="name" tabindex="0"  rowspan="1" colspan="1">
+                                       Name
+                                    </th>
+                                    <th class="sorting" rel="link" tabindex="0"  rowspan="1" colspan="1">
+                                       Link
+                                    </th>
+                                    <th class="sorting" rel="link" tabindex="0"  rowspan="1" colspan="1">
+                                       Position
+                                    </th>
+                                    <th style='width:7%;' rel="sort" class="text-center sorting_asc" rowspan="1" colspan="1">
+                                       Sort
+                                    </th>
+                                    <th style='width:10%;' rel="createdAt" class="text-center sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">
+                                       Created At
+                                    </th>
+                                    <th style='width:10%;' rel="status" class="text-center sorting" rowspan="1" colspan="1">
+                                       Status
+                                    </th>
+                                    <th style='width:7%;' class="text-center" rowspan="1" colspan="1">
+                                       Action
+                                    </th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="banner in banners" class="gradeX odd" role="row">
+                                   <td class="text-center">
+                                       <img ng-if="performer.imageThumbPath != 'null'" ng-src="{{banner.imageThumbPath | checkImage}}" alt="{{banner.name}}">
+                                    </td>
+
+                                    <td >
+                                       {{banner.name}}
+                                    </td>
+                                    <td >
+                                       {{banner.link}}
+                                    </td>
+                                    <td >
+                                       {{banner.type}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{banner.sort}}
+                                    </td >
+                                    <td class="text-center">
+                                        {{banner.createdAt | date}}
+                                    </td>
+                                    <td class="text-center">
+                                       <span ng-if='banner.status=="active"' class="label label-sm label-success">
+                                       Active </span>
+                                      <span ng-if='banner.status=="inactive"' class="label label-sm label-default">
+                                       Inactive </span>
+                                    </td>
+                                    <td class="text-center">
+                                      <a style="display:none" ui-sref='bannerView({id:banner._id})' class="view" title="View">
+                                        <i class="icon-eye"></i>
+                                      </a>
+                                      <a ui-sref='bannerEdit({id:banner._id})'  class="view" title="Edit">
+                                        <i class="icon-pencil"></i>
+                                      </a>
+                                      <a confirmed-click='delete(banner,$index)' ng-confirm-click="Are you sure delete?"  class="view" title="Delete">
+                                        <i class="icon-trash"></i>
+                                      </a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-5 col-sm-12">
+                              <div  class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
+                                Showing {{totalItemInPage}} to {{totalItems}} of {{totalItems}} items
+                              </div>
+                           </div>
+                           <div class="col-md-7 col-sm-12">
+                              <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+
+                                <div class="paging">
+                                  <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+                              </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="clearfix">
+         </div>
+      </div>
+   </div>
+</div>
+<footer></footer>

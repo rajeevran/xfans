@@ -1,0 +1,227 @@
+<div class="page-sidebar-wrapper">
+  <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+  <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+  <div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul
+      class="page-sidebar-menu "
+      data-keep-expanded="false"
+      data-auto-scroll="true"
+      data-slide-speed="200"
+    >
+      <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+      <li class="sidebar-toggler-wrapper">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler"></div>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+      </li>
+      <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+
+      <li class="start open" ui-sref-active="active">
+        <a ui-sref="dashboard">
+          <i class="icon-home"></i>
+          <span class="title">Dashboard</span>
+          <span class="selected"></span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='StoreEditCtrl' || active =='StoreAddCtrl' || active =='StoreViewCtrl' || active =='StoreCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="store">
+          <i class="icon-basket"></i>
+          <span class="title">Store</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='ProductCategoryUpdateCtrl' || active =='ProductCategoryCreateCtrl' || active =='ProductCategoryListCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="productCategories.list">
+          <i class="icon-basket-loaded"></i>
+          <span class="title">Product category</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='CouponUpdateCtrl' || active =='CouponCreateCtrl' || active =='CouponListCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="coupons.list">
+          <i class="icon-diamond"></i>
+          <span class="title">Coupons</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='ModelsEditCtrl' || active =='ModelsAddCtrl' || active =='ModelsViewCtrl' || active =='ModelsCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="models">
+          <i class="icon-user-female"></i>
+          <span class="title">Models</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='VideoEditCtrl' && !params.type || active =='VideoAddCtrl' && !params.type || active =='VideoViewCtrl' && !params.type || active =='VideoCtrl' && !params.type}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="movies({type:null})">
+          <i class="icon-camcorder"></i>
+          <span class="title">Videos</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='CategoriesController' || active =='CategoryCreateController' || active =='CategoryUpdateController'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="main.categories">
+          <i class="icon-grid"></i>
+          <span class="title">Videos Categories</span>
+        </a>
+      </li>
+      <!-- <li class="start"
+        ng-class="{'active':active =='VideoEditCtrl' && params.type || active =='VideoAddCtrl' && params.type || active =='VideoViewCtrl' && params.type || active =='VideoCtrl' && params.type}"
+        ui-sref-active="active">
+        <a ui-sref="movies({type:'schedule'})">
+          <i class="icon-camcorder"></i>
+          <span class="title">Schedule</span>
+        </a>
+      </li> -->
+      <li
+        class="start"
+        ng-class="{'active':active =='PhotoEditCtrl' || active =='PhotoAddCtrl' || active =='PhotoViewCtrl' || active =='PhotoCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="photo">
+          <i class="icon-picture"></i>
+          <span class="title">Photos</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='BannerEditCtrl' || active =='BannerAddCtrl' || active =='BannerViewCtrl' || active =='BannerCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="banner">
+          <i class="icon-puzzle"></i>
+          <span class="title">Banners</span>
+        </a>
+      </li>
+      <!-- <li class="start"
+        ng-class="{'active':active =='PayoutEditCtrl' || active =='PayoutAddCtrl' || active =='PayoutViewCtrl' || active =='PayoutListCtrl'}"
+        ui-sref-active="active">
+        <a ui-sref="payout">
+          <i class="icon-credit-card"></i>
+          <span class="title">Requests Payout</span>
+        </a>
+      </li> -->
+      <li
+        class="start"
+        ng-class="{'active':active =='OrderEditCtrl' || active =='OrderAddCtrl' || active =='OrderViewCtrl' || active =='OrderCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="order">
+          <i class="icon-credit-card"></i>
+          <span class="title">Orders</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='UserEditCtrl' || active =='UserAddCtrl' || active =='UserViewCtrl' || active =='UserCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="user">
+          <i class="icon-users"></i>
+          <span class="title">Users</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='SubscriberEditCtrl' || active =='SubscriberCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="subscriber">
+          <i class="icon-users"></i>
+          <span class="title">Subscribers</span>
+        </a>
+      </li>
+      <!-- <li class="start" ng-class="{'active':active =='MembershipPackageCtrl' || active =='MembershipPackageAddCtrl' || active =='MembershipPackageViewCtrl' || active =='MembershipPackageCtrl'}" ui-sref-active="active">
+        <a ui-sref="memberShipPackage">
+          <i class="icon-tag"></i>
+          <span class="title">Membership Package</span>
+        </a>
+      </li> -->
+      <li
+        class="start"
+        ng-class="{'active':active =='EarningCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="earning">
+          <i class="fa fa-usd"></i>
+          <span class="title">Earning Stats</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='PageEditCtrl' || active =='PageAddCtrl' || active =='PageViewCtrl' || active =='PageCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="page">
+          <i class="icon-docs"></i>
+          <span class="title">Page</span>
+        </a>
+      </li>
+      <!-- <li class="start" ng-class="{'active':active =='AffiliateAccountEditCtrl' || active =='AffiliateAccountCreateCtrl' || active =='AffiliateAccountListCtrl'}" ui-sref-active="active">
+        <a ui-sref="affiliateAccountListing">
+          <i class="fa fa-users"></i>
+          <span class="title">Affiliate Account</span>
+        </a>
+      </li>
+      <li class="start"
+        ng-class="{'active':active =='AffiliateContentEditCtrl' || active == 'AffiliateContentBulkUploadCtrl' || active =='AffiliateContentCreateCtrl' || active =='AffiliateContentListCtrl'}"
+        ui-sref-active="active">
+        <a ui-sref="affiliateContentListing">
+          <i class="fa fa-flag"></i>
+          <span class="title">Affiliate Content</span>
+        </a>
+      </li> -->
+      <li
+        class="start"
+        ng-class="{'active':active =='SettingEditCtrl' || active =='SettingAddCtrl' || active =='SettingViewCtrl' || active =='SettingCtrl'}"
+        ui-sref-active="active"
+      ></li>
+      <li
+        class="start"
+        ng-class="{'active':active =='CountryBlockCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="geoCountries">
+          <i class="icon-globe"></i>
+          <span class="title">Geo block</span>
+        </a>
+      </li>
+      <li
+        class="start"
+        ng-class="{'active':active =='SettingEditCtrl' || active =='SettingAddCtrl' || active =='SettingViewCtrl' || active =='SettingCtrl'}"
+        ui-sref-active="active"
+      >
+        <a ui-sref="setting">
+          <i class="icon-settings"></i>
+          <span class="title">Settings</span>
+        </a>
+      </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div>
+  <div class="title-pro">
+    <span>Statistic </span>
+    <!-- <div class="btn btn-primary pull-right" ng-click="getStats('today')">Today</div>
+    <div class="btn btn-primary pull-right" ng-click="getStats('week')">Week</div>
+    <div class="btn btn-primary pull-right" ng-click="getStats('month')">Month</div>
+    <div class="btn btn-primary pull-right" ng-click="getStats('year')">Year</div> -->
+    <div class="form-group" style="margin-top:25px">
+          <input date-range-picker class="form-control date-picker" type="text"
+                           ng-model="rangeDate" options="opts" />
+    </div>
+    <a class="btn btn-primary" ng-click="getStats()">Filter</a>
+  </div>
+  <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-colors="colors"
+    chart-click="onClick" chart-dataset-override="datasetOverride"></canvas>
+<br>
+<br>
+  <div class="title-pro">
+    <span>Top 10 videos</span>
+  </div>
+  <canvas class="chart chart-bar" chart-data="statsVideos" chart-labels="labels1" chart-colors="colors"
+    chart-click="onClick" chart-dataset-override="datasetOverride1"></canvas>
+
+</div>

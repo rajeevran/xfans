@@ -1,0 +1,53 @@
+<div class="title-pro">
+  <div class="col-md-12" style="margin-bottom:20px"><span> Earnings</span></div>
+
+    <div class="form-group">
+          <input date-range-picker class="form-control date-picker" type="text"
+                           ng-model="daterange" options="opts" style="width:50%;margin-right:15px;float:left" placeholder="Select daterange"/>
+        <a class="btn btn-primary" ng-click="loadData(query.page)">Filter</a>
+    </div>
+
+
+
+<div class="stats-earning">
+  <label ng-if="query.dateFrom">From <strong>{{query.dateFrom | date}}</strong> to <strong>{{query.dateTo | date}}</strong></label>
+  <table class="table-main">
+    <tr>
+      <th>Total Original Price</th>
+      <th>{{earningStats.priceOriginal | price}}</th>
+      <th ng-if="!earningStats.priceOriginal">$0.00</th>
+    </tr>
+    <tr>
+      <th>Total Price Receive</th>
+      <th>{{earningStats.pricePay | price}}</th>
+      <th ng-if="!earningStats.pricePay">$0.00</th>
+    </tr>
+    <tr>
+      <th>Total Price for commision</th>
+      <th>{{earningStats.priceReceive | price}}</th>
+      <th ng-if="!earningStats.priceReceive">$0.00</th>
+    </tr>
+  </table>
+</div>
+</div>
+<div class="table-responsive">
+  <table class="table-main">
+    <tr>
+      <th>Type</th>
+      <th>Commission</th>
+      <th>Price Original</th>
+      <th>Price Receive</th>
+      <th>CreatedAt</th>
+    </tr>
+    <tr ng-repeat="earning in earnings">
+      <td>{{earning.type}}</td>
+      <td>{{earning.commission}}%</td>
+      <td>${{earning.priceOriginal}}</td>
+      <td>${{earning.pricePay}}</td>
+      <td>{{earning.createdAt | date}}</td>
+    </tr>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+  <uib-pagination previous-text="Prev" items-per-page="query.take" num-pages="noOfPages" ng-change="loadData(query.page)" total-items="totalItems" ng-model="query.page" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

@@ -1,0 +1,27 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a ui-sref='productCategories.list'>Product categories</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Create new product categry
+      </h3>
+      <div class="row" ng-include="'app/store-category/views/form.html'">
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

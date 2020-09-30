@@ -1,0 +1,32 @@
+<div class="title-pro">
+  <span> Photos listing</span>
+</div>
+<div class="table-responsive">
+  <div class="mar-bot-15">
+    <a ui-sref="manager.photosUpload" class="btn btn-primary">Upload</a>
+    <a ui-sref="manager.photosBunkUpload" class="btn btn-danger">Bunk Upload</a>
+    <a ui-sref="manager.albumList" class="btn btn-danger pull-right">Manage Albums</a>
+  </div>
+  <table class="table-main">
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Created date</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="photo in photos">
+      <td>
+        <img fallback-src ng-src="{{photo.imageThumbPath | checkImage}}" class="img-thumbnail" />
+      </td>
+      <td>{{photo.name}}</td>
+      <td>{{photo.createdAt | date}}</td>
+      <td>
+        <a ui-sref="manager.photosEdit({id:photo._id})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        &nbsp; <a ng-click="remove(photo._id, $index)"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+  <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

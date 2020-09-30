@@ -1,0 +1,91 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="xMember">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <base href="/">
+  <title update-title>siteName</title>
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" ng-attr-content="{{metaDescription||''}}" content="4my.Fans is a social media platform for you to see the explosive content from your favorite models. Abetter platform than you are used too. come try it and find out!!" />
+  <meta name="keywords" ng-attr-content="{{metaKeywords||''}}" />
+  <meta name="title" ng-attr-content="{{metaTitle||''}}" content="siteName" />
+
+  <!-- twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" ng-attr-content="{{appConfig.twitterName}}" content="siteName">
+  <meta name="twitter:title" ng-attr-content="{{metaTitle||''}}">
+  <meta name="twitter:description" ng-attr-content="{{metaDescription||''}}" content="4my.Fans is a social media platform for you to see the explosive content from your favorite models. Abetter platform than you are used too. come try it and find out!!">
+  <meta name="twitter:image" ng-attr-content="{{shareImageUrl}}" content="https://s3.us-east-2.amazonaws.com/4my.fans/logositeName.png">
+
+  <!-- facebook and other social sites -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" ng-attr-content="{{appConfig.siteName}}" content="siteName">
+  <meta property="og:title" ng-attr-content="{{metaTitle||''}}" content="siteName">
+  <meta property="og:description" ng-attr-content="{{metaDescription||''}}" content="4my.Fans is a social media platform for you to see the explosive content from your favorite models. Abetter platform than you are used too. come try it and find out!!">
+  <meta property="og:image" ng-attr-content="{{shareImageUrl}}" content="https://s3.us-east-2.amazonaws.com/4my.fans/logositeName.png">
+  <meta property="og:url" ng-attr-content="{{shareUrl}}">
+
+  <link rel="shortcut icon" type="image/png" ng-href="{{setting.favicon}}" ng-if="setting.favicon" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="app/vendor-ffe8514f5f.css">
+
+
+  <!-- injector:css -->
+  <!-- endinjector -->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- Add your site or application content here -->
+
+
+  <div ui-view=""></div>
+  <div growl></div>
+
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWUVr_RzrnVJXj-Oh5TGkd7Vy6TAORmpo"></script> -->
+  <!-- Javascript -->
+  <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+
+  <!--jwplayer lib-->
+  <script src="https://content.jwplatform.com/libraries/ZWUD43rP.js"></script>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+        <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+        <![endif]-->
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+  <script src="app/vendor-8a59a0c231.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script src="app/app-1e039ccfff.js"></script>
+</body>
+
+</html>

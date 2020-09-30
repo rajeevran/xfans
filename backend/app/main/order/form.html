@@ -1,0 +1,81 @@
+<navbar></navbar>
+<div class="page-container">
+   <backend-menu></backend-menu>
+   <div class="page-content-wrapper">
+      <div class="page-content">
+         <div class="page-bar">
+            <ul class="page-breadcrumb">
+               <li>
+                  <i class="fa fa-home"></i>
+                  <a ui-sref="dashboard">Dashboard</a>
+                  <i class="fa fa-angle-right"></i>
+               </li>
+               <li>
+                  <a ui-sref='order' >Order</a>
+               </li>
+            </ul>
+         </div>
+         <h3 class="page-title">
+            Management Orders <small></small>
+         </h3>
+         <div class="row">
+            <div class="col-md-12">
+               <!-- BEGIN EXAMPLE TABLE PORTLET-->
+              <div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i> {{action}} {{order.name}}
+							</div>
+							<div class="tools">
+								<a href="" class="collapse" data-original-title="" title="">
+								</a>
+								
+							</div>
+						</div>
+						<div class="portlet-body form" style="display: block;">
+							<form enctype="multipart/form-data"  name="form" ng-submit="submitForm(form,order.imageFullPath)" novalidate>
+								<div class="form-body">
+                  
+									<div class="form-group">
+										<label>Type</label>
+                    <select class="form-control" ng-model="order.type">
+                      <option value="store">Store</option>
+                      <option value="model">Model</option>
+                    </select>
+									
+									</div>
+                  
+                  
+                  
+                  <div class="form-group">
+										<label>Description</label>
+                    <textarea class="form-control" rows='5' ng-model='order.description'></textarea>
+									</div>
+                  <div class="form-group">
+										<label>Sort</label>
+										<input type="text" class="form-control" ng-model='order.sort'> 
+							  </div>
+                <div class="form-group">
+										<label>Status</label>
+                    <select class='form-control'ng-model='order.status'>
+                      <option value='active'>Active</option>
+                      <option value='inactive'>Inactive</option>
+                    </select>	
+							  </div>
+								</div>
+                
+								<div class="form-actions right">
+									<a ui-sref='order' class="btn default">Cancel</a>
+									<button type="submit" class="btn green">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div>
+            </div>
+         </div>
+         <div class="clearfix">
+         </div>
+      </div>
+   </div>
+</div>
+<footer></footer>

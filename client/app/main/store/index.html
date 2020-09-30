@@ -1,0 +1,56 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="m20">
+      <div class="title-main">
+        <h4>{{totalItems}} Products</h4>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3 col-md-2">
+          <h3>Categories</h3>
+          <ul>
+            <li>
+              <a href="#" ui-sref="store({categoryId:''})">All</a>
+            </li>
+            <li ng-repeat="cat in categories track by $index">
+              <a href="#" ui-sref="store({categoryId: cat._id})">{{cat.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <ul class="row list-li list-video">
+            <li ng-repeat="product in products" class="col-sm-4 col-lg-3">
+              <div class="box-li">
+                <div class="img-li">
+                  <a ui-sref="storeView({id:product._id,alias:product.alias})">
+                      <img ng-src="{{product.imageMediumPath | checkImage | cdn}}" alt="{{product.name}}" fallback-src>
+                  </a>
+                  <div class="bottom-img">
+                    {{product.name}}
+                  </div>
+                </div>
+                <div class="bottom-store">
+                  <div class="pull-left">
+                    <div ng-if="product.pricePromotion==0" class="price-store">{{product.price |price}}</div>
+                    <div ng-if="product.pricePromotion!=0" class="price-store">{{product.pricePromotion |price}}</div>
+                  </div>
+                  <div class="pull-right">
+                    <a ng-if="product.quantity > 0" buy-product="product" class="btn btn-warning">Buy now</a>
+                    <a ng-if="product.quantity == 0" class="btn btn-warning">Sold Out</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+          <div ng-if="totalItems > itemsPerPage" class="paging">
+            <uib-pagination previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

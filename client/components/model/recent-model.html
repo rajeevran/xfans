@@ -1,0 +1,23 @@
+<div class="box-main">
+  <!-- <div class="title-main">
+    <h4>Recent Models</h4>
+  </div> -->
+    <ul class="row list-li list-video list-model">
+      <li ng-repeat="model in performers | limitTo:9" class="col-sm-6 col-md-4 col-lg-3 col-xs-12">
+        <div class="box-li mar-bot-0 item-model">
+          <div class="img-li">
+            <a ui-sref="modelView({id:model.username})">
+              <img ng-src="{{model.imageFullPath | checkImage}}" alt="{{model.name}}">
+            </a>
+          </div>
+          <div class="bottom-img">
+              <h3><a ui-sref="modelView({id:model.username})"{{model.name}}>{{model.name}}</a></h3>
+              Views:&nbsp;{{model.totalView}} - <span>Subscibers:&nbsp;{{model.totalSubscriber}}</span>
+            </div>
+        </div>
+      </li>
+  </ul>
+  <div class="text-center">
+    <a ui-sref="models" class="btn btn-lg btn-warning btn-botder">View All Models <i class="fa fa-caret-right"></i></a>
+  </div>
+</div>

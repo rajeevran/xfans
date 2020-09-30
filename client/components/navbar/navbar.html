@@ -1,0 +1,54 @@
+<div class="header header-das" ng-controller="NavbarController">
+  <div class="container">
+     <div class="logo"><a ui-sref="home"><img src="{{setting.logoFullPath}}"></a></div>
+    <div class="model-nav-block">
+      <ul class="model-nav-menu">
+        <li class="model-nav-item"><a ui-sref="home"><i class="fa fa-home"></i></a></li>
+        <li class="model-nav-item" ng-if="isLoggedIn() && currentUser.isPerformer"><a ng-href="{{currentUser.username}}#Videos"><i class="far fa-video"></i></a></li>
+        <li class="model-nav-item" ng-if="!isLoggedIn() || !currentUser.isPerformer"><a ui-sref="contact"><i class="far fa-envelope"></i></a></li>
+        <li class="model-nav-item" ng-if="isLoggedIn() && currentUser.isPerformer"><a ng-href="{{currentUser.username}}#Albums"><i class="far fa-images"></i></a></li>
+        <li class="model-nav-item" ng-if="isLoggedIn() && currentUser.isPerformer"><a ng-href="{{currentUser.username}}#SaleVideos">$<i class="far fa-video"></i></a></li>
+        <li class="model-nav-item"><a ui-sref="cart" class="cart-item"><i class="fa fa-shopping-cart"></i><span class="cart-total">{{tototalItems}}</span></a></li>
+        <li class="model-nav-item" ng-if="isLoggedIn() && currentUser.isPerformer"><a ng-href="{{currentUser.username}}#Store"><i class="far fa-gem"></i></a></li>
+        <li class="model-nav-item" ng-if="isLoggedIn()"><a ui-sref="messages"><i class="fa fa-comments"></i></a></li>
+        <!-- <li class="model-nav-item"><a ui-sref="calendar({performerId: currentUser.username})"><img src="assets/images/calendar-icon.png"></a></li> -->
+
+      </ul>
+    </div>
+    <div class="user-login">
+      <div class="dropdown">
+            <a class="dropdown-toggle" type="button" id="dropdownModelProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="assets/images/account-icon.png" ng-if="!isLoggedIn()">
+              <img ng-src="{{currentUser.imageThumbPath | checkAvatar | cdn}}" ng-if="isLoggedIn()" style="border-radius:50%">
+            </a>
+            <ul class="dropdown-menu model-drop-menu" aria-labelledby="dropdownModelProfile" ng-if="!isLoggedIn()">
+              <li><a ui-sref="login"><i class="fa fa-sign-in"></i> Log in</a></li>
+              <li><a ui-sref="login"><i class="fa fa-power-off"></i> Sign up</a></li>
+            </ul>
+            <ul class="dropdown-menu model-drop-menu" aria-labelledby="dropdownModelProfile" ng-if="isLoggedIn() && currentUser.role === 'user' || isLoggedIn() && currentUser.role === 'admin' ">
+              <li><a ui-sref="profile"><i class="fa fa-user"></i> Account information</a></li>
+              <li><a ui-sref="favorites"><i class="fa fa-heart"></i> Favorites</a></li>
+              <li><a ui-sref="watchLater"><i class="fa fa-clock-o"></i> Watch Later</a></li>
+              <li><a ui-sref="paymentHistory"><i class="fa fa-shopping-cart"></i> Payment history</a></li>
+              <li><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
+              <li><a ui-sref="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+            <ul class="dropdown-menu model-drop-menu" aria-labelledby="dropdownModelProfile" ng-if="isLoggedIn() && currentUser.role === 'performer'">
+              <li><a ui-sref="manager.profile"><i class="fa fa-user"></i> Account information</a></li>
+              <li><a ui-sref="manager.videos"><i class="fa fa-camera"></i> Manage videos</a></li>
+              <li><a ui-sref="manager.tagVideos({performerId: currentUser._id})"><i class="fa fa-check"></i>Tagged Videos</a></li>
+              <li><a ui-sref="manager.photos"><i class="fa fa-picture-o"></i> Manage photos</a></li>
+              <li><a ui-sref="manager.productList"><i class="fa fa-shopping-cart"></i>Manage Products</a></li>
+              <li><a ui-sref="manager.scheduleList({performerId: currentUser._id})"><i class="fa fa-calendar"></i> Manage Calendar Events</a></li>
+              <li><a ui-sref="calendar({performerId: currentUser._id})"><i class="fa fa-calendar"></i>My calendar</a></li>
+              <li><a ui-sref="manager.earning"><i class="fa fa-dollar"></i> Earnings</a></li>
+              <li><a ui-sref="messages"><i class="fa fa-envelope"></i> Messages</a></li>
+              <li><a ui-sref="modelMessages"><i class="fa fa-envelope"></i> Messages to Model</a></li>
+              <li><a ui-sref="manager.stats"><i class="fa fa-bar-chart"></i> Statistic</a></li>
+              <li><a ui-sref="manager.topPerformers"><i class="fa fa-star"></i>Top Performers</a></li>
+              <li><a ui-sref="logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+          </div>
+    </div>
+</div>
+</div>

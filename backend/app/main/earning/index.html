@@ -1,0 +1,226 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a>Earning Stats</a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Management Earnings <small></small>
+      </h3>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-globe"></i>Earnings List
+              </div>
+              <div class="tools">
+                <a href="javascript:;" class="collapse" data-original-title="" title="">
+                </a>
+              </div>
+            </div>
+            <div class="portlet-body">
+              <form ng-submit="loadData(currentPage)" name="form">
+                <div id="sample_1_wrapper" class="dataTables_wrapper no-footer">
+                  <div class="row mar-btt-25">
+                    <!-- <div style="display:none" class="col-md-6 col-sm-12">
+                              <div class="dataTables_length" id="sample_1_length">
+                                 <label>
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-xsmall input-inline">
+                                       <option value="5">5</option>
+                                       <option value="15">15</option>
+                                       <option value="20">20</option>
+                                       <option value="-1">All</option>
+                                    </select>
+                                    records
+                                 </label>
+                              </div>
+                           </div> -->
+                    <div class="col-md-6 col-sm-12">
+                      <div>
+                        <label style="width:40%">Select Date <input date-range-picker class="form-control date-picker"
+                            type="text" ng-model="daterange" min="'2017-11-11'" max="today" /></label>
+                        <input type="submit" style="border:1px solid #ccc;background:#1caf9a;" value="Search" />
+                      </div>
+                      <div>
+                        <label style="width:40%">Search Model
+                          <input type="text" ng-model="performerSelected" placeholder="Search model"
+                            typeahead-editable="false"
+                            uib-typeahead="performer as performer.name for performer in searchPerformer($viewValue)"
+                            ng-model-options="selectPerformerOptions"
+                            typeahead-template-url="customTemplateSearchPerformer.html"
+                            typeahead-loading="loadingPerformers" typeahead-no-results="noResults" class="form-control">
+                          <i ng-show="loadingPerformers" class="glyphicon glyphicon-refresh"></i>
+                          <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                          </div>
+                        </label>
+
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div style="float:right">
+                        <label>Stats</label>
+                        <table>
+                          <tr>
+                            <th style="width:7%">Payouts</th>
+                            <th style="width:7%">Price Original</th>
+                            <th style="width:7%">Price Recieve</th>
+                            <th style="width:7%">Price Pay</th>
+                            <th style="width:7%">Remaining</th>
+                          </tr>
+                          <tr>
+                            <td>${{stats.payout.toFixed(2)}}</td>
+                            <td>${{stats.priceOriginal.toFixed(2)}}</td>
+                            <td>${{stats.priceReceive.toFixed(2)}}</td>
+                            <td>${{stats.pricePay.toFixed(2)}}</td>
+                            <td>${{stats.remaining.toFixed(2)}}</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-scrollable">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="sample_1"
+                      role="grid" aria-describedby="sample_1_info">
+                      <thead>
+                        <tr role="row">
+                          <th class="text-center">
+                            User
+                          </th>
+                          <th class="text-center">
+                            Model
+                          </th>
+                          <th>
+                              <select ng-model="query.type" type="submit" ng-change="loadData(1)">
+                                <option value="">All</option>
+                                <option value="tip">Tip</option>
+                                <option value="sale_video">Sale Video</option>
+                                <option value="monthly_subscription">Monthly Subscription</option>
+                                <option value="yearly_subscription">Yearly Subscription</option>
+                              </select>
+                          </th>
+                          <th class="text-center">
+                            Commission
+                          </th>
+                          <th class="text-center">
+                            Price Original
+                          </th>
+                          <th class="text-center">
+                            Price Receive
+                          </th>
+                          <th class="text-center">
+                            Price Pay
+                          </th>
+                          <th class="text-center">
+                            Paid?
+                          </th>
+                          <th class="text-center">
+                            CreatedAt
+                          </th>
+                          <!-- <th style='width:7%;' class="text-center" rowspan="1" colspan="1">
+                            Action
+                          </th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="earning in earnings" class="gradeX odd" role="row">
+                          <td>
+                            {{earning.user.name || earning.user.email}}
+                          </td>
+                          <td class="text-center">
+                            {{earning.performer.name || earning.performer.email}}
+                          </td>
+                          <td class="text-center">
+                            {{earning.type}}
+                          </td>
+                          <td class="text-center">
+                            {{earning.commission}}%
+                          </td>
+                          <td class="text-center">
+                            ${{earning.priceOriginal.toFixed(2)}}
+                          </td>
+                          <td class="text-center">
+                            ${{earning.priceReceive.toFixed(2)}}
+                          </td>
+                          <td class="text-center">
+                            ${{earning.pricePay.toFixed(2)}}
+                          </td>
+                          <td class="text-center">
+                            <span class="badge badge-warning" ng-if="!earning.paid">{{earning.paid}}</span>
+                            <span class="badge badge-success" ng-if="earning.paid">{{earning.paid}}</span>
+                          </td>
+                          <td class="text-center">
+                            {{earning.createdAt | date}}
+                          </td>
+                          <!-- <td class="text-center">
+                            <a ng-click="changePaid(updatePaiddaterange.performerId = earning.performerId)" class="view"
+                              title="Edit">
+                              <i class="icon-pencil"></i>
+                            </a>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 col-sm-12">
+                      <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
+                        Showing {{totalItemInPage}} to {{totalItems}} of {{totalItems}} items
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                      <div class="dataTables_paginate paging_bootstrap_full_number" id="sample_1_paginate">
+
+                        <div class="paging">
+                          <uib-pagination previous-text="Prev" items-per-page="query.take" num-pages="noOfPages"
+                            ng-change="pageChanged(query.page)" total-items="totalItems" ng-model="query.page"
+                            max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false">
+                          </uib-pagination>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mar-top-25">
+                    <div class="col-md-6 col-sm-12">
+                      <div>
+                        <label style="width:40%">Update Paid status here: <input date-range-picker
+                            class="form-control date-picker" placeholder="select date range" type="text"
+                            ng-model="statsdaterange" min="'2017-11-11'" max="today" /></label>
+                        <select ng-model="updatePaiddaterange.paid">
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </select>
+                        <a ng-click="changePaid(statsdaterange)" class="submit-paid">Submit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>
+<script type="text/ng-template" id="customTemplateSearchPerformer.html">
+  <a>
+      <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+  </a>
+</script>

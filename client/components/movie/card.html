@@ -1,0 +1,24 @@
+<div class="box-li">
+  <div class="img-li">
+    <img src="{{thumbPath}}" alt="{{video.name}}" />
+    <a  ui-sref="videoView({id:video._id,alias:video.alias})" class="play-hover">
+      <i class="fa fa-caret-right"></i>
+    </a>
+    <div class="bottom-img">
+      <div class="pull-left">
+        <ul class="ac-box-li">
+          <li><a href="#"><i class="fa fa-heart"></i></a> {{video.stats.totalLike}}</li>
+          <li><a href="#"><i class="fa fa-comment"></i></a> {{video.stats.totalComment}}</li>
+        </ul>
+      </div>
+      <div class="pull-right color-gray" >
+        {{video.activeDate | date}}
+      </div>
+    </div>
+    <span class="time-video">{{video.duration|durationFormat}}</span>
+  </div>
+  <div class="text-li">
+    
+    <a ui-sref="videoView({id:video._id,alias:video.alias})" title="{{video.name}}">{{video.name}}</a>
+  </div>
+</div>

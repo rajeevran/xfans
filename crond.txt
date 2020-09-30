@@ -1,0 +1,2 @@
+//crontab -e
+30 * * * * wget http://50.112.14.163/api/v1/users/check/uservip

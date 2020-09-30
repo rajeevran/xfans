@@ -1,0 +1,38 @@
+<div>
+  <h3>Manage photo album</h3>
+  <div class="form-group" ng-show="!options.hideName">
+    <label>Album title</label>
+    <input type="text" ng-model="name" class="form-control" />
+  </div>
+  <div class="row">
+    <div class="col-md-3" ng-repeat="photo in photos track by $index">
+      <img ng-src="{{photo.imageThumbPath}}" style="width: 125px" />
+      <div class="clearfix"></div>
+      <a href="#" ng-click="delete(photo, $index)">
+        <i class="fa fa-trash"></i>
+      </a>
+    </div>
+    <div class="col-md-3" ng-repeat="file in files track by $index">
+      <img ngf-thumbnail="file" style="width: 125px" />
+      <div class="clearfix"></div>
+      <a href="#" ng-click="remove($index)">
+        <i class="fa fa-trash"></i>
+      </a>
+    </div>
+  </div>
+  <div class="form-group">
+    <div ngf-drop ngf-select="populateFile($files)" class="drop-box"
+      ngf-drag-over-class="'dragover'" ngf-multiple="true"
+      accept="image/*"
+      ngf-pattern="'image/*'">Drop images here or click to upload</div>
+  </div>
+  <div class="form-group">
+    <label>Select files</label>
+    <input type="file" ngf-select="populateFile($files)" ngf-multiple="true" ngf-pattern="'image/*'"
+      ngf-accept="'image/*'" ngf-max-size="20MB" />
+  </div>
+
+  <!-- <div class="form-group">
+    <button class="btn btn-primary" ng-click="upload()" type="btn">Upload</button>
+  </div> -->
+</div>

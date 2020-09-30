@@ -1,0 +1,57 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="border-bottom: 1px solid #ddd; padding: 20px 0px; padding-top: 0px; margin-bottom: 40px;">
+		<img src="http://52.42.142.211/assets/images/logo.png">
+	</div>
+	
+	<div style="font-size: 17px; margin-bottom: 30px">
+		<div style="padding: 15px 20px; margin-bottom: 30px; background: #c9f1fd; color: #006e8c; font-weight: bold; font-size: 18px; margin-bottom: 20px"><%= user.firstName %> <%= user.lastName %> <%= text %></div>
+		<table style="width: 100%">
+			<tbody>
+				<tr>
+					<td style="vertical-align: top">
+						<img src="<%= user.avatar %>">
+					</td>
+					<td style="vertical-align: top; border-right: 1px solid #ddd; ">
+						<h3 style="margin-top: 0px; margin-bottom: 5px"><%= user.firstName %> <%= user.lastName %></h3>
+						<div style="margin-bottom: 5px;"><%= user.tagline %></div>
+						<div>
+							<%= user.profileAddress.fullAddress %>
+						</div>
+						<div>
+							<img src="http://chiiz.mansainc.com/assets/images/star.png">
+							<%= user.rate %>/5 by <%= user.rateTotal %>
+						</div>
+					</td>
+					<td style="vertical-align: top;border-right: 1px solid #ddd;padding-left: 10px">
+						<strong style="margin-bottom: 5px; display: block">Specilization</strong>
+					</td>
+					<td style="vertical-align: top;border-right: 1px solid #ddd;padding-left: 10px">
+						<strong style="margin-bottom: 5px; display: block">Gears</strong>
+						{% for brand in user.photoGears.camera.brand %}
+							<p><%= brand %></p>
+						{% endfor%}
+					</td>
+					<td style="vertical-align: top;padding-left: 10px">
+						<strong style="margin-bottom: 5px; display: block">Portfolio</strong>
+						<img src="<%= user.portfolio %>" style="width: 70">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		{% if !isAddPorfolio %}
+			<div style="border-top:1px solid #ddd; padding-top: 30px; margin-top: 30px;">
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Reject</a>
+				<a href="#" style="padding: 8px 20px; border: 1px solid #e7505a; text-decoration: none; color: #e7505a;">Approve</a>
+			</div>
+		{% endif %}
+
+		{% if isComment%}
+			<a style="font-size: 17px; font-weight: bold;padding: 12px 30px;border-radius: 3px; color: #FFF;background-color: #32c5d2;border-color: #32c5d2; text-decoration: none" href="<%= url %>">View Comment</a>
+		{% endif%}
+	</div>
+</div>
+{% endblock %}

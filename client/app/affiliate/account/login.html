@@ -1,0 +1,42 @@
+<div class="content login-page-cus">
+  <div class="container">
+      <div class="logo-login"><a  ui-sref="home"><img ng-src="{{setting.logoFullPath}}" tittle="Logo" fallback-src style="max-width:300px"></a></div>
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 benefit-listing active">
+          <h3>LOGIN AFFILIATE CENTER</h3>
+          <form class="form" name="form" ng-submit="login(form)" novalidate>
+            <div class="form-group mar-bot-30">
+                <input type="text" name="username" placeholder="Username" class="form-control input-login" ng-model="info.username" required>
+
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control input-login" ng-model="info.password" required>
+            </div>
+            <div class="form-group" style="overflow: hidden">
+                <div class="pull-left">
+                    <div class="checkbox-inline">
+                      <label class="checkbox-cus"> Remember Me
+                        <input type="checkbox" ng-model="info.rememberMe">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-error">
+            <p class="help-block" ng-show="form.username.$error.required && form.password.$error.required && submitted">
+               Please enter your email and password.
+            </p>
+            <p class="help-block">{{errors.message}}</p>
+          </div>
+            <div class="form-group text-center">
+                <div class="submit-login-btn"><button class="btn btn-warning" type="submit">Login</button></div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+  </div>
+</div>
+<footer></footer>

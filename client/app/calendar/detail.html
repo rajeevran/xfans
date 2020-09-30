@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{event.title}}</h3>
+  <div style="color:#333;font-style:italic;font-size:14px">{{event.start._d | date}} - {{ event.end._d | date}}</div>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <div ng-bind-html="event.description" style="color:#888"></div>
+    </div>
+    <hr />
+    <button class="btn btn-warning btn-warning-cus" type="button" ng-click="close()">Close</button>
+  </form>
+</div>

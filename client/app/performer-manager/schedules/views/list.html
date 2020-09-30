@@ -1,0 +1,47 @@
+<div class="row">
+  <h3 class="abl-ttl">Events</h3>
+  <div class="col-md-12">
+      <a ui-sref="manager.scheduleCreate({performerId: currentUser._id})" class="btn btn-warning pull-right">
+        Add New <i class="fa fa-plus"></i>
+      </a>
+       <div class="portlet-body">
+         <table class="table table-stripe">
+           <thead>
+             <tr>
+               <th>
+                 Title
+               </th>
+               <th>
+                 Description
+               </th>
+               <th>
+                 Date range
+               </th>
+               <th>
+                 #
+               </th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr ng-repeat="item in items track by $index">
+               <td>
+                 {{item.title}}
+               </td>
+               <td>
+                 {{item.description | limitTo: 25}}{{item.description.length > 25 ? '...' : ''}}
+               </td>
+               <td>{{item.from | date}} - {{item.to | date}}</td>
+               <td>
+                 <a ui-sref="manager.scheduleEdit({id: item._id, performerId: currentUser._id})">
+                   <i class="fa fa-pencil"></i>
+                 </a>&nbsp;&nbsp;
+                 <a  ng-click="delete(item, $index)">
+                   <i class="fa fa-trash"></i>
+                 </a>
+               </td>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+  </div>
+</div>

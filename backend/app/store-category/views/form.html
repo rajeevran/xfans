@@ -1,0 +1,33 @@
+<div class="portlet box blue">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-gift"></i> {{action}} {{category.name}}
+    </div>
+    <div class="tools">
+      <a href="" class="collapse" data-original-title="" title=""></a>
+    </div>
+  </div>
+  <div class="portlet-body form" style="display: block;">
+    <form name="form" ng-submit="submit(form)" novalidate>
+      <div class="form-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" name="name" ng-model='item.name' required>
+
+          <p class="help-block" ng-show="form.name.$error.required && form.$submitted">
+            This field is required
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" ng-model="item.description"></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions right">
+        <a ui-sref="productCategories.list" class="btn default">Cancel</a>
+        <button type="submit" class="btn green">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

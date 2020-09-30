@@ -1,0 +1,14 @@
+<div class="m20">
+  <div class="title-main">
+    <h4>Upcoming Videos</h4>
+  </div>
+
+  <ul class="row list-li list-video">
+    <li ng-repeat="video in videoUpcoming" class="col-sm-4 col-lg-3">
+      <div movie-card video="video"></div>
+    </li>
+  </ul>
+  <div class="text-center">
+    <a ui-sref="movies" class="btn btn-lg btn-warning btn-botder">View All Videos <i class="fa fa-caret-right"></i></a>
+  </div>
+</div>

@@ -1,0 +1,299 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a ui-sref='video'>Video</a>
+          </li>
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Management Videos
+        <small></small>
+      </h3>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- BEGIN EXAMPLE TABLE PORTLET-->
+          <div class="portlet box blue">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-gift"></i> {{action}} {{video.name}}
+              </div>
+              <div class="tools">
+                <a href="" class="collapse" data-original-title="" title="">
+                </a>
+
+              </div>
+            </div>
+            <div class="portlet-body form" style="display: block;">
+              <form enctype="multipart/form-data" name="form" ng-submit="submitForm(form, video.imageFullPath)"
+                novalidate>
+
+                <div class="form-body">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" ng-model='video.name' required>
+
+                        <p class="help-block" ng-show="form.name.$error.required && submitted">
+                          This field is required
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Categories</label>
+                        <select ui-select2="select2Options" data-placeholder="Select Categories" multiple
+                          class="form-control" ng-model="video.categories">
+                          <option ng-repeat="item in categories" value="{{item._id}}">{{item.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Type</label>
+                        <select class='form-control' ng-model='video.type'>
+                          <option value='upcoming'>Upcoming</option>
+                          <option value='recent'>Recent</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Model Name</label>
+                        <select ui-select2="select2Options" data-placeholder="Select Model" multiple
+                          class="form-control" ng-model="video.performer">
+                          <option ng-repeat="performer in performers" value="{{performer._id}}">{{performer.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Tags</label>
+                        <input class="form-control" data-placeholder="Add tags" type="hidden"
+                          ui-select2="inputSelect2Options" ng-model="video.tags">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group" ng-show="video.type==='upcoming'">
+                        <label>
+                          <input type="checkbox" ng-model="video.isSchedule"> Schedule
+                        </label>
+                        <div class="input-group" ng-if="video.isSchedule">
+                          <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd"
+                            ng-model="video.schedule" is-open="opened" datepicker-options="dateOptions"
+                            ng-required="video.isSchedule" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="opened=true">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="checkbox-c">
+                    <label>
+                      <input type="checkbox" ng-model="isFtp"> Use FTP
+                    </label>
+                  </div>
+                  <div class="row">
+                    <!-- <div class="col-lg-4">
+                      <div class="form-group">
+                        <label>Image (max size 5MB)</label>
+
+                        <div class="photo-upload">
+                          <img ng-show="form.file.$valid" ngf-thumbnail="video.imageFullPath | checkImage"
+                               class="thumb">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select
+                                   ng-model="video.imageFullPath" name="file"
+                                   accept="image/*" ngf-max-size="5MB"
+                                   ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 5MB
+                            </p>
+                        <span class="progress" ng-show="picFile.progress >= 0">
+                          <div style="width:{{picFile.progress}}%"
+                               ng-bind="form.progress + '%'"></div>
+                        </span>
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="col-lg-4" ng-hide="isFtp">
+                      <div class="form-group">
+                        <label>File Full Path (max size 2GB)</label>
+
+                        <div class="photo-upload">
+                          <img ng-if="video.filePath || fileFullPath" width="100" src="assets/images/icon-video.gif">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select ng-model="fileFullPath"
+                              name="file" ngf-multiple="action=='Add'" accept="video/mp4,video/x-m4v,video/*"
+                              ngf-max-size="2048MB" ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 2GB
+                            </p>
+                            <span class="progress" ng-show="picFile.progress >= 0">
+                              <div style="width:{{picFile.progress}}%" ng-bind="form.progress + '%'"></div>
+                            </span>
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-lg-4" ng-hide="isFtp">
+                      <div class="form-group">
+                        <label>File Trailer Path (max size 500MB)</label>
+
+                        <div class="photo-upload">
+                          <img ng-if="video.fileTrailerPath || fileTrailerPath" width="100" src="assets/images/icon-video.gif">
+
+                          <div class="upload">
+                            <input class="btn btn-warning btupload" type="file" ngf-select
+                                   ng-model="fileTrailerPath" name="file"
+                                   accept="video/mp4,video/x-m4v,video/*" ngf-max-size="500MB"
+                                   ngf-model-invalid="errorFile">
+
+                            <p class="help-block" ng-show="form.file.$error.maxSize && submitted">
+                              File too large
+                              {{errorFile.size / 1000000|number:1}}MB: max 500MB
+                            </p>
+                        <span class="progress" ng-show="picFile.progress >= 0">
+                          <div style="width:{{picFile.progress}}%"
+                               ng-bind="form.progress + '%'"></div>
+                        </span>
+                            <span ng-show="form.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="col-lg-6" ng-show="isFtp">
+                      <!-- <div class="form-group">
+                        <label>Video Trailer Path</label>
+                        <select ui-select2="select2Options" data-placeholder=""
+                                class="form-control" ng-model="video.fileTrailerPath">
+                          <option ng-repeat="path in pathFiles" value="{{path}}">{{path}}
+                          </option>
+                        </select>
+                      </div> -->
+                      <div class="form-group">
+                        <label>Video Full Path</label>
+                        <select ui-select2="select2Options" data-placeholder="" class="form-control"
+                          ng-model="video.filePath">
+                          <option ng-repeat="path in pathFiles" value="{{path}}">{{path}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-show="progress >= 0">
+
+                    <div class="progress" style="width:{{progress}}%" ng-bind="progress + '%'">{{progress}} %
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows='5' ng-model='video.description'></textarea>
+                  </div>
+                  <div class="form-group" style="display:none">
+                    <div album-create options="albumOptions"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Meta Keywords</label>
+                        <input type="text" class="form-control" ng-model='video.metaKeywords'>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Meta Title</label>
+                        <input type="text" class="form-control" ng-model='video.metaTitle'>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label>Meta Description</label>
+                        <input type="text" class="form-control" ng-model='video.metaDescription'>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label><input type="checkbox" ng-model="video.isSaleVideo" />Is Sale video</label>
+                      </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="video.isSaleVideo">
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" ng-model='video.price' />
+                      </div>
+                    </div>
+                    <div class="col-lg-6" ng-if="video.isSaleVideo">
+                      <div class="form-group disable-select">
+                        <label>Unlock for user <span style="color:red">(Be careful , You can not edit this content after
+                            saving.)</span></label>
+                        <select ui-select2="select2Options" data-placeholder="" multiple class="form-control"
+                          ng-model="video.allowViewSaleIds">
+                          <option ng-repeat="item in users" value="{{item._id}}">{{item.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Sort</label>
+                        <input type="text" class="form-control" ng-model='video.sort'>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select class='form-control' ng-model='video.status'>
+                          <option value='active'>Active</option>
+                          <option value='inactive'>Inactive</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions right">
+
+                  <a ui-sref='movies' class="btn default">Cancel</a>
+                  <button type="submit" class="btn green">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix">
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

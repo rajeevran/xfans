@@ -1,0 +1,271 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="xMember">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <base href="/">
+  <title update-title></title>
+
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" ng-attr-content="{{metaDescription||''}}" />
+  <meta name="keywords" ng-attr-content="{{metaKeywords||''}}" />
+  <meta name="title" ng-attr-content="{{metaTitle||''}}" />
+
+  <!-- twitter -->
+  <meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" ng-attr-content="{{appConfig.twitterName}}">
+  <meta name="twitter:title" ng-attr-content="{{metaTitle||''}}">
+  <meta name="twitter:description" ng-attr-content="{{metaDescription||''}}">
+  <meta name="twitter:image" ng-attr-content="{{shareImageUrl}}">
+
+  <meta name="twitter:site" ng-attr-content="{{appConfig.twitterName}}">
+  <meta name="twitter:title" ng-attr-content="{{metaTitle||''}}">
+  <meta name="twitter:description" ng-attr-content="{{metaDescription||''}}">
+  <meta name="twitter:image" ng-attr-content="{{shareImageUrl}}">
+
+  <!-- facebook and other social sites -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" ng-attr-content="{{appConfig.siteName}}">
+  <meta property="og:title" ng-attr-content="{{metaTitle||''}}">
+  <meta property="og:description" ng-attr-content="{{metaDescription||''}}">
+
+  <meta property="og:image" ng-attr-content="{{shareImageUrl}}">
+
+  <meta property="og:image" ng-attr-content="{{shareImageUrl}}">
+
+  <meta property="og:image" ng-attr-content="{{shareImageUrl}}">
+
+  <meta property="og:url" ng-attr-content="{{shareUrl}}">
+
+  <link rel="shortcut icon" type="image/png" ng-href="{{setting.favicon}}" ng-if="setting.favicon" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <!-- build:css(client) app/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+  <link rel="stylesheet" href="bower_components/angular-growl-v2/build/angular-growl.css" />
+  <link rel="stylesheet" href="bower_components/video.js/dist/video-js.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-carousel/dist/ui-carousel.css" />
+  <link rel="stylesheet" href="bower_components/select2/select2.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+  <!-- endbower -->
+
+  <link href="/styles/daterangepicker.css" rel="stylesheet">
+  <link href="/styles/bootstrap.css" rel="stylesheet">
+  <link href="/styles/bootstrap-glyphicons.css" rel="stylesheet">
+  <link href="/styles/bootstrap-theme.css" rel="stylesheet">
+  <link href="/styles/angular-bootstrap-lightbox.css" rel="stylesheet">
+  <link href="/styles/slick-theme.css" rel="stylesheet">
+  <link href="/styles/font-awesome-pro.css" rel="stylesheet">
+  <link href="/styles/slick.css" rel="stylesheet">
+  <link href="/styles/style.css" rel="stylesheet">
+  <link href="/styles/new_style.css" rel="stylesheet">
+  <link href="/styles/responsive.css" rel="stylesheet">
+  <!-- endbuild -->
+  <!-- injector:css -->
+  <!-- endinjector -->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <!-- Add your site or application content here -->
+
+
+  <div ui-view=""></div>
+  <div growl></div>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWUVr_RzrnVJXj-Oh5TGkd7Vy6TAORmpo"></script> -->
+  <!-- Javascript -->
+  <!-- <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script> -->
+
+  <!--jwplayer lib-->
+  <script src="https://content.jwplatform.com/libraries/ZWUD43rP.js"></script>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+        <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+        <![endif]-->
+  <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+  <!-- build:js({client,node_modules}) app/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-socket-io/socket.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+  <script src="bower_components/angular-growl-v2/build/angular-growl.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+  <script src="bower_components/angular-md5/angular-md5.js"></script>
+  <script src="bower_components/ngcart/dist/ngCart.js"></script>
+  <script src="bower_components/video.js/dist/video.js"></script>
+  <script src="bower_components/vjs-video/dist/vjs-video.min.js"></script>
+  <script src="bower_components/angular-ui-select/dist/select.js"></script>
+  <script src="bower_components/angular-ui-carousel/dist/ui-carousel.js"></script>
+  <script src="bower_components/select2/select2.js"></script>
+  <script src="bower_components/angular-ui-select2/src/select2.js"></script>
+  <script src="bower_components/async/dist/async.js"></script>
+  <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+  <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+  <script src="bower_components/chart.js/dist/Chart.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
+  <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <!-- build:js(.tmp) app/app.js -->
+  <script src="app/app.js"></script>
+  <!-- injector:js -->
+  <script src="app/admin/admin.module.js"></script>
+  <script src="components/auth/auth.module.js"></script>
+  <script src="components/util/util.module.js"></script>
+  <script src="app/account/account.js"></script>
+  <script src="app/account/login/login-performer.controller.js"></script>
+  <script src="app/account/login/login.controller.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
+  <script src="app/account/signup/signup-performer.controller.js"></script>
+  <script src="app/account/signup/signup.controller.js"></script>
+  <script src="app/admin/admin.controller.js"></script>
+  <script src="app/admin/admin.router.js"></script>
+  <script src="app/affiliate/account/login.js"></script>
+  <script src="app/affiliate/affiliate.routes.js"></script>
+  <script src="app/affiliate/affiliate.service.js"></script>
+  <script src="app/affiliate/list/affiliateListCenter.controller.js"></script>
+  <script src="app/album/album-detail.controller.js"></script>
+  <script src="app/album/album.routes.js"></script>
+  <script src="app/app.constant.js"></script>
+  <script src="app/calendar/calendar.service.js"></script>
+  <script src="app/calendar/routes.js"></script>
+  <script src="app/calendar/schedule.controller.js"></script>
+  <script src="app/components/Socket.js"></script>
+  <script src="app/components/filters.js"></script>
+  <script src="app/components/helpers/common.js"></script>
+  <script src="app/main/contact/contact.controller.js"></script>
+  <script src="app/main/home/home.controller.js"></script>
+  <script src="app/main/main.js"></script>
+  <script src="app/main/models/models.controller.js"></script>
+  <script src="app/main/movies/movie-detail.controller.js"></script>
+  <script src="app/main/movies/movies.controller.js"></script>
+  <script src="app/main/movies/movies.routes.js"></script>
+  <script src="app/main/page/page.controller.js"></script>
+  <script src="app/main/profile/profile.controller.js"></script>
+  <script src="app/main/store/store.controller.js"></script>
+  <script src="app/main/welcome/welcome.controller.js"></script>
+  <script src="app/messages/message.service.js"></script>
+  <script src="app/messages/messages-chat.directive.js"></script>
+  <script src="app/messages/messages.controller.js"></script>
+  <script src="app/messages/messages.route.js"></script>
+  <script src="app/messages/model-messages.controller.js"></script>
+  <script src="app/payment/payment.controller.js"></script>
+  <script src="app/payment/payment.routes.js"></script>
+  <script src="app/payment/payment.service.js"></script>
+  <script src="app/performer-manager/affiliatecontent/bulkUpload.controller.js"></script>
+  <script src="app/performer-manager/album/album-service.js"></script>
+  <script src="app/performer-manager/album/create-album-directive.js"></script>
+  <script src="app/performer-manager/album/create.controller.js"></script>
+  <script src="app/performer-manager/album/list.controller.js"></script>
+  <script src="app/performer-manager/album/update.controller.js"></script>
+  <script src="app/performer-manager/blacklist/block-service.js"></script>
+  <script src="app/performer-manager/blacklist/list.controller.js"></script>
+  <script src="app/performer-manager/earning/earning.controller.js"></script>
+  <script src="app/performer-manager/photos/photo-bunk-upload.controller.js"></script>
+  <script src="app/performer-manager/photos/photo-edit.controller.js"></script>
+  <script src="app/performer-manager/photos/photo-list.controller.js"></script>
+  <script src="app/performer-manager/photos/photo-upload.controller.js"></script>
+  <script src="app/performer-manager/profile/profile-edit.controller.js"></script>
+  <script src="app/performer-manager/request-payout/request-create.controller.js"></script>
+  <script src="app/performer-manager/request-payout/request-edit.controller.js"></script>
+  <script src="app/performer-manager/request-payout/request-list.controller.js"></script>
+  <script src="app/performer-manager/routes.js"></script>
+  <script src="app/performer-manager/schedules/create.controller.js"></script>
+  <script src="app/performer-manager/schedules/list.controller.js"></script>
+  <script src="app/performer-manager/schedules/schedule-service.js"></script>
+  <script src="app/performer-manager/schedules/update.controller.js"></script>
+  <script src="app/performer-manager/stats/stats-controller.js"></script>
+  <script src="app/performer-manager/store/product.controller.js"></script>
+  <script src="app/performer-manager/tag-videos/list.controller.js"></script>
+  <script src="app/performer-manager/top-performer/top-performer.controller.js"></script>
+  <script src="app/performer-manager/videos/bunk-upload.controller.js"></script>
+  <script src="app/performer-manager/videos/create-model.controller.js"></script>
+  <script src="app/performer-manager/videos/edit.controller.js"></script>
+  <script src="app/performer-manager/videos/list.controller.js"></script>
+  <script src="app/performer-manager/videos/upload.controller.js"></script>
+  <script src="app/photo/photo-detail.controller.js"></script>
+  <script src="app/photo/photo.routes.js"></script>
+  <script src="app/search/routes.js"></script>
+  <script src="app/search/search.controller.js"></script>
+  <script src="app/search/service.js"></script>
+  <script src="app/services/banner.service.js"></script>
+  <script src="app/services/categories.service.js"></script>
+  <script src="app/services/comment.service.js"></script>
+  <script src="app/services/earning.service.js"></script>
+  <script src="app/services/memberpackage.service.js"></script>
+  <script src="app/services/order.service.js"></script>
+  <script src="app/services/page.service.js"></script>
+  <script src="app/services/perfomer.service.js"></script>
+  <script src="app/services/photo.service.js"></script>
+  <script src="app/services/product.service.js"></script>
+  <script src="app/services/request-payout.service.js"></script>
+  <script src="app/services/savevideo.service.js"></script>
+  <script src="app/services/setting.service.js"></script>
+  <script src="app/services/user.service.js"></script>
+  <script src="app/services/usertemp.service.js"></script>
+  <script src="app/services/video.service.js"></script>
+  <script src="assets/js/angular-bootstrap-lightbox.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="components/auth/auth.service.js"></script>
+  <script src="components/auth/interceptor.service.js"></script>
+  <script src="components/auth/router.decorator.js"></script>
+  <script src="components/auth/user.service.js"></script>
+  <script src="components/directive.js"></script>
+  <script src="components/filters.js"></script>
+  <script src="components/footer/footer.directive.js"></script>
+  <script src="components/modal/modal.service.js"></script>
+  <script src="components/model/model.directive.js"></script>
+  <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+  <script src="components/movie/movie.directive.js"></script>
+  <script src="components/navbar/navbar.controller.js"></script>
+  <script src="components/navbar/navbar.directive.js"></script>
+  <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
+  <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
+  <script src="components/profile/profile.directive.js"></script>
+  <script src="components/seo/seo.directive.js"></script>
+  <script src="components/slider/slider.directive.js"></script>
+  <script src="components/socket/socket.service.js"></script>
+  <script src="components/util/jwplayer.directive.js"></script>
+  <script src="components/util/util.directive.js"></script>
+  <script src="components/util/util.service.js"></script>
+  <script src="components/welcome/welcome.directive.js"></script>
+  <script src="lib/ae.js"></script>
+  <script src="lib/mdo-angular-cryptography.js"></script>
+  <!-- endinjector -->
+  <!-- endbuild -->
+</body>
+
+</html>

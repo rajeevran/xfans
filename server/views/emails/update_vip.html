@@ -1,0 +1,15 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+	<div style="border-bottom: 1px solid #ddd; padding: 20px 0px; padding-top: 0px; margin-bottom: 40px;">
+		<img src="http://52.42.142.211/assets/images/logo.png">
+	</div>
+	
+	<div style="font-size: 17px; margin-bottom: 30px">
+		<h3>Dear <%= user.name %>.</h3>
+		<p>Congrats you update vip successfully.</p>
+        <p><%= siteName %> Support Team</p>
+	</div>
+</div>
+{% endblock %}

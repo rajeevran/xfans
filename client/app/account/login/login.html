@@ -1,0 +1,101 @@
+<div class="header">
+  <div class="container">
+  <div class="logo"><a  ui-sref="home">
+    <img ng-src="{{setting.logoFullPath}}" tittle="Logo" fallback-src></a>
+  </div>
+  <div class="menu-login">
+  <ul>
+    <li class="btn" ui-sref-active="active" ui-sref="landing">Sign Up</li>
+    <li class="btn" ui-sref-active="active" ui-sref="login">Log In</li>
+  </ul>
+  </div>
+</div>
+</div>
+<div class="login-page">
+      <div class="row login-row benefit-listing">
+        <div class="col-sm-6" id="tab-model">
+          <h3><span>MODEL LOGIN</span></h3>
+          <form class="form" name="formModel" ng-submit="loginPerformer(formModel)" novalidate>
+            <div class="form-group mar-bot-30">
+                <input type="email" name="email" placeholder="Email" class="form-control input-login" ng-model="performer.email" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control input-login" ng-model="performer.password" required autocomplete="off">
+            </div>
+            <div class="form-group" style="overflow: hidden">
+                <div class="pull-left">
+                    <div class="checkbox-inline">
+                      <label class="checkbox-cus"> Remember Me
+                        <input type="checkbox" ng-model="performer.rememberMe">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <a ui-sref="forgot" class="color-gray-light">Forgot Password?</a>
+                </div>
+            </div>
+            <div class="form-group has-error">
+            <p class="help-block" ng-show="formModel.email.$error.required && formModel.password.$error.required && submitted1">
+               Please enter your email and password.
+            </p>
+            <p class="help-block" ng-show="formModel.email.$error.email && submitted1">
+               Please enter a valid email.
+            </p>
+
+            <p class="help-block">{{ errors1.other }}</p>
+          </div>
+            <div class="form-group text-center">
+                <button class="button-main btn-block" type="submit">Login</button>
+            </div>
+            <div class="text-center color-gray-light">
+                Don't have an account yet ?  <a ui-sref="signupPerformer">Create an account</a>
+            </div>
+            <div class="vertical-line"></div>
+          </form>
+        </div>
+        <div class="col-sm-6" id="tab-member">
+          <h3><span>MEMBER LOGIN</span></h3>
+          <form class="form" name="formUser" ng-submit="loginUser(formUser)" novalidate>
+            <div class="form-group mar-bot-30">
+                <input type="email" name="email" placeholder="Email" class="form-control input-login" ng-model="user.email" required autocomplete="off">
+
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control input-login" ng-model="user.password" required autocomplete="off">
+            </div>
+            <div class="form-group" style="overflow: hidden">
+                <div class="pull-left">
+                  <div class="checkbox-inline">
+                    <label class="checkbox-cus" style="color: #fff"> Remember Me
+                      <input type="checkbox" ng-model="user.rememberMe">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="pull-right">
+                    <a ui-sref="forgot">Forgot Password?</a>
+                </div>
+            </div>
+            <div class="form-group has-error">
+            <p class="help-block" ng-show="formUser.email.$error.required && formUser.password.$error.required && submitted">
+               Please enter your email and password.
+            </p>
+            <p class="help-block" ng-show="formUser.email.$error.email && submitted">
+               Please enter a valid email.
+            </p>
+
+            <p class="help-block">{{ errors.other }}</p>
+          </div>
+            <div class="form-group text-center">
+                <button class="button-main-white btn-block" type="submit">Login</button>
+            </div>
+            <div class="text-center" style="color: #fff">
+                Don't have an account yet ?  <a ui-sref="signup">Create an account</a>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+<footer></footer>

@@ -1,0 +1,82 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Albums</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet box grey-cascade">
+             <div class="portlet-title">
+                <div class="caption">
+                   <i class="fa fa-globe"></i>Albums
+                </div>
+                <div class="tools">
+                   <a href="javascript:;" class="collapse" data-original-title="" title="">
+                   </a>
+                </div>
+             </div>
+             <div class="portlet-body">
+               <div class="table-toolbar">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="btn-group">
+                           <a ui-sref="albums.create({performerId:performerId})" class="btn green">
+                           Add New <i class="fa fa-plus"></i>
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <table class="table table-stripe">
+                 <thead>
+                   <tr>
+                     <th>
+                       Name
+                     </th>
+                     <th>
+                       Description
+                     </th>
+                     <th>
+                       #
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr ng-repeat="item in items track by $index">
+                     <td>
+                       {{item.name}}
+                     </td>
+                     <td>
+                       {{item.description}}
+                     </td>
+                     <td>
+                       <a ui-sref="albums.update({id: item._id, performerId:performerId})">
+                         <i class="fa fa-pencil"></i>
+                       </a>
+                       <a href="#" ng-click="delete(item, $index)">
+                         <i class="fa fa-trash"></i>
+                       </a>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

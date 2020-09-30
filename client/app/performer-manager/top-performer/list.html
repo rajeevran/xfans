@@ -1,0 +1,23 @@
+<div class="m20">
+  <div class="title-main">
+    <h4>Top Leaderboard</h4>
+  </div>
+    <ul class="row list-li list-video list-model">
+      <li ng-repeat="model in topPerformers | limitTo:9" class="col-xs-6 col-lg-4">
+        <div class="box-li">
+          <div class="img-li">
+            <img fallback-src ng-src="{{model.imageFullPath | checkImage}}" alt="{{model.name}}">
+            <div class="bg-hover">
+              <a ui-sref="modelView({id:model.username})" class="btn btn-warning btn-botder">{{model.name}}</a>
+            </div>
+            <div class="bottom-img">
+              Views:&nbsp;{{model.totalView}} <span class="pull-right">Subscibers:&nbsp;{{model.totalSubscriber}}</span>
+            </div>
+          </div>
+        </div>
+      </li>
+  </ul>
+  <div class="text-center">
+    <a ui-sref="models" class="btn btn-lg btn-warning btn-botder">View All Models <i class="fa fa-caret-right"></i></a>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+
+<div class="slider-home" ng-if="banners.length">
+<div class="container">
+  <ui-carousel
+    slides="banners"
+    slides-to-show="1"
+    slides-to-scroll="1"
+    autoplay="true"
+    autoplay-speed="4000"
+    dots="true">
+
+    <carousel-item>
+      <a ng-href="{{item.link}}">
+        <img ng-src="{{item.imageFullPath | cdn}}" title="{{item.name}}" class="thumb" />
+      </a>
+    </carousel-item>
+  </ui-carousel>
+</div>
+</div>

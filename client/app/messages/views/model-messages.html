@@ -1,0 +1,41 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="profile-box">
+      <div class="row">
+         <div class="col-sm-4 list-models-block">
+           <h3 class="list-chat-heading">Model Messenger</h3>
+           <div class="inrow">
+             <div class="input-group stylish-input-group" style="padding-left:20px">
+              <input type="text" class="form-control" ng-model="searchName" placeholder="Search ...">
+              <span class="input-group-addon" >
+                <span class="fa fa-search"></span>
+              </span>
+            </div>
+            <div class="blacklist-btn"><a ui-sref="manager.blackList({performerId:user.username})">Black list</a></div>
+          </div>
+            <div class="list-models">
+              <a href="#" class="chatperson" ng-repeat="group in groups | filter:searchName"
+               ng-if="getRecipient(group).type == 'performer' && getRecipient(group)._id != user._id" ng-click="setActiveGroup(group)"
+              ng-class="{active: group._id === activeGroup._id}">
+              <div>
+                <img ng-src="{{getRecipient(group).imageThumbPath | checkAvatar}}" alt="" class="chatimg" />
+                <div class="pname">{{getRecipient(group).name}}</div>
+              </div>
+              <div class="namechat">
+                <div class="lastmsg">{{group.lastContent | limitTo: 35}}{{group.lastContent.length > 35 ? '...' : ''}}{{!group.lastContent ? '...' : ''}}</div>
+              </div>
+              </a>
+          </div>
+         </div>
+         <div class="col-sm-8 chat-block">
+          <message-chat active-group="activeGroup" ng-if="activeGroup"></message-chat>
+          <p ng-if="!activeGroup" class="alert alert-info">
+            Please select recipient to start message.
+          </p>
+         </div>
+     </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

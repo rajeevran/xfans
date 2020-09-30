@@ -1,0 +1,71 @@
+<div class="title-pro">
+  <span> Upload Affiliate Content</span>
+</div>
+<div class="row">
+   <div class="col-md-12">
+      <!-- BEGIN EXAMPLE TABLE PORTLET-->
+      <div class="portlet box grey-cascade">
+         <div class="portlet-body">
+           <div class="form-group">
+             <div ngf-drop="populateFile($files)" ngf-select="populateFile($files)" ng-model="files" class="drop-box"
+               ngf-drag-over-class="'dragover'" ngf-multiple="true"
+               accept="video/mp4,video/x-m4v,.flv,.mkv,.3gp,video/*" ngf-max-size="20000MB">Drop video here or click to upload</div>
+             <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+           </div>
+           <div class="form-group">
+             <label>Select files</label>
+             <input type="file" ngf-select="populateFile($files)" ng-model="files" ngf-multiple="true"
+               accept="video/mp4,video/x-m4v,.flv,.mkv,.3gp,video/*" ngf-max-size="20000MB" />
+           </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-12" ng-repeat="file in files track by $index">
+     <div class="row">
+       <div class="col-md-2">
+         <img src="assets/images/icon-video.gif" style="width:100%" />
+       </div>
+       <div class="col-md-10">
+         <div class="row">
+           <div class="col-md-12">
+             <div class="form-group">
+               <label>Name</label>
+               <input type="text" ng-model="file.data.name" class="form-control" />
+
+               <a href="#" class="btn btn-danger" ng-click="remove(file, $index)" ng-disabled="uploading">Remove</a>
+               <a href="#" class="btn btn-primary" ng-click="file.extra=true" ng-if="!file.extra">Show extra</a>
+               <a href="#" class="btn btn-primary" ng-click="file.extra=false" ng-if="file.extra">Hide extra</a>
+               <a href="#" class="btn btn-info" ng-show="file.uploading">Uploading...</a>
+               <a href="#" class="btn btn-info" ng-show="file.uploaded">Uploaded</a>
+               <div class="progress" ng-show="file.uploading" style="position:relative">
+                 <div class="progress-bar" role="progressbar" ng-style="{width: file.progress + '%'}">
+                 </div>
+                 <div style="color:red;position:absolute;left:50%">{{file.progress}}%</div>
+               </div>
+             </div>
+           </div>
+
+           <div ng-show="file.extra">
+             <div class="col-md-12">
+               <div class="form-group">
+                 <label>Description</label>
+                 <textarea class="form-control" ng-model='file.data.description' ng-disabled="uploading"></textarea>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <div class="col-md-offset-2 col-md-10" ng-show="files.length">
+     <div class="form-actions" style="background-color: #ddd; margin-top: 10px;padding:10px">
+       <button class="btn btn-default" ng-disabled="uploading" ng-click="cancel()">Cancel</button>
+       <button class="btn btn-primary" ng-click="uploadAll()" ng-disabled="uploading">Upload all</button>
+     </div>
+
+     <p class="alert alert-info" ng-show="uploading">
+       File is uploading, please wait. Do not reload page at this time.
+     </p>
+   </div>
+</div>

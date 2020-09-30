@@ -1,0 +1,39 @@
+<div class="chatbody" scroll-glue>
+  <ul>
+    <li ng-show="!items">
+      There is no message right now, let talk!
+    </li>
+    <li ng-repeat="item in items track by $index">
+      <p ng-class="{'custom-chat-model': item.senderId !== currentUser._id}">
+        <strong class="chat-name">
+          <span ng-if="item.senderId !== currentUser._id">&nbsp;</span>
+          {{getRecipient(item.senderId).name}}:</strong>
+        <!-- <span ng-if="item.senderId === currentUser._id"></span> -->
+        <span ng-if="item.type != 'image'">{{item.content}}</span>
+        <span ng-if="item.type == 'image'">
+          <img ng-src="{{item.content}}" style="max-width:100%" />
+        </span>
+      </p>
+    </li>
+  </ul>
+</div>
+<div class="row" ng-if="!isBlocked && subcribed && currentUser.role === 'user' || !isBlocked && !subcribed  && currentUser.role ==='performer'">
+  <form ng-submit="sendMessage()">
+    <div class="col-xs-9">
+      <input type="text" placeholder="Yozing..." class="form-control" required ng-model="newMessage.msg" my-enter="sendMessage()" />
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-danger" ngf-select="uploadImage($file)" accept="image/*">Image</button>
+      <button class="btn btn-info" type="submit">Send</button>
+    </div>
+  </form>
+</div>
+<div class="row text-center" ng-if="!subcribed && currentUser.role ==='user' || isBlocked">
+  <a>You have not yet subscribed this performer or You have been blocked by this performer.</a>
+</div>
+<div class="block-row">
+  <a class="btn-block-model" ng-if="blocked !== 0 && currentUser.role === 'performer'">Blocked!</a>
+  <a class="btn-block-model" ng-if="blocked === 0 && currentUser.role === 'performer'" ng-click="block()">Block</a>
+  <a class="btn-block-model" ng-if="allowed !== 0 && currentUser.role === 'performer' && recipient.role === 'performer'">Allowed!</a>
+  <a class="btn-block-model" ng-if="allowed === 0 && currentUser.role === 'performer' && recipient.role === 'performer'" ng-click="allow()">Allow to view profile</a>
+</div>

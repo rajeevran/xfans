@@ -1,0 +1,40 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="profile-box">
+      <profile-menu></profile-menu>
+      <div class="profile-right">
+        <div class="title-pro">
+          <span> Downloaded items</span>
+        </div>
+        <div class="table-responsive">
+          <table class="table-main">
+            <tr>
+              <th>Date</th>
+              <th>Description</th>             
+            </tr>
+            <tr ng-repeat="item in items">
+              <td>{{item.downloadedDate}}</td>
+              <td>{{item.name}}</td>            
+            </tr>            
+          </table>
+          <!-- pager -->
+        <div class="paging" ng-if="pager.GetPager.pages.length > limit">
+          <ul ng-if="pager.GetPager.pages.length" class="pagination">
+            <li ng-class="{disabled:pager.GetPager.currentPage === 1}">
+              <a ng-click="setPage(pager.GetPager.currentPage - 1)">Prev</a>
+            </li>
+            <li ng-repeat="page in pager.GetPager.pages" ng-class="{active:pager.GetPager.currentPage === page}">
+              <a ng-click="setPage(page)">{{page}}</a>
+            </li>                
+            <li ng-class="{disabled:pager.GetPager.currentPage === pager.GetPager.totalPages}">
+              <a ng-click="setPage(pager.GetPager.currentPage + 1)">Next</a>
+            </li>            
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

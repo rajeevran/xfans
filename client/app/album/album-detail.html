@@ -1,0 +1,37 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <ul class="breadcrumbs">
+      <li>
+        <a href="/" ui-sref="home">Home <i class="fa fa-angle-right"></i></a>
+      </li>
+      <li>
+        <a href="#" ui-sref="modelView({id: performer.username})">{{performer.name}} <i class="fa fa-angle-right"></i></a>
+      </li>
+      <li>
+        <a href="#">Albums</a>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+    <div class="profile-box">
+      <div class="title-pro album-title">
+        <span>{{album.name}}</span>
+      </div>
+
+      <div class="albums-wrapper">
+        <ul class="row list-li list-video">
+          <li ng-repeat="photo in photos track by $index" class="col-sm-4 col-lg-3">
+            <div class="box-li">
+              <div class="img-li">
+                <a href="#" ui-sref="photo({performerId: performer._id, albumId: album._id, id: photo._id})">
+                  <img ng-src="{{photo.imageThumbPath | checkImage | cdn}}" title="{{photo.name}}" fallback-src>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

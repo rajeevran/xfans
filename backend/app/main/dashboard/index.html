@@ -1,0 +1,179 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+
+          </li>
+
+        </ul>
+      </div>
+      <h3 class="page-title">
+        Dashboard <small></small>
+      </h3>
+      <!-- END PAGE HEADER-->
+      <!-- BEGIN DASHBOARD STATS -->
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat blue-madison">
+            <div class="visual">
+              <i class="fa fa-comments"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+                {{videoCount}}
+              </div>
+              <div class="desc">
+                Total movies uploaded
+              </div>
+            </div>
+            <a class="more" ui-sref="movies">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat red-intense">
+            <div class="visual">
+              <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+                {{performerCount}}
+              </div>
+              <div class="desc">
+                Total number of models
+              </div>
+            </div>
+            <a class="more" ui-sref="models">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat green-haze">
+            <div class="visual">
+              <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+               {{orderCount}}
+              </div>
+              <div class="desc">
+                Total value of orders
+              </div>
+            </div>
+            <a class="more" ui-sref="order">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat purple-plum">
+            <div class="visual">
+              <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+                {{userCount}}
+              </div>
+              <div class="desc">
+                Total number of users / members
+              </div>
+            </div>
+            <a class="more" ui-sref="user">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat purple-plum">
+            <div class="visual">
+              <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+                {{albumCount}}
+              </div>
+              <div class="desc">
+                Total number of active album
+              </div>
+            </div>
+            <a class="more" ui-sref="photo">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat purple-plum">
+            <div class="visual">
+              <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+              <div class="number">
+                {{productCount}}
+              </div>
+              <div class="desc">
+                Total number of active products
+              </div>
+            </div>
+            <a class="more" ui-sref="store">
+              View more <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- END DASHBOARD STATS -->
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-2">
+          <a ui-sref="store" class="btn btn-default btn-lg">
+            <i class="icon-basket"></i>
+            <span class="title">Store</span>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a ui-sref="models" class="btn btn-default btn-lg">
+            <i class="icon-user-female"></i>
+            <span class="title">Models</span>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a ui-sref="movies({type:null})" class="btn btn-default btn-lg">
+            <i class="icon-camcorder"></i>
+            <span class="title">Movies</span>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a ui-sref="photo" class="btn btn-default btn-lg">
+            <i class="icon-picture"></i>
+            <span class="title">Photos</span>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a ui-sref="order" class="btn btn-default btn-lg">
+            <i class="icon-credit-card"></i>
+            <span class="title">Orders</span>
+          </a>
+        </div>
+
+        <div class="col-md-2">
+          <a ui-sref="user" class="btn btn-default btn-lg">
+            <i class="icon-users"></i>
+            <span class="title">Users</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>

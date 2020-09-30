@@ -1,0 +1,20 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div style="background: #fff; padding: 30px; margin-bottom: 15px; border-right: 2px solid #e7eaee; border-bottom: 3px solid #e7eaee; padding-bottom: 50px">
+
+	<div style="font-size: 17px; margin-bottom: 30px">
+		<h3>Dear <%= performer.name %>.</h3>
+		<p>You have a new order.</p>
+    <p>
+      <strong>Product name: </strong> <%= product.name %>
+    </p>
+    <p>
+      <strong>Quantity: </strong> <%= order.quantity %>
+    </p>
+    <p>
+      <strong>From: </strong> <%= order.name %> / <%= order.email %>
+    </p>
+	</div>
+</div>
+{% endblock %}

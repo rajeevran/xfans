@@ -1,0 +1,370 @@
+<navbar></navbar>
+<div class="content">
+  <div class="container">
+    <div class="top-video-detail">
+      <h3>{{video.name}}</h3>
+      <div class="date">{{video.activeDate |date}}</div>
+    </div>
+
+    <div
+      class="box-detail-video m20 min-height-video"
+      ng-class="{'box-detail-block': !isSubscribed || !isLoggedIn}"
+      ng-if="!isSaleVideo"
+    >
+      <div ng-if="isSubscribed" class="video-detail">
+        <jwplayer setup="jwplayerOptions" ng-if="!video.isSchedule"></jwplayer>
+
+        <!-- <video width="100%" height="450" controls ng-if="video.isSchedule">
+          <source ng-src="{{trustSrc(video.fileTrailerPath)}}" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video> -->
+        <h3 style="padding:30px" ng-if="video.isSchedule">
+          Video will be upcomming in {{video.schedule | date}}
+        </h3>
+        <div
+          ng-if="video.convertStatus.mainVideo === 'processing' || video.convertStatus.mainVideo === 'pending'"
+        >
+          <a
+            >This video has been converted. It takes a few minutes to finish.</a
+          >
+        </div>
+      </div>
+      <div ng-if="!isSubscribed" class="video-detail" style="height:100%">
+        <div ng-if="show" class="showTrailer">
+          <!-- <video width="100%" height="450" controls>
+            <source ng-src="{{trustSrc(video.fileTrailerPath)}}" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video> -->
+          <img src="/assets/subscriber-thumb.png" width="100%" />
+        </div>
+        <div ng-if="!show" class="hideTrailer">
+          <div
+            class="img-video-detail"
+            style="background-image: url('{{setting.imageMemberNotVip}}')"
+          ></div>
+          <div class="text-block">
+            <img src="/assets/subscriber-thumb.png" width="100%" />
+            <!-- <h2>Subscribe to view Full video! <img ng-src="{{setting.fullAccessVideoText.icon}}" /></h2> -->
+          </div>
+        </div>
+      </div>
+      <div ng-if="!isSubscribed || !isLoggedIn" class="membership-detail">
+        <h2>Subscribe performer.</h2>
+        <ul>
+          <li ng-show="performer">
+            <a
+              href="#"
+              ui-sref="payment({performerId: video.performer[0], type: 'performer_subscription', package: 'monthly'})"
+            >
+              <h3>Subscription Monthly.</h3>
+              Get it now!
+              <div class="price-membership">
+                <span class="dola-mem">$</span>
+                <span class="price-mem"
+                  >{{performers[0].subscriptionMonthlyPrice}}</span
+                >
+              </div>
+            </a>
+          </li>
+          <li ng-show="performer">
+            <a
+              href="#"
+              ui-sref="payment({performerId: video.performer[0], type: 'performer_subscription', package: 'yearly'})"
+            >
+              <h3>Subscription Yearly.</h3>
+              Get it now!
+              <div class="price-membership">
+                <span class="dola-mem">$</span>
+                <span class="price-mem"
+                  >{{performers[0].subscriptionYearlyPrice}}</span
+                >
+              </div>
+            </a>
+          </li>
+          <li ng-show="!performer">
+            <a href="#" ui-sref="login">
+              <h3>This performer is not available!</h3>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-detail-video m20" ng-if="isSaleVideo">
+      <div ng-if="!isBoughtVideo" class="video-detail">
+        <div ng-if="show" class="showTrailer">
+          <video width="100%" height="450" controls>
+            <source
+              ng-src="{{trustSrc(video.fileTrailerPath)}}"
+              type="video/mp4"
+            />
+            Your browser does not support HTML5 video.
+          </video>
+          <h2 class="text-center">
+            <a ui-sref="payment({videoId: video._id, type: 'sale_video'})">
+              Buy with {{video.price|price}} to view Full video!
+            </a>
+          </h2>
+        </div>
+        <div ng-if="!show" class="hideTrailer">
+          <div
+            class="img-video-detail"
+            style="background-image: url('{{setting.imageMemberNotVip}}')"
+          ></div>
+          <div class="text-block">
+            <h2>
+              <a ui-sref="payment({videoId: video._id, type: 'sale_video'})">
+                Buy with {{video.price|price}} to view Full video!
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div ng-if="isBoughtVideo">
+        <div class="video-detail">
+          <jwplayer
+            setup="jwplayerOptions"
+            ng-if="!video.isSchedule"
+          ></jwplayer>
+
+          <video width="100%" height="450" controls ng-if="video.isSchedule">
+            <source
+              ng-src="{{trustSrc(video.fileTrailerPath)}}"
+              type="video/mp4"
+            />
+            Your browser does not support HTML5 video.
+          </video>
+          <div
+            ng-if="video.convertStatus.mainVideo === 'processing' || video.convertStatus.mainVideo === 'pending'"
+          >
+            <a
+              >This video has been converted. It takes a few minutes to
+              finish.</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-detial-video m20">
+      <ul>
+        <li>
+          <a ng-click="likeVideo(video)"><i class="fa fa-thumbs-up"></i><span>({{video.stats.totalLike}})</span></a>
+        </li>
+        <li>
+          <a aria-controls="comments" role="tab" data-toggle="tab" class="clickshowcomment"><i class="fa fa-comment"></i><span>({{video.stats.totalComment}})</span></a>
+        </li>
+        <li>
+          <a ng-click="favoriteVideo(video)"><i class="fa fa-star"></i></a>
+        </li>
+        <li>
+          <a ng-click="watchLaterVideo(video)"><i class="fa fa-clock-o"></i></a>
+        </li>
+        <li class="pull-right" ng-if="video.userInfo.name">
+          <a ui-sref="modelView({id: video.userInfo.username})"
+            ><i class="fa fa-upload"></i
+            ><span>Uploaded by: {{video.userInfo.name}}</span></a
+          >
+        </li>
+        <li class="pull-right" ng-if="currentUser._id === video.user">
+          <a ui-sref="manager.videosedit({id: video._id})"
+            ><i class="fa fa-pencil"></i><span>Edit</span></a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <div class="m20" ng-if="video.categoriesInfo.length || video.tags.length">
+      <p>
+        <a>Categories: </a>
+        <a
+          ng-repeat="cat in video.categoriesInfo track by $index"
+          href="#"
+          ui-sref="movies({category:cat.alias})"
+        >
+          {{cat.name}}
+          <span ng-if="$index < video.categoriesInfo.length-1">, </span>
+        </a>
+      </p>
+      <p>
+        <a>Tags: </a>
+        <a
+          class="label label-tag"
+          ng-repeat="tag in video.tags track by $index"
+          ui-sref="search({q:tag, p: video.user})"
+          >{{tag}}</a
+        >
+      </p>
+    </div>
+
+    <div class="action-detial-video border-bot-left m20">
+      <!-- Nav tabs -->
+      <ul class="menutab no-border" role="tablist">
+        <li role="presentation" class="active">
+          <a aria-controls="description" role="tab" data-toggle="tab"
+            >Description</a
+          >
+        </li>
+        <li role="presentation">
+          <a
+            aria-controls="comments"
+            class="rcm"
+            role="tab"
+            data-toggle="tab"
+            id="comment-btn"
+            >Comments</a
+          >
+        </li>
+        <!-- <li role="presentation"><a aria-controls="photos" class="rcm" role="tab" data-toggle="tab">Photos</a></li> -->
+        <li role="presentation">
+          <a aria-controls="performers" class="rcm" role="tab" data-toggle="tab"
+            >Performers</a
+          >
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="description">
+          {{video.description}}
+        </div>
+        <div role="tabpanel" class="tab-pane comment-tab" id="comments">
+          <ul class="comment-list">
+            <li ng-repeat="comment in comments">
+              <div class="post-li">
+                <a
+                  class="pull-right"
+                  ng-click="removeComment(comment, $index)"
+                  ng-if="comment.isOwner"
+                  ><i class="fa fa-trash"></i
+                ></a>
+                <div class="img-post-li">
+                  <img
+                    ng-src="{{comment.user.photo  | checkAvatar}}"
+                    fallback-src
+                  />
+                </div>
+                <div class="content-post-li">
+                  <div class="title-post-li">
+                    {{comment.user.name}} -
+                    <span class="date-post">{{comment.updatedAt | date}}</span>
+                  </div>
+                  <div class="content-post-li">
+                    {{comment.content}}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div ng-if="isLoggedIn && isSubscribed" class="comment-user">
+            <form
+              class="form"
+              name="form"
+              ng-submit="saveComment(form)"
+              novalidate
+            >
+              <div
+                class="form-group"
+                ng-class="{ 'has-success': form.content.$valid && submitted,
+                                            'has-error': form.content.$invalid && submitted }"
+              >
+                <!-- <label>Comment</label> -->
+
+                <textarea
+                  type="text"
+                  name="content"
+                  class="form-control input-lg"
+                  ng-model="comment.content"
+                  required
+                  placeholder="Leave some text here..."
+                ></textarea>
+
+                <p
+                  class="help-block"
+                  ng-show="form.content.$error.required && submitted"
+                >
+                  Content is required
+                </p>
+                <p class="help-block" ng-show="err">
+                  {{err}}
+                </p>
+              </div>
+              <div class="row">
+                <div class="col-lg-2">
+                  <button
+                    type="submit"
+                    class="btn btn-warning btn-lg btn-block"
+                  >
+                    SUBMIT
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- <div role="tabpanel" class="tab-pane" id="photos">
+          <p ng-show="!photos.length">
+            <a style="color:#1ce4e5">There is no photo right now!</a>
+          </p>
+          <ul class="row list-li list-video" ng-show="photos.length">
+            <li ng-repeat="photo in photos track by $index" class="col-sm-4 col-lg-3">
+              <div class="box-li">
+                <div class="img-li">
+                  <a ng-click="openLightboxModal($index)" href="#">
+                    <img ng-src="{{photo.imageThumbPath | checkImage}}" title="{{photo.name}}" fallback-src>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+        <div role="tabpanel" class="tab-pane" id="performers">
+          <ul class="row list-li list-video">
+            <p ng-show="!video.performerInfo.length">
+              <a href="#"></a>
+            </p>
+            <li ng-repeat="info in video.performerInfo" class="col-sm-12 col-lg-4 video-per-info">
+              <div>
+                <a>Name: </a>
+                <a ui-sref="modelView({id: info.username})">{{info.name}}</a>
+              </div>
+              <div><a>Gender: </a> {{info.sex}}</div>
+              <div><a>Ethnicity: </a> {{info.ethnicity}}</div>
+              <div><a>Age: </a> {{info.age}}</div>
+              <div><a>Height: </a> {{info.height}}</div>
+              <div><a>Weight: </a> {{info.weight}}</div>
+              <div><a>Foot size: </a> {{info.bust}}</div>
+              <div><a>Eyes: </a> {{info.eyes}}</div>
+              <div><a>Hair: </a> {{info.hair}}</div>
+              <div><a>Body hair: </a> {{info.publicHair}}</div>
+              <div><a>Hometown: </a> {{info.hometown}}</div>
+              <div><a>Languages: </a> {{info.languages}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="title-main title-pro-custom new">
+      <h4>Related Scenes</h4>
+    </div>
+
+    <ul class="row list-li list-video">
+      <li
+        ng-repeat="video in videos | limitTo: 60"
+        class="col-sm-4 col-lg-3 col-xs-4 mobile-block-3"
+      >
+        <div movie-card video="video"></div>
+      </li>
+    </ul>
+  </div>
+</div>
+<footer></footer>
+<script>
+  $(document).ready(function() {
+    $("li  a.clickshowcomment").click(function(e) {
+      $("#comment-btn").click();
+      e.preventDefault();
+    });
+  });
+</script>

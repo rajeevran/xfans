@@ -1,0 +1,38 @@
+<navbar></navbar>
+<div class="content">
+            <div class="container">
+                <div class="profile-box payment">
+
+                    <div class="title-pro">
+                        <span>Shopping cart</span>
+                    </div>
+                    <table ng-if="items.length > 0" class="table table-cart">
+                        <tr>
+                            <th colspan="2">Products</th>
+                            <th>Quantity</th>
+                            <th width="100">Price</th>
+                            <th width="20"></th>
+                        </tr>
+                        <tr ng-repeat="item in items">
+                          <td width="50"><a ui-sref="storeView({id:item._data._id,alias:item._data.alias})"><img ng-src="{{item._data.imageThumbPath | cdn}}" fallback-src></a></td>
+                          <td><a ui-sref="storeView({id:item._data._id,alias:item._data.alias})">{{item._name}}</a></td>
+                            <td><input type="text" ng-change="setQuantity(item,quantity)" ng-model="quantity" class="quantity"  ng-value="{{item.getQuantity()}}"></td>
+                            <td>{{item.getTotal() | price}}</td>
+                            <td><a ng-click="removeCart($index);"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Total Price</strong></td>
+                            <td><strong>{{total | price}}</strong></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <div ng-if="items.length > 0" class="text-right">
+                        <button ng-if="showButtonCheckOut" ng-click="checkOut()" class="btn btn-warning">Checkout</button>
+                    </div>
+                  <h3 ng-if="items.length ==0">Your cart don't have item</h3>
+
+                </div>
+            </div>
+        </div>
+<footer></footer>

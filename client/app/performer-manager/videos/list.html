@@ -1,0 +1,64 @@
+<div class="title-pro">
+  <span> Videos listing</span>
+</div>
+<div class="table-responsive">
+  <a ui-sref="manager.videosUpload" class="btn btn-primary">Upload</a>
+  <a ui-sref="manager.videosBunkUpload" class="btn btn-danger">Bulk Upload</a>
+  <table class="table-main">
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Posted Date</th>
+      <th>For Sale?</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><input class="form-control" ng-model="filter.keyword"></th>
+      <th><input date-range-picker class="form-control date-picker" type="text"
+                       ng-model="dateRange" options="opts" /></th>
+      <th></th>
+      <th></th>
+      <th>
+        <select ng-model="filter.status">
+          <option value="">All</option>
+          <option value="active">Active</option>
+          <option value="inactive">InActive</option>
+        </select>
+      </th>
+      <th><a class="btn btn-success" ng-click="updateFilter()">Filter</a></th>
+    </tr>
+    <tr ng-repeat="video in videos">
+      <td><img fallback-src ng-src="{{video.thumbs[4] | checkImage}}" width="40px"/></td>
+      <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+        {{video.name}}
+        <span class="badge badge-danger" ng-if="video.brokenFile">File is broken!</span>
+      </td>
+      <td>{{video.activeDate | date}}</td>
+      <td><span class="label label-default" ng-if="!video.isSaleVideo">N</span>
+          <span class="label label-success" ng-if="video.isSaleVideo">Y</span>
+      </td>
+      <td>
+        <span ng-if="video.isSaleVideo">${{video.price}}</span>
+      </td>
+      <td><span class="label label-default" ng-if="video.status === 'inactive'">Inactive</span>
+          <span class="label label-success" ng-if="video.status === 'active'">Active</span>
+      </td>
+      <td ng-if="!video.isTaggedin">
+        <a ui-sref="manager.videosedit({id:video._id})"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        &nbsp; <a ng-click="remove(video._id, $index)"><i class="fa fa-trash"></i></a>
+        &nbsp; <a ng-click="updateStatus(video)"><i class="fa fa-arrow-circle-up"></i></a>
+        <!-- &nbsp; <a ng-click="tweet(video)" title="Tweet this video" ng-if="performer.connectTwitter && performer.autoPostTwitter"><i class="fab fa-twitter"></i></a> -->
+      </td>
+      <td ng-if="video.isTaggedin">
+        <span class="badge badge-danger">is Tagged</span>
+      </td>
+    </tr>
+  </table>
+</div>
+<div ng-if="totalItems > itemsPerPage" class="paging">
+
+<uib-pagination  previous-text="Prev" items-per-page="itemsPerPage" num-pages="noOfPages" ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false"></uib-pagination>
+</div>

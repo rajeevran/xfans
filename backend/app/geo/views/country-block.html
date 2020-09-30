@@ -1,0 +1,54 @@
+<navbar></navbar>
+<div class="page-container">
+  <backend-menu></backend-menu>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <div class="page-bar">
+        <ul class="page-breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a ui-sref="dashboard">Dashboard</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Geolocation</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-globe"></i>Blocked countries
+              </div>
+            </div>
+            <div class="portlet-body">
+              <table class="table table-stripe">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Blocked?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="country in countries track by $index">
+                    <td>
+                      {{country.name}}
+                    </td>
+                    <td>{{country.code}}</td>
+                    <td>
+                      <input type="checkbox" ng-change="change(country.isBlocked, country)" ng-model="country.isBlocked" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer></footer>
